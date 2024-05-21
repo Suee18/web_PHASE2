@@ -30,6 +30,9 @@ mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
 });
 
 
+
+
+
 //public directory
 app.use(express.static(path.join(__dirname, 'public')));
 //pages routes
@@ -37,8 +40,8 @@ app.get('/', (req, res) => {
     res.render('pages/index', { title: 'My App' });
 });
 
-app.get('/registeration', (req, res) => {
-    res.render('pages/registeration', { title: 'Register' });
+app.get('/register', (req, res) => {
+    res.render('pages/register', { title: 'Register' });
 });
 
 

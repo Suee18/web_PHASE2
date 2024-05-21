@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
-    <link rel="stylesheet" href="/css/registration.css">
+    <link rel="stylesheet" href="/css/register.css">
 </head>
 <body>
 <header>
@@ -13,15 +13,18 @@
     <div class="container right-panel-active">
         <!-- Sign Up -->
         <div class="container__form container--signup">
-            <form action="#" class="form" id="form1">
+
+
+            <form action="/register" method="post" class="form" id="form1">
+
                 <h2 class="form__title">Sign Up</h2>
-                <input type="text" placeholder="Name" class="input" id="name"required/>
+                <input type="text"  name="username" placeholder="Name" class="input" id="name"required/>
                 <small class="error" id="n" style="visibility: hidden;"></small>
 
-                <input type="email" placeholder="Email" class="input" id="email" required />
+                <input type="email"  name="email" placeholder="Email" class="input" id="email" required />
                 <small class="error" id="e" style="visibility: hidden;"></small>
                 
-                <input type="password" placeholder="Password" class="input" id="password" required/>
+                <input type="password" name="password" placeholder="Password" class="input" id="password" required/>
                 <small class="error" id="p" style="visibility: hidden;"></small>
                 
                 <div class="radioButton" id="gender">
@@ -42,14 +45,23 @@
             </form>
         </div>
     
-        <!-- Sign In -->
+
+
+
+
+
+
+
+
+
+        <!-- log In -->
         <div class="container__form container--signin">
-            <form action="#" class="form" id="form2">
-                <h2 class="form__title">Sign In</h2>
+            <form action="/register" method="post" class="form" id="form2">
+                <h2 class="form__title">log In</h2>
                 <input type="email" placeholder="Email" class="input" />
                 <input type="password" placeholder="Password" class="input" />
                 <a href="#" class="link"></a>
-                <button class="btn" type="submit" href="reviews.html">Sign In      
+                <button class="btn" type="submit" href="reviews.html">Log In      
                 </button>
                 <a href="/review/reviews.html"> sign in as a tourist</a>
                 <a href="/admin/admin.html">sign in as an admin </a>
@@ -61,7 +73,7 @@
         <div class="container__overlay">
             <div class="overlay">
                 <div class="overlay__panel overlay--left">
-                    <button class="btn" id="signIn">Sign In</button>
+                    <button class="btn" id="signIn">Log In</button>
                 </div>
                 <div class="overlay__panel overlay--right">
                     <button class="btn" id="signUp">Sign Up</button>
@@ -69,7 +81,7 @@
             </div>
         </div>
     </div>
-<script src="/js/registeration.js"></script>
+<script src="/js/register.js"></script>
 <script src="/js/navBar.js"></script>
 </body>
 </html>
