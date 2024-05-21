@@ -108,7 +108,7 @@ body {
 
 .overlay {
 	background-color: var(--lightblue);
-	background: url("https://r4.wallpaperflare.com/wallpaper/912/935/732/egypt-pyramids-of-giza-tourism-sand-wallpaper-b2c122c07d96cebb7a084295e048b952.jpg");
+	background: url("/images/registration_BG.jpg");
 	background-attachment: fixed;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -244,8 +244,8 @@ input[name='sex'] {
     
     &:checked {
         &:after {
-            box-shadow: 2px 2px 14px rgba(0,0,0,.4);
-            color:rgb(255, 255, 255);
+            box-shadow: 2px 2px 14px rgba(145, 144, 144, 0.616);
+            color:rgb(15, 8, 59);
         }
     }
 }
@@ -287,14 +287,13 @@ input[type="date"] {
 	background-color: #f0f0f0; /* Change background color on hover */
   }
   
-  /* Style for the selected option */
   option:checked {
 	background-color: #e9e9e9; /* Change background color for selected option */
   }
   
   /* Style for the placeholder */
   option[value=""] {
-	color: #999; /* Set placeholder color */
+	color: #999; 
   }
 
   select{

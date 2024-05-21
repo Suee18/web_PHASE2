@@ -27,7 +27,7 @@ app.get('/registeration', (req, res) => {
 
 
 // Start the server
-const port = process.env.PORT || 3002;
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
 });
