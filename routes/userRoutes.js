@@ -24,7 +24,7 @@
 
 // export default router;
 import express from 'express';
-import { createUser, loginUser, userProfile } from '../controllers/userController.js';
+import { createUser, loginUser, userProfile} from '../controllers/userController.js';
 
 const router = express.Router();
 
