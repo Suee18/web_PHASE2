@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -10,15 +11,18 @@
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css'>
   <link rel="stylesheet" href="/css/profile.css">
 </head>
+
 <body>
   <header>
     <div id="NavbarLoggedin_call"></div>
   </header>
-  <div class="main-container">
+  <div class="main-container"> <!-- Main container wrapping all content -->
+
     <section>
       <div class="rt-container">
         <div class="col-rt-12">
           <div class="Scriptcontent">
+
             <!-- Profile -->
             <div class="profilee py-4">
               <div class="container">
@@ -27,9 +31,29 @@
                     <div class="card-header bg-transparent text-center">
                       <div class="aboveAll">
                         <div id="avatar-display" class="avatar-container">
-                          <img src="<%= user.avatar %>" alt="Profile Avatar" style="width: 100px; height: 100px;">
+                          <!-- Selected avatar will be displayed here -->
                         </div>
-                        <button class="tooltip" onclick="fetchAvatars()">Change Avatar</button>
+                        <div id="avatar-dropdown" class="dropdown-menu" style="display: none;">
+                          <!-- Avatar selection dropdown -->
+                          <div onclick="selectAvatar('PP.jpg')"><img src="PP.jpg" alt="PP"
+                              style="width: 30px; height: 30px;"></div>
+                          <div onclick="selectAvatar('PP1.jpg')"><img src="PP1.jpg" alt="PP1"
+                              style="width: 30px; height: 30px;"></div>
+                          <div onclick="selectAvatar('PP2.jpg')"><img src="PP2.jpg" alt="PP2"
+                              style="width: 30px; height: 30px;"></div>
+                          <div onclick="selectAvatar('PP3.jpg')"><img src="PP3.jpg" alt="PP3"
+                              style="width: 30px; height: 30px;"></div>
+                          <div onclick="selectAvatar('PP4.jpg')"><img src="PP4.jpg" alt="PP4"
+                              style="width: 30px; height: 30px;"></div>
+                          <div onclick="selectAvatar('PP5.jpg')"><img src="PP5.jpg" alt="PP5"
+                              style="width: 30px; height: 30px;"></div>
+                          <div onclick="selectAvatar('avatar7.png')"><img src="Avatars/avatar7.png" alt="Avatar 7"
+                              style="width: 30px; height: 30px;"></div>
+                          <div onclick="selectAvatar('avatar8.png')"><img src="Avatars/avatar8.png" alt="Avatar 8"
+                              style="width: 30px; height: 30px;"></div>
+                        </div>
+                        <button class="tooltip" onclick="toggleDropdown()">+<span class="tooltiptext">Add
+                            Avatar</span></button>
                         <h3><%= user.username %></h3>
                       </div>
                     </div>
@@ -67,12 +91,10 @@
                     <div style="height: 1em"></div>
                     <div class="buttons">
                       <button onclick="editProfile()" type="button" class="btn">Edit Profile</button>
-                      <button onclick="saveProfile()" type="button" class="btn btn-primary" disabled>Save Changes</button>
+                      <button onclick="saveProfile()" type="button" class="btn btn-primary" disabled>Save
+                        Changes</button>
                       <button type="button" class="btn">Change Password</button>
                       <button type="button" class="btn">Delete Profile</button>
-                    </div>
-                    <div id="avatars-container" style="display: none;">
-                      <!-- Avatars will be displayed here -->
                     </div>
                   </div>
                 </div>
@@ -88,40 +110,6 @@
 
   <script src="/js/profile.js"></script>
   <script src="/navBar_loggedin/navBarLoggedin.js"></script>
-  <script>
-    function fetchAvatars() {
-      fetch('/avatars')
-        .then(response => response.json())
-        .then(data => {
-          const avatarsContainer = document.getElementById('avatars-container');
-          avatarsContainer.innerHTML = '';
-          data.forEach(avatar => {
-            const img = document.createElement('img');
-            img.src = avatar.avatarUrl;
-            img.style.width = '100px';
-            img.style.height = '100px';
-            img.onclick = () => selectAvatar(avatar.avatarUrl);
-            avatarsContainer.appendChild(img);
-          });
-          avatarsContainer.style.display = 'block';
-        });
-    }
-
-    function selectAvatar(avatarUrl) {
-      fetch('/update-avatar', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ avatarUrl })
-      })
-      .then(response => response.text())
-      .then(message => {
-        console.log(message);
-        document.getElementById('avatar-display').innerHTML = `<img src="${avatarUrl}" alt="Profile Avatar" style="width: 100px; height: 100px;">`;
-        document.getElementById('avatars-container').style.display = 'none';
-      });
-    }
-  </script>
 </body>
+
 </html>
