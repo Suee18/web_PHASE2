@@ -18,7 +18,7 @@
             <form action="/register" method="post" class="form" id="form1">
 
                 <h2 class="form__title">Sign Up</h2>
-                <input type="text"  name="username" placeholder="Name" class="input" id="name"required/>
+                <input type="text"  name="username" placeholder="user name" class="input" id="name"required/>
                 <small class="error" id="n" style="visibility: hidden;"></small>
 
                 <input type="email"  name="email" placeholder="Email" class="input" id="email" required />
@@ -41,7 +41,7 @@
                     <option value="">Select your nationality</option>
                   </select>
                 
-                  <button class="btn" type="submit" onclick="checkSelection(); validateForm();">Sign Up</button>
+                  <button class="btn" type="submit">Sign Up</button> 
             </form>
         </div>
     
@@ -56,19 +56,23 @@
 
         <!-- log In -->
         <div class="container__form container--signin">
-            <form action="/register" method="post" class="form" id="form2">
+            <form action="/login" method="post" class="form" id="form2" >
                 <h2 class="form__title">log In</h2>
-                <input type="email" placeholder="Email" class="input" />
-                <input type="password" placeholder="Password" class="input" />
+                <input type="text" placeholder="user name" class="input" name="username" />
+                <input type="password" placeholder="Password" class="input" name="password" />
                 <a href="#" class="link"></a>
-                <button class="btn" type="submit" href="reviews.html">Log In      
-                </button>
+                <button class="btn" type="submit">Log In  </button>
+
+
                 <a href="/review/reviews.html"> sign in as a tourist</a>
                 <a href="/admin/admin.html">sign in as an admin </a>
-
             </form>
         </div>
     
+
+
+
+
         <!-- Overlay -->
         <div class="container__overlay">
             <div class="overlay">
@@ -81,7 +85,8 @@
             </div>
         </div>
     </div>
-<script src="/js/register.js"></script>
+
+ <script src="/js/register.js"></script> 
 <script src="/js/navBar.js"></script>
 </body>
 </html>
