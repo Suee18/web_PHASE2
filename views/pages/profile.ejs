@@ -1,13 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
 <body>
-    <%- include("../partials/nav.ejs") %>
-    <div>
+<header>
+    <%- include('../components/navBar') %> 
+</header>
+<main>
+    <div class="profile-container">
         <h1>Welcome, <%= user.username %></h1>
-        <p>Email: <%= user.email %></p>
-        <p>Sex: <%= user.sex %></p>
-        <p>Birthday: <%= user.birthday.toDateString() %></p>
-        <p>Nationality: <%= user.nationality %></p>
+        <p><strong>Email:</strong> <%= user.email %></p>
+        <p><strong>Gender:</strong> <%= user.sex %></p>
+        <p><strong>Date of Birth:</strong> <%= new Date(user.birthday).toDateString() %></p>
+        <p><strong>Nationality:</strong> <%= user.nationality %></p>
     </div>
+</main>
 </body>
 </html>

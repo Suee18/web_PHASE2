@@ -1,64 +1,73 @@
-
 import User from '../models/User.js';
-import bcrypt from 'bcrypt'; // Import bcrypt for password hashing
+import bcrypt from 'bcrypt';
 
 // Function to create a new user
 export const createUser = async (req, res) => {
-    const { username, email, password, sex, birthday, nationality } = req.body;
-    console.log('Received form submission:', req.body);
-
-    try {
-        // Check if the email already exists
-        const existingUser = await User.findOne({ email });
-        if (existingUser) {
-            console.error('Error creating user: Email already in use');
-            return res.status(400).send('Email already in use');
-        }
-
-        // Hash the password before saving
-        const hashedPassword = await bcrypt.hash(password, 10);
-
-        const newUser = new User({
-            username,
-            email,
-            password: hashedPassword, // Save hashed password
-            sex,
-            birthday,
-            nationality
-        });
-
-        await newUser.save();
-        console.log('User created successfully:', newUser);
-        res.redirect('/');
-    } catch (error) {
-        console.error('Error creating user:', error);
-        res.status(500).send('Error creating user');
+  const { username, email, password, sex, birthday, nationality } = req.body;
+  console.log('Received form submission:', req.body);
+  
+  try {
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      console.error('Error creating user: Email already in use');
+      return res.status(400).send('Email already in use');
     }
+    
+    const hashedPassword = await bcrypt.hash(password, 10);
+    
+    const newUser = new User({
+      username,
+      email,
+      password: hashedPassword,
+      sex,
+      birthday,
+      nationality
+    });
+    
+    await newUser.save();
+    console.log('User created successfully:', newUser);
+    res.redirect('/login');
+  } catch (error) {
+    console.error('Error creating user:', error);
+    res.status(500).send('Error creating user');
+  }
 };
 
-//log in a user
+// Function to log in a user
 export const loginUser = async (req, res) => {
-    const { username, password } = req.body;
-    try {
-        // Find the user by username
-        const user = await User.findOne({ username });
-        if (!user) {
-            return res.status(400).send('Invalid username or password');
-        }
-
-        // Compare passwords input::hashedDB 
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) {
-            return res.status(400).send('Invalid username or password');
-        }
-
-        console.log('current logged in:', user, 'logged in successfully');
-        res.redirect('/');
-    } catch (error) {
-        console.error('Error logging in user:', error);
-        res.status(500).send('Error logging in user');
+  const { username, password } = req.body;
+  try {
+    const user = await User.findOne({ username });
+    if (!user) {
+      return res.status(400).send('Invalid username or password');
     }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).send('Invalid username or password');
+    }
+
+    req.session.userId = user._id;  // Save the user ID in the session
+    console.log('Session data after login:', req.session); // Log session data
+    res.redirect('/profile');
+  } catch (error) {
+    console.error('Error logging in user:', error);
+    res.status(500).send('Error logging in user');
+  }
 };
 
-// Other CRUD operations can be added here
-
+// Function to display user profile
+export const userProfile = async (req, res) => {
+  try {
+    console.log('Session userId:', req.session.userId); // Log the session userId
+    const user = await User.findById(req.session.userId);
+    if (!user) {
+      return res.status(404).send('User not found');
+    }
+    console.log('User found:', user); // Log to verify user retrieval
+    res.render('pages/profile', { user });
+  } catch (error) {
+    console.error('Error retrieving user profile:', error);
+    res.status(500).send('Error retrieving user profile');
+  }
+};
