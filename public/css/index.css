@@ -1,8 +1,33 @@
+/***********FONTS*********/
+@font-face {
+  font-family: 'paragraphRegularFont';
+  src: url('/fonts/GrotleyRegular-mLEWv.otf') format('opentype');
+       
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'paragraphsBoldFont';
+  src: url('/fonts/GrotleyRegular-mLEWv.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'titlesFont';
+  src: url('/fonts/EgyptianNights-yAOV.ttf') format('truetype');
+       
+  font-weight: normal;
+  font-style: normal;
+}
+/********************/
+
 *,
 *::after,
 *::before {
   box-sizing: border-box;
 }
+
 /* remove nav styling from here make sure the travelo styling is copird to  navbar css */
 body {
   margin: 0;
@@ -140,6 +165,7 @@ div.overlay {
   pointer-events: none;
   user-select: none;
 }
+
 div.overlay h1 {
   font-family: 'Nanum Myeongjo', serif;
   font-size: 4.2rem;
@@ -186,7 +212,7 @@ div.overlay a.leave:after {
   transition: 0.4s ease;
 }
 
-  /*******************************************/
+  /*******************OUR SERVICES************************/
   #new-section{
     position: absolute;
     top: 102%;
@@ -230,7 +256,6 @@ div.overlay a.leave:after {
     width: 50%; 
     box-sizing: border-box; 
     overflow-y: none; 
-    
   }
   .background-opacity {
     position: absolute;
@@ -258,11 +283,17 @@ div.overlay a.leave:after {
     list-style-type:none;
     padding-left: 0;
   }
-  .content h2 {
+  .content h2 
+  {
+    /* font-family: 'titlesFont';
+    font-weight: 50;
+    font-size: 300%; */ 
+    /* salma added */
     position: relative;
     margin-bottom: 20px;
+    margin-left: 10%;
     color: azure;
-    font-family: 'Perpetua Titling MT';
+     font-family: 'Perpetua Titling MT'; 
   }
 
   .content h3{
@@ -277,6 +308,9 @@ div.overlay a.leave:after {
     padding-left: 8%;
     color: #fff;
     font-size: 100%;
+    font-family: paragraphRegularFont;     /* salma added */
+
+    font-weight: 500;
   }
 
   .content p::after{
@@ -343,8 +377,10 @@ div.overlay a.leave:after {
   }
   
   .main-container h1 {
-    font-size: 2.5rem;
-    font-weight: 800;
+    /* salma added  */
+    font-family: titlesFont;
+    font-size: 5.5rem;
+    font-weight: 100;
     text-align: center;
     color: #033f76;
     margin: 10px 0 30px;
@@ -360,6 +396,9 @@ div.overlay a.leave:after {
       margin-bottom: 50px;
   }
   .text li{
+    /* salma added */
+    font-family: paragraphRegularFont;
+    font-weight: 500;
     text-align: left;
     padding-left: 10px;
     font-size: 1.5rem;
@@ -476,10 +515,10 @@ div.overlay a.leave:after {
       width: 100%;
     }
   }
-  /******************************/
+  /*************FOOTER*****************/
   .contact {
-    background-color: #bc853e97;
-    color: black;
+    background-color: #02213e;
+    color: #c3e4db ;
     width: 100vw;
     height: 25vh;
     margin-top: 3rem;
@@ -492,11 +531,14 @@ div.overlay a.leave:after {
     align-items: center;
     
   }
+ 
   .join-icons {
     margin-right: auto;
     margin-left: 1.5rem;
     font-size: 2rem; 
-    padding-left: 5rem;
+    padding-left: 5rem;    
+    color: #c3e4db ;
+
   }
   .contact-info {
     margin-left: auto; 
@@ -516,6 +558,7 @@ div.overlay a.leave:after {
     margin-right: 7rem;
   }
   .email a{
+    color: #c3e4db ;
     padding-left: 0.7rem;
     text-decoration: none;
   }
@@ -525,6 +568,8 @@ div.overlay a.leave:after {
   .bot-info a{
     padding-left: 0.7rem;
     text-decoration: none;
+    color: #c3e4db ;
+
   }
   .bot-info a:hover{
     text-decoration: underline;
