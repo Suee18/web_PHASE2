@@ -12,8 +12,7 @@ signUpBtn.addEventListener("click", () => {
 	container.classList.add("right-panel-active");
 });
 
-// fistForm.addEventListener("submit", (e) => e.preventDefault());
-// secondForm.addEventListener("submit", (e) => e.preventDefault());
+
 
 const countries = [
   "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria", 
@@ -147,4 +146,20 @@ function validateForm() {
       genderErr = false;
     }
   }
+
+//client side date validation
+//10 years old to 65 years old
+document.addEventListener('DOMContentLoaded', function() {
+  const birthdayInput = document.getElementById('birthday');
+  if (birthdayInput) {
+      const today = new Date();
+      const maxDate = new Date(today.getFullYear() - 10, today.getMonth(), today.getDate());
+      const minDate = new Date(today.getFullYear() - 65, today.getMonth(), today.getDate());
+
+      birthdayInput.max = maxDate.toISOString().split('T')[0];
+      birthdayInput.min = minDate.toISOString().split('T')[0];
+  }
+});
+
+
 
