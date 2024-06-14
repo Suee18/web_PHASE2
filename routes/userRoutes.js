@@ -19,7 +19,7 @@ router.get('/profile', userProfile);
 
 //================navBar logged in user routing =======================================================
 router.get('/user_input/create', (req, res) => {
-  res.render('pages/create_plan');  // Ensure you have a corresponding EJS file for this route
+  res.render('pages/plan_input');  // Ensure you have a corresponding EJS file for this route
 });
 
 router.get('/user_input/history', (req, res) => {
