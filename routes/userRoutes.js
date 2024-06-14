@@ -3,7 +3,7 @@ import { createUser, loginUser, userProfile} from '../controllers/userController
 
 const router = express.Router();
 
-// Serve the registration page
+// sServe the registration page
 router.get('/register', (req, res) => {
   res.render('pages/register', { title: 'Register' });
 });
