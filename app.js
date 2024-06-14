@@ -30,7 +30,7 @@ mongoose.connect(uri)
     });
   })
   .catch(err => {
-    console.error('****************MongoDB MAGATSH  ->:', err);
+    console.error('****************MongoDB fail to connect:  ->:', err);
   });
   app.use(express.static(path.join(__dirname, 'public')));
 

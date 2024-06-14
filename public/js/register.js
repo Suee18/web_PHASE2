@@ -148,6 +148,7 @@ function validateForm() {
   }
 
 //client side date validation
+
 //10 years old to 65 years old
 document.addEventListener('DOMContentLoaded', function() {
   const birthdayInput = document.getElementById('birthday');
