@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/history.css">
+    <script src="history.js"></script>
+
+    <title>Document</title>
+</head>
+
+
+
+    <body>
+        <header>
+            <%- include('../components/navBarLoggedin') %>
+        </header>
+        <!--History form-->
+        <section>
+            <div class="container-history">
+                <h2>History</h2>
+                <table>
+
+                    <head>
+                        <tr>
+                            <th>Date of Creating</th>
+                            <th colspan="2">Destination</th>
+                            <th>Check-In</th>
+                            <th>Check-Out</th>
+                            <th>Number of Days</th>
+                            <th>Package</th>
+                            <th></th>
+                        </tr>
+                    </head>
+                    <tbody>
+                        <tr id="row-two">
+                            <td></td>
+                            <td>First</td>
+                            <td>Last</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>10/10/2020</td>
+                            <td>Cairo</td>
+                            <td>Aswan</td>
+                            <td>12/10/2020</td>
+                            <td>16/10/2020</td>
+                            <td>4</td>
+                            <td>Standard </td>
+                            <td><a href="#" onclick="showDetails4()">More Details</a></td>
+                        </tr>
+                        <tr>
+                            <td>20/12/2021</td>
+                            <td colspan="2">Alexandria</td>
+                            <td>1/12/2021</td>
+                            <td>5/12/2021</td>
+                            <td>4</td>
+                            <td>Free </td>
+                            <td><a href="#" onclick="showDetails3()">More Details</a></td>
+                        </tr>
+                        <tr>
+                            <td>1/5/2022</td>
+                            <td colspan="2">cairo</td>
+                            <td>2/5/2022</td>
+                            <td>3/5/2022</td>
+                            <td>1</td>
+                            <td>free </td>
+                            <td><a href="#" onclick="showDetails2()">More Details</a></td>
+                        </tr>
+                        <tr>
+                            <td>9/5/2024</td>
+                            <td>Hurghada</td>
+                            <td>Cairo</td>
+                            <td>10/5/2024</td>
+                            <td>12/5/2024</td>
+                            <td>2</td>
+                            <td>Premium </td>
+                            <td><a href="#" onclick="showDetails1()">More Details</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="details-container" id="details-container">
+                <div class="details-content">
+                </div>
+                <button class="close-btn" id="close-btn">Close</button>
+            </div>
+        </section>
+    </body>
+
+</html>
