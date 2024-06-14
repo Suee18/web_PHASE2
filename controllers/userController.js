@@ -3,7 +3,6 @@ import bcrypt from 'bcrypt';
 //CRUD operations
 
 // Function to Sign in / create a new user
-
 export const createUser = async (req, res) => {
   const { username, email, password, sex, birthday, nationality } = req.body;
   console.log('-------------Printed by: UserController/createUser()----------------'); 
@@ -47,14 +46,13 @@ export const loginUser = async (req, res) => {
     if (!user) {
       return res.status(400).send('---------!!ERROR!!-------From : UserController/LoginUser()Invalid username or password-------');
     }
-
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(400).send('Invalid username or password');
     }
     req.session.userId = user._id;  // Save the user ID in the session
     console.log('-----------------Printed by: UserController/loginUser()-----------------'); 
-    console.log('Session data after login:', req.session); // Log session data
+    console.log('Session data after login:', req.session); // Log session data    
     res.redirect('/profile');
   } catch (error) {
     console.log('Printed by: UserController/LoginUser()'); 

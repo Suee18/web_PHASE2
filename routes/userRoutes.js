@@ -1,6 +1,5 @@
 import express from 'express';
 import { createUser, loginUser, userProfile} from '../controllers/userController.js';
-
 const router = express.Router();
 
 // sServe the registration page
@@ -32,13 +31,15 @@ router.get('/review/reviews', (req, res) => {
 });
 
 //===================================================================================================
-//LOG OUT SESSION TO BE IMPLEMENTED YET
+//LOG OUT 
 router.get('/logout', (req, res) => {
-  res.redirect('/');
+  req.session.destroy(err => {
+    if (err) {
+      return res.redirect('/profile');
+    }
+    res.clearCookie('sid');
+    res.redirect('/');
+  });
 });
 
-// Handle errors
-router.get('/error', (req, res) => {
-  res.render('components/popUpError');
-});
 export default router;
