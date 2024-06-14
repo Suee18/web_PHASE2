@@ -32,6 +32,13 @@ export const createUser = async (req, res) => {
     await newUser.save();
     console.log('------------------------------Printed by: UserController/createUser()------------------'); 
     console.log('User created successfully:', newUser);
+    
+    // Automatically log in the user
+    req.session.userId = newUser._id;  // Save the user ID in the session
+    console.log('------------------------------Printed by: UserController/createUser()------------------'); 
+    console.log('Session data after signup:', req.session); // Log session data
+
+    // Redirect to the profile page
     res.redirect('/profile');
   } catch (error) {
     console.log('-------------Printed by: UserController/createUser()-----------------'); 
