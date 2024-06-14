@@ -8,11 +8,12 @@ const userSchema = new Schema({
   sex: { type: String, required: true },
   birthday: { type: Date, required: true },
   nationality: { type: String, required: true },
-  isAdmin: { type: Boolean,default: false },
-  avatar: { type: String, required: true }, 
-
+  isAdmin: { type: Boolean, default: false },
+  avatar: { type: String, required: true }
 });
-userSchema.pre('save', function(next) {
+
+//default avatar
+userSchema.pre('validate', function(next) {
   if (!this.avatar) {
     this.avatar = this.sex === 'female' ? '/images/avatars/female_default.png' : '/images/avatars/male_default.png';
   }

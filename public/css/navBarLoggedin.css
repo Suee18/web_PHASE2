@@ -7,11 +7,13 @@ body {
 }
 
 .profile {
-  width: 5rem;
-  height: 5rem;
+  width: 7rem;
+  height: 7rem;
   border-radius: 3rem;
   margin-top: 0.7rem;
-  margin-left: 59rem;
+  margin-left: 57rem;
+  /* box-shadow: 10px 10px 10px rgb(6, 4, 80); */
+
 }
 
 .logoIcon {

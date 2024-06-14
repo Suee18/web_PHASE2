@@ -5,29 +5,32 @@
         <ul class="menu">
             <li>
                 <div class="logo-div">
-                    <img src="/images/Logo.png" class="logoIcon" onclick="window.location.href='/'" style="cursor: pointer;">
+                    <img src="/images/Logo.png" class="logoIcon" onclick="window.location.href='/'"
+                        style="cursor: pointer;">
                     <p class="logo">Travelo</p>
-                    <img src="/review/Avatars/avatar7.png" class="profile">
+                    <img src="<%= user.avatar %>" alt="Avatar" class="profile">
                 </div>
             </li>
         </ul>
     </nav>
     <div id="slidingPanel" class="panel">
         <!-- Content of the panel -->
-        <img src="/review/Avatars/avatar7.png" class="profileIconPanel">
+        <img src="<%= user.avatar %>" alt="Avatar" style="width:12rem; height:12rem;
+        border-radius: 2.5rem;
+        margin-top: 0.7rem;">
 
         <ul class="panellist">
-            <li class="sidePanelChoice" id="sidePanelChoice">
-                <a href="/user_input/create">Create a plan</a>
-            </li>
-            <li class="sidePanelChoice" id="sidePanelChoice">
-                <a href="/user_input/history">View previous plans</a>
-            </li>
             <li class="sidePanelChoice" id="sidePanelChoice">
                 <a href="/profile">View profile</a>
             </li>
             <li class="sidePanelChoice" id="sidePanelChoice">
-                <a href="/review/reviews">Add a review</a>
+                <a href="create_A_Plan">Create a plan</a>
+            </li>
+            <li class="sidePanelChoice" id="sidePanelChoice">
+                <a href="/add_a_review">Add a review</a>
+            </li>
+            <li class="sidePanelChoice" id="sidePanelChoice">
+                <a href="/view_plans_history">View previous plans</a>
             </li>
             <li class="sidePanelChoice" id="sidePanelChoice">
                 <a href="https://Suee18.github.io/egyTour.github.io/">Egypt virtual tour</a>

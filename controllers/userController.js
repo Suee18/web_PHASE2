@@ -2,7 +2,9 @@ import User from '../models/User.js';
 import bcrypt from 'bcrypt';
 //CRUD operations
 
-// Function to Sign in / create a new user
+//======================Register=====================================================
+
+// Function to Sign up / create a new user
 export const createUser = async (req, res) => {
   const { username, email, password, sex, birthday, nationality } = req.body;
   console.log('-------------Printed by: UserController/createUser()----------------'); 
@@ -30,7 +32,7 @@ export const createUser = async (req, res) => {
     await newUser.save();
     console.log('------------------------------Printed by: UserController/createUser()------------------'); 
     console.log('User created successfully:', newUser);
-    res.redirect('/login');
+    res.redirect('/profile');
   } catch (error) {
     console.log('-------------Printed by: UserController/createUser()-----------------'); 
     console.error('Error creating user:', error);
@@ -38,7 +40,7 @@ export const createUser = async (req, res) => {
   }
 };
 
-// Function to log in a user
+// Function to log in a user with session data
 export const loginUser = async (req, res) => {
   const { username, password } = req.body;
   try {
@@ -61,10 +63,13 @@ export const loginUser = async (req, res) => {
   }
 };
 
-// Function to display user profile
+
+//===================================================================================
+//=========================Profile page===============================================
+
 export const userProfile = async (req, res) => {
   try {
-    console.log('//////Printed by: UserController/userProfile()'); 
+    console.log('-----------Printed by: UserController/userProfile()'); 
     console.log('Session userId:', req.session.userId); // Log the session userId
     const user = await User.findById(req.session.userId);
     if (!user) {
@@ -74,9 +79,75 @@ export const userProfile = async (req, res) => {
     console.log('---------Printed by: UserController/userProfile()'); 
     console.log('User found:', user); // Log to verify user retrieval
     res.render('pages/profile', { user });
-  } catch (error) {
+  } catch (error)
+   {
     console.log('Printed by: UserController/userProfile()'); 
     console.error('Error retrieving user profile:', error);
     res.status(500).send('Error retrieving user profile');
   }
 };
+//===================================================================================
+//============================Reviews page===========================================
+export const reviwesSessionGet = async (req, res) => {
+  try {
+    console.log('-----------Printed by: UserController/userProfile()'); 
+    console.log('Session userId:', req.session.userId); // Log the session userId
+    const user = await User.findById(req.session.userId);
+    if (!user) {
+      console.log('--------!!!!!Printed by: UserController/userProfile()'); 
+      return res.status(404).send('User not found');
+    }
+    console.log('---------Printed by: UserController/userProfile()'); 
+    console.log('User found:', user); // Log to verify user retrieval
+    res.render('pages/reviews', { user });
+  } catch (error)
+   {
+    console.log('Printed by: UserController/userProfile()'); 
+    console.error('Error retrieving user profile:', error);
+    res.status(500).send('Error retrieving user profile');
+  }
+};
+//===================================================================================
+//=============================Create a plan ========================================
+export const inputSession = async (req, res) => {
+  try {
+    console.log('-----------Printed by: UserController/inputSession()'); 
+    console.log('Session userId:', req.session.userId); // Log the session userId
+    const user = await User.findById(req.session.userId);
+    if (!user) {
+      console.log('--------!!!!!Printed by: UserController/inputSession()'); 
+      return res.status(404).send('User not found');
+    }
+    console.log('---------Printed by: UserController/inputSession()'); 
+    console.log('User found:', user); // Log to verify user retrieval
+    res.render('pages/plan_input', { user });
+  } catch (error)
+   {
+    console.log('Printed by: UserController/inputSession()'); 
+    console.error('Error retrieving user profile:', error);
+    res.status(500).send('Error retrieving user profile');
+  }
+};
+//===================================================================================
+//==========================History==================================================
+export const historySession = async (req, res) => {
+  try {
+    console.log('-----------Printed by: UserController/historySession()'); 
+    console.log('Session userId:', req.session.userId); // Log the session userId
+    const user = await User.findById(req.session.userId);
+    if (!user) {
+      console.log('--------!!!!!Printed by: UserController/historySession()'); 
+      return res.status(404).send('User not found');
+    }
+    console.log('---------Printed by: UserController/historySession()'); 
+    console.log('User found:', user); // Log to verify user retrieval
+    res.render('pages/history', { user });
+  } catch (error)
+   {
+    console.log('Printed by: UserController/historySession()'); 
+    console.error('Error retrieving user profile:', error);
+    res.status(500).send('Error retrieving user profile');
+  }
+};
+//===================================================================================
+//===================================================================================
