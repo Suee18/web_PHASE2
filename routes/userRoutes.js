@@ -1,7 +1,8 @@
 import express from 'express';
-import { createUser, loginUser, userProfile,reviwesSessionGet,historySession,inputSession} from '../controllers/userController.js';
+import { createUser, loginUser} from '../controllers/userController.js';
 const router = express.Router();
 
+import { fetchUserFromSession } from '../middleware/auth.js';
 
 
 //================Register=============================================================================
@@ -20,10 +21,25 @@ router.post('/login', loginUser);
 
 //================navBar logged in user routing =======================================================
 
-router.get('/profile', userProfile);
-router.get('/add_a_review', reviwesSessionGet);
-router.get('/view_plans_history', historySession);
-router.get('/create_A_Plan', inputSession);
+router.get('/profile', fetchUserFromSession,  (req, res) => {
+  console.log('User found:', req.user); 
+  res.render('pages/profile', { user: req.user });
+});
+
+router.get('/add_a_review', fetchUserFromSession, (req, res) => {
+  console.log('User found:', req.user); 
+  res.render('pages/reviews', { user: req.user });
+});
+
+router.get('/create_A_Plan', fetchUserFromSession, (req, res) => {
+  console.log('User found:', req.user); 
+  res.render('pages/plan_input', { user: req.user });
+});
+
+router.get ('/view_plans_history', fetchUserFromSession ,  (req, res)=> {
+  console.log('User found:', req.user); 
+  res.render('pages/history', { user: req.user });
+});
 
 //================LOG OUT ===============================================================================
 
