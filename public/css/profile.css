@@ -1,3 +1,26 @@
+/***********FONTS*********/
+@font-face {
+  font-family: 'paragraphRegularFont';
+  src: url('/fonts/GrotleyRegular-mLEWv.otf') format('opentype');
+       
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'paragraphsBoldFont';
+  src: url('/fonts/GrotleyRegular-mLEWv.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'titlesFont';
+  src: url('/fonts/EgyptianNights-yAOV.ttf') format('truetype');
+       
+  font-weight: normal;
+  font-style: normal;
+}
+/********************/
 body {
   /* fallback for old browsers */
   background: #033f76;
@@ -24,18 +47,26 @@ body {
 .main-container {
   border-radius: 2rem;
   margin: 0 auto;
-  max-width: 1200px;
+  width:90%;
+  /* max-width: 1200px; */
   padding: 20px;
   height: 35rem;
   margin-top: 7rem;
   background-color: #ffffff36;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  /* Optional: adds shadow for better focus */
+  box-shadow: 0 0 10px rgba(1, 4, 32, 0.808);
 }
+.avatarHolder{
+  width:30%;
+  border-radius: 1rem;
+  height: 31em;
+background-color: #96a0a386;
+margin-left: 1em;
+box-shadow: 0 0 10px rgba(1, 238, 255, 0.418);
 
+}
 #avatar-display {
   height: 100%;
-  width: 100%;
+  width: 90%;
   border-radius: 10px;
 }
 
@@ -59,16 +90,24 @@ body {
   border: 10px solid #ccc;
   border-radius: 50%;
 }
-
+/* 
 .profilee .card h3 {
   font-size: 20px;
   font-weight: 700;
+} */
+
+.userInfoUN{
+  margin-top: 3rem;
+font-family:paragraphsBoldFont;
+color: #0e044d;
+text-shadow:5px 5px 5px #8c7a61;
+font-size:200%;
 }
 
-.profilee .card p {
+/* .profilee .card p {
   font-size: 16px;
   color: #000;
-}
+} */
 
 .profilee .table th,
 .profilee .table td {
