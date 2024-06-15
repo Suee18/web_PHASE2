@@ -100,7 +100,8 @@ box-shadow: 0 0 10px rgba(1, 238, 255, 0.418);
   margin-top: 3rem;
 font-family:paragraphsBoldFont;
 color: #0e044d;
-text-shadow:5px 5px 5px #8c7a61;
+/* font-weight: 200; */
+/* text-shadow:5px 5px 5px #8c7a61; */
 font-size:200%;
 }
 
