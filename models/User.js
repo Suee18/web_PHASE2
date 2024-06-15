@@ -12,7 +12,7 @@ const userSchema = new Schema({
   avatar: { type: String, required: true }
 });
 
-//default avatar
+//default avatar for each account on sign up 
 userSchema.pre('validate', function(next) {
   if (!this.avatar) {
     this.avatar = this.sex === 'female' ? '/images/avatars/female_default.png' : '/images/avatars/male_default.png';

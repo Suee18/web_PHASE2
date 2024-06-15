@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import session from 'express-session';
 import dotenv from 'dotenv';
 import userRoutes from './routes/userRoutes.js';
+import adminRoutes from './routes/adminRoutes.js';
 
 dotenv.config(); // Load environment variables from .env file
 
@@ -46,13 +47,14 @@ mongoose.connect(uri)
     //  session data if no user is logged in
     if (!req.session.user) 
     {
-      console.log('--------------','Session data on landing page (no user logged in):\n', req.session,'-------------------<printed by: app.js>');
+      console.log('--------------Session data on landing page (no user logged in):\n', req.session,'-------------------<printed by: app.js>');
     }
     res.render('pages/index', { title: 'My App' });
   });
   
-  // Use the user routes
+  //Routes
   app.use('/', userRoutes);
+  app.use('/', adminRoutes);
   
 
 

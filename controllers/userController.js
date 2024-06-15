@@ -1,6 +1,5 @@
 import User from '../models/User.js';
 import bcrypt from 'bcrypt';
-//CRUD operations
 
 //======================Register=====================================================
 
@@ -30,15 +29,13 @@ export const createUser = async (req, res) => {
     });
     
     await newUser.save();
-    console.log('------------------------------Printed by: UserController/createUser()------------------'); 
+    req.session.userId = newUser._id; //session data,id
+    console.log('\n===============Printed by: UserController/createUser()============================'); 
+    console.log('Session data after signup:', req.session); 
+  console.log('\n-------------------------------');
     console.log('User created successfully:', newUser);
-    
+    console.log('=====================================================================================\n');
     // Automatically log in the user
-    req.session.userId = newUser._id;  // Save the user ID in the session
-    console.log('------------------------------Printed by: UserController/createUser()------------------'); 
-    console.log('Session data after signup:', req.session); // Log session data
-
-    // Redirect to the profile page
     res.redirect('/profile');
   } catch (error) {
     console.log('-------------Printed by: UserController/createUser()-----------------'); 
@@ -60,13 +57,20 @@ export const loginUser = async (req, res) => {
       return res.status(400).send('Invalid username or password');
     }
     req.session.userId = user._id;  // Save the user ID in the session
-    console.log('-----------------Printed by: UserController/loginUser()-----------------'); 
-    console.log('Session data after login:', req.session); // Log session data    
-    res.redirect('/profile');
+    console.log('\n==============Printed by: UserController/loginUser()==================='); 
+    console.log('Session data after login:\n', req.session,'\n-----------------------------'); 
+    console.log('User data:', user); // Log user data
+    console.log('======================================================================='); 
+
+    // Redirect based on isAdmin 
+    if (user.isAdmin) {
+      res.redirect('/adminHome');
+    } else {
+      res.redirect('/profile');
+    }
   } catch (error) {
-    console.log('Printed by: UserController/LoginUser()'); 
-    console.error('Error logging in user:', error);
+    console.log('!!!!-------------Printed by: UserController/LoginUser()-----------------'); 
+    console.log('Error logging in user:', error);
     res.status(500).send('Error logging in user');
   }
 };
-
