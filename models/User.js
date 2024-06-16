@@ -9,14 +9,36 @@ const userSchema = new Schema({
   birthday: { type: Date, required: true },
   nationality: { type: String, required: true },
   isAdmin: { type: Boolean, default: false },
-  avatar: { type: String, required: true }
+  avatar: { type: String, required: true },
+  age : {type: Number, required: true},
 });
-
+//age 
+userSchema.pre('save', function(next) {
+  const today = new Date();
+  const birthDate = new Date(this.birthday);
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const m = today.getMonth() - birthDate.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+  this.age = age;
+  next();
+});
 //default avatar for each account on sign up 
 userSchema.pre('validate', function(next) {
+  const today = new Date();
+  const birthDate = new Date(this.birthday);
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const m = today.getMonth() - birthDate.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+  this.age = age;
+
   if (!this.avatar) {
     this.avatar = this.sex === 'female' ? '/images/avatars/female_default.png' : '/images/avatars/male_default.png';
   }
+
   next();
 });
 

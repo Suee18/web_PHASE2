@@ -36,7 +36,6 @@
                           <!-- Selected avatar will be displayed here -->
                           <img src="<%= user.avatar %>" alt="Avatar" class="avatar-image">
                         </div>
-     
 
                         <p class="userInfoUN">  <%= user.username %></p>
                       </div>
@@ -62,10 +61,10 @@
                           <tr id="birthday">
                             <th width="30%">Birthday</th>
                             <td><input type="date" id="birthday-value" value="<%= user.birthday.toISOString().substring(0, 10) %>"></td>
-                          </tr>
+                          </tr>                          
                           <tr id="age">
                             <th width="30%">Age</th>
-                            <td><span id="age-value"><%= new Date().getFullYear() - new Date(user.birthday).getFullYear() %></span></td>
+                            <td><span id="age-value"><%= user.age %></span></td>
                           </tr>
                           <tr id="gender">
                             <th width="30%">Gender</th>

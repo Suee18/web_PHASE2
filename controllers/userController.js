@@ -81,18 +81,18 @@ export const loginUser = async (req, res) => {
 
 export const updateProfileInfo = async (req, res) => {
   try {
-    const { email, gender, nationality, username,birthday } = req.body;
+    const { email, gender, nationality, username, birthday, age } = req.body;
     const userId = req.session.userId; //r ID  stored in session
 
     const user = await User.findById(userId);
     if (!user) {
       return res.status(404).send('User not found');
     }
-    
+
     user.username = username;
     user.email = email;
-    user.birthday = new Date(birthday); // Update birthday
-    // user.birthday = new Date(new Date().getFullYear() - age, user.birthday.getMonth(), user.birthday.getDate()); // Update age
+    user.birthday = new Date(birthday);
+    user.age = age;
     user.sex = gender;
     user.nationality = nationality;
 
