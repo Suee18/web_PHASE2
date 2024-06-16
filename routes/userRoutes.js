@@ -1,5 +1,5 @@
 import express from 'express';
-import { createUser, loginUser} from '../controllers/userController.js';
+import { createUser, loginUser,updateProfileInfo} from '../controllers/userController.js';
 import { fetchUserFromSession} from '../middleware/auth.js';
 const router = express.Router();
 
@@ -48,4 +48,26 @@ router.get('/logout', (req, res) => {
   });
 });
 
+
+//================Real time -> ERROR HANDLING========================================================================
+router.get('/check-username', async (req, res) => {
+  const { username } = req.query;
+  try {
+      const user = await User.findOne({ username });
+      if (user) {
+          res.json({ exists: true });
+      } else {
+          res.json({ exists: false });
+      }
+  } catch (error) {
+      res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 export default router;
+//====================CRUD=Update Profile info=============================================================================
+
+
+router.post('/profile/update', updateProfileInfo); 
+
+//====================CRUD=Delete Profile=============================================================================
