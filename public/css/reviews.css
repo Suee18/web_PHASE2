@@ -116,6 +116,11 @@
   .add-review-btn:focus {
     outline: none;
   }
+  .error-message {
+    color: red;
+    font-size: 0.7em;
+    margin-top: 5px;
+  }
   
   @media (max-width: 1060px) {
     .box {

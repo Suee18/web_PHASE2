@@ -1,94 +1,173 @@
-document.addEventListener("DOMContentLoaded", function() {
+function AddReviewBox() {
+  // Retrieve dynamic values from data attributes
   const addReviewButton = document.getElementById('add-review-button');
+  const username = addReviewButton.getAttribute('data-username');
+  const avatar = addReviewButton.getAttribute('data-avatar');
+
+  // Create elements
   const boxContainer = document.querySelector('.box-container');
+  const newReviewBox = document.createElement('div');
+  newReviewBox.classList.add('box');
+
+  // Avatar and username
+  const profileInfo = document.createElement('div');
+  profileInfo.classList.add('profile-info');
+  
+  const leftPart = document.createElement('div');
+  leftPart.classList.add('left-part');
+  
+  const avatarImg = document.createElement('img');
+  avatarImg.src = avatar; // Use dynamic avatar URL
+  avatarImg.alt = 'Avatar';
+  avatarImg.classList.add('avatar');
+  
+  const usernameElem = document.createElement('p');
+  usernameElem.classList.add('username');
+  usernameElem.textContent = username; // Use dynamic username
+  
+  leftPart.appendChild(avatarImg);
+  leftPart.appendChild(usernameElem);
+  profileInfo.appendChild(leftPart);
+  
+  // Rating stars (Initially without color, change on hover)
+  const ratingWrapper = document.createElement('div'); // Wrapper for rating and error message
+  ratingWrapper.classList.add('rating-wrapper');
+  
+  const rating = document.createElement('div');
+  rating.classList.add('rating');
+  rating.innerHTML = renderStars(0); // Initialize with unfilled stars
+  
+  ratingWrapper.appendChild(rating);
+  profileInfo.appendChild(ratingWrapper);
+  
+  // Review text textarea and Add Review button
+  const reviewText = document.createElement('div');
+  reviewText.classList.add('review-text');
+  
+  const textarea = document.createElement('textarea');
+  textarea.setAttribute('placeholder', 'Write your review here...');
+  textarea.setAttribute('rows', '4');
+  reviewText.appendChild(textarea);
+  
+  const addReviewBtn = document.createElement('button');
+  addReviewBtn.textContent = 'Add Review';
+  addReviewBtn.classList.add('add-review-btn');
+  reviewText.appendChild(addReviewBtn);
+  
+  // Append all parts to new review box
+  newReviewBox.appendChild(profileInfo);
+  newReviewBox.appendChild(reviewText);
+  
+  // Append new review box at the end of box-container
+  boxContainer.appendChild(newReviewBox);
+
+  // Add star rating functionality
+  const stars = newReviewBox.querySelectorAll('.star');
+  let isStarClicked = false;
   let currentRating = 0;
-  addReviewButton.addEventListener('click', function() {
-    // Create elements for the new review
-    const newReview = document.createElement('div');
-    newReview.className = 'box';
 
-    // Mock data for the new review (replace with actual user input or dynamic data)
-    const avatarUrl = 'path_to_avatar.jpg'; // Replace with actual avatar URL
-    const username = 'New User'; // Replace with actual username
-    const starRating = 0; // Replace with actual star rating
-    const reviewComment = ''; // Replace with actual review comment
+  stars.forEach((star, index) => {
+    star.addEventListener('mouseover', function() {
+      if (!isStarClicked) {
+        highlightStars(stars, index + 1);
+      }
+    });
 
-    // Construct the HTML for the new review
-    newReview.innerHTML = `
-      <div class="box-top">
-        <div class="profile-info">
-          <div class="left-part">
-            <img src="${avatarUrl}" alt="Avatar" class="avatar">
-            <p class="username">${username}</p>
-          </div>
-          <div class="rating">
-            <!-- Render stars based on rating -->
-            ${renderStars(starRating)}
-          </div>
-        </div>
-      </div>
-      <div class="review-text">
-        <textarea class="review-input" rows="4" placeholder="Write your review here...">${reviewComment}</textarea>
-        <button class="add-review-btn">Add Review</button>
-      </div>
-    `;
+    star.addEventListener('mouseout', function() {
+      if (!isStarClicked) {
+        highlightStars(stars, 0);
+      }
+    });
 
-    // Append the new review to the box container
-    boxContainer.appendChild(newReview);
-
-    // Adjust the width of the textarea to match the box-container
-    const textarea = newReview.querySelector('.review-input');
-    const boxWidth = newReview.clientWidth;
-    textarea.style.width = `${boxWidth * 0.9}px`; // Set textarea width to 70% of box container
-
-    // Add event listeners to stars for hover and click
-    const stars = newReview.querySelectorAll('.star');
-    const isClickedArray = new Array(5).fill(false);
-    let isStarClicked = false;
-    stars.forEach((star, index) => {
-      star.addEventListener('mouseover', function() {
-        if (!isStarClicked) {
-        for (let i = 0; i <= index; i++) {
-          stars[i].classList.add('fas');
-          stars[i].classList.remove('far');
-        }
-        for (let i = index + 1; i < stars.length; i++) {
-          stars[i].classList.remove('fas');
-          stars[i].classList.add('far');
-        }
-      
-    }
-      });
-
-      star.addEventListener('click', function() {
-        isStarClicked = true;
-        currentRating = index + 1;
-        renderStars(currentRating); // Update star rating based on click
-      
-        // Update all stars visually
-        stars.forEach((star, i) => {
-          if (i <= index) {
-            star.classList.add('fas');
-            star.classList.remove('far');
-          } else {
-            star.classList.remove('fas');
-            star.classList.add('far');
-          }
-        });
-      });
+    star.addEventListener('click', function() {
+      isStarClicked = true;
+      currentRating = index + 1;
+      highlightStars(stars, currentRating);
     });
   });
 
-  // Function to render star icons based on rating
-  function renderStars(count) {
-    let stars = '';
-    for (let i = 0; i < 5; i++) {
-      if (i < count) {
-        stars += '<i class="star fas fa-star"></i>';
-      } else {
-        stars += '<i class="star far fa-star"></i>';
-      }
+  // Add review button click event
+  addReviewBtn.addEventListener('click', function() {
+    // Remove existing error messages
+    const existingErrors = newReviewBox.querySelectorAll('.error-message');
+    existingErrors.forEach(error => error.remove());
+
+    let hasError = false;
+
+    // Check if textarea is empty
+    if (textarea.value.trim() === '') {
+      const errorMessage = document.createElement('p');
+      errorMessage.textContent = 'You have to fill this part';
+      errorMessage.classList.add('error-message');
+      textarea.after(errorMessage);
+      hasError = true;
     }
-    return stars;
+
+    // Check if stars are filled
+    if (currentRating === 0) {
+      const errorMessage = document.createElement('p');
+      errorMessage.textContent = 'You have to fill this part';
+      errorMessage.classList.add('error-message');
+      ratingWrapper.appendChild(errorMessage);
+      hasError = true;
+    }
+
+    // If no errors, proceed with submitting the review
+    if (!hasError) {
+      const reviewData = {
+        username,
+        avatar,
+        rate: currentRating,
+        comment: textarea.value,
+        created_at: new Date().toISOString()
+      };
+
+      // Make an AJAX request to submit the review
+      fetch('/api/reviews', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(reviewData)
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          console.log('Review submitted successfully:', data);
+          // Optionally, update the UI to reflect the new review
+        } else {
+          console.error('Error submitting review:', data.message);
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+    }
+  });
+}
+
+// Function to highlight stars based on hover or click
+function highlightStars(stars, count) {
+  stars.forEach((star, index) => {
+    if (index < count) {
+      star.classList.add('fas');
+      star.classList.remove('far');
+    } else {
+      star.classList.remove('fas');
+      star.classList.add('far');
+    }
+  });
+}
+
+// Function to render star icons based on rating
+function renderStars(count) {
+  let stars = '';
+  for (let i = 0; i < 5; i++) {
+    if (i < count) {
+      stars += '<i class="star fas fa-star"></i>';
+    } else {
+      stars += '<i class="star far fa-star"></i>';
+    }
   }
-});
+  return stars;
+}

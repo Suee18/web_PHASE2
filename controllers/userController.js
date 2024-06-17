@@ -1,4 +1,3 @@
-import mongoose from 'mongoose';
 import User from '../models/User.js';
 import Review from '../models/Review.js'; 
 import bcrypt from 'bcrypt';
@@ -59,7 +58,9 @@ export const loginUser = async (req, res) => {
     if (!isMatch) {
       return res.status(400).send('Invalid username or password');
     }
-    req.session.userId = user._id;  // Save the user ID in the session
+    req.session.userId = user._id;
+    req.session.username = user.username;
+    req.session.avatar = user.avatar;  // Save the user ID in the session
     console.log('\n==============Printed by: UserController/loginUser()===================');
     console.log('Session data after login:\n', req.session, '\n-----------------------------');
     console.log('User data:', user); // Log user data
@@ -98,8 +99,8 @@ export const addReview = async (req, res) => {
     
     // Assuming username and avatar are available in req.user
     const newReview = new Review({
-      username: req.user.username,
-      avatar: req.user.avatar,
+      username: req.session.username,
+      avatar: req.session.avatar,
       comment: reviewText,
       rate: rating
     });

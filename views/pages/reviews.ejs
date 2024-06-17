@@ -43,7 +43,8 @@
     </div>
     
     <div class="button">
-      <button class="btn" id="add-review-button">Add Review</button>
+      <button class="btn" id="add-review-button" data-username="<%= user.username %>" 
+        data-avatar="<%= user.avatar %>" onclick="AddReviewBox()">Add Review</button>
     </div>
     <script src="/js/reviews.js"></script>
   </body>
