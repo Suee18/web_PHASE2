@@ -1,6 +1,8 @@
+import mongoose from 'mongoose';
 import User from '../models/User.js';
+import Review from '../models/Review.js'; 
 import bcrypt from 'bcrypt';
-
+  
 //======================Register=====================================================
 
 // Function to Sign up / create a new user
@@ -18,7 +20,6 @@ export const createUser = async (req, res) => {
     }
     
     const hashedPassword = await bcrypt.hash(password, 10);
-    
     const newUser = new User({
       username,
       email,
@@ -26,8 +27,7 @@ export const createUser = async (req, res) => {
       sex,
       birthday,
       nationality
-    });
-    
+    })
     await newUser.save();
     req.session.userId = newUser._id; //session data,id
     console.log('\n===============Printed by: UserController/createUser()============================'); 
@@ -74,3 +74,20 @@ export const loginUser = async (req, res) => {
     res.status(500).send('Error logging in user');
   }
 };
+//=======================Reviews======================================//
+// userController.js
+
+export const getReviews = async (req, res) => {
+  try {
+    const reviews = await Review.find().lean();
+    res.render('pages/reviews', { reviews });
+  } catch (error) {
+    console.error('Error fetching reviews:', error);
+    if (error instanceof mongoose.Error) {
+      res.status(500).send('Database error: ' + error.message);
+    } else {
+      res.status(500).send('Error fetching reviews');
+    }
+  }
+};
+

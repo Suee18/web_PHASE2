@@ -1,5 +1,5 @@
 import express from 'express';
-import { createUser, loginUser} from '../controllers/userController.js';
+import { createUser, getReviews, loginUser} from '../controllers/userController.js';
 import { fetchUserFromSession} from '../middleware/auth.js';
 const router = express.Router();
 
@@ -28,6 +28,8 @@ router.get('/add_a_review', fetchUserFromSession, (req, res) => {
   res.render('pages/reviews', { user: req.user });
 });
 
+router.post('/reviews', getReviews);
+
 router.get('/create_A_Plan', fetchUserFromSession, (req, res) => {
   res.render('pages/plan_input', { user: req.user });
 });
@@ -36,7 +38,7 @@ router.get ('/view_plans_history', fetchUserFromSession ,  (req, res)=> {
   res.render('pages/history', { user: req.user });
 });
 
-//================LOG OUT ===============================================================================
+//================LOG OUT ==========================================================================//
 
 router.get('/logout', (req, res) => {
   req.session.destroy(err => {
