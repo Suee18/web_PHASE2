@@ -35,9 +35,8 @@
                         <div id="avatar-display" class="avatar-container">
                           <!-- Selected avatar will be displayed here -->
                           <img src="<%= user.avatar %>" alt="Avatar" class="avatar-image">
-                          <!-- style="width: 100%; height: 100%; -->
                         </div>
-     
+
                         <p class="userInfoUN">  <%= user.username %></p>
                       </div>
                     </div>
@@ -51,25 +50,29 @@
                       </div>
                       <div class="card-body pt-0">
                         <table class="table table-bordered">
-                          <tr id="age">
-                            <th width="30%">Age</th>
-                            <td width="2%">:</td>
-                            <td><%= new Date().getFullYear() - new Date(user.birthday).getFullYear() %></td>
-                          </tr>
-                          <tr id="gender">
-                            <th width="30%">Gender</th>
-                            <td width="2%">:</td>
-                            <td><%= user.sex %></td>
-                          </tr>
-                          <tr id="nationality">
-                            <th width="30%">Nationality</th>
-                            <td width="2%">:</td>
-                            <td><%= user.nationality %></td>
+                          <tr id="username">
+                            <th width="30%">username</th>
+                            <td><span id="username-value"><%= user.username %></span></td>
                           </tr>
                           <tr id="email">
                             <th width="30%">e-mail</th>
-                            <td width="2%">:</td>
-                            <td><%= user.email %></td>
+                            <td><span id="email-value"><%= user.email %></span></td>
+                          </tr>
+                          <tr id="birthday">
+                            <th width="30%">Birthday</th>
+                            <td><input type="date" id="birthday-value" value="<%= user.birthday.toISOString().substring(0, 10) %>"></td>
+                          </tr>                          
+                          <tr id="age">
+                            <th width="30%">Age</th>
+                            <td><span id="age-value"><%= user.age %></span></td>
+                          </tr>
+                          <tr id="gender">
+                            <th width="30%">Gender</th>
+                            <td><span id="gender-value"><%= user.sex %></span></td>
+                          </tr>
+                          <tr id="nationality">
+                            <th width="30%">Nationality</th>
+                            <td><span id="nationality-value"><%= user.nationality %></span></td>
                           </tr>
                         </table>
                       </div>
@@ -77,10 +80,9 @@
                     <div style="height: 1em"></div>
                     <div class="buttons">
                       <button onclick="editProfile()" type="button" class="btn">Edit Profile</button>
-                      <button onclick="saveProfile()" type="button" class="btn btn-primary" disabled>Save
-                        Changes</button>
-                      <button type="button" class="btn">Change Password</button>
-                      <button type="button" class="btn">Delete Profile</button>
+                      <button id="btnSave" onclick="saveProfile()" type="button" class="btn" disabled>Save Changes</button>
+                      <!-- <button type="button" class="btn">Change Password</button> -->
+                      <!-- <button type="button" class="btn">Delete Profile</button> -->
                     </div>
                   </div>
                 </div>

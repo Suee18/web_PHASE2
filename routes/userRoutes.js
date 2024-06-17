@@ -28,7 +28,7 @@ router.get('/add_a_review', fetchUserFromSession, (req, res) => {
   res.render('pages/reviews', { user: req.user });
 });
 
-router.post('/reviews', getReviews);
+router.post('pages/reviews', getReviews);
 
 router.get('/create_A_Plan', fetchUserFromSession, (req, res) => {
   res.render('pages/plan_input', { user: req.user });

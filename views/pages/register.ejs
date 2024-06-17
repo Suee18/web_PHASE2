@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
     <link rel="stylesheet" href="/css/register.css">
 </head>
+
 <body>
-<header>
-    <%- include('../components/navBar') %> 
-</header>
+    <header>
+        <%- include('../components/navBar') %>
+    </header>
     <div class="container right-panel-active">
         <!-- Sign Up -->
         <div class="container__form container--signup">
@@ -18,33 +20,34 @@
             <form action="/register" method="post" class="form" id="form1">
 
                 <h2 class="form__title">Sign Up</h2>
-                <input type="text"  name="username" placeholder="user name" class="input" id="name"required/>
+                <input type="text" name="username" placeholder="user name" class="input" id="name" required />
                 <small class="error" id="n" style="visibility: hidden;"></small>
+                <small class="error" id="usernameError" style="color: red;"></small>
 
-                <input type="email"  name="email" placeholder="Email" class="input" id="email" required />
+                <input type="email" name="email" placeholder="Email" class="input" id="email" required />
                 <small class="error" id="e" style="visibility: hidden;"></small>
-                
-                <input type="password" name="password" placeholder="Password" class="input" id="password" required/>
+
+                <input type="password" name="password" placeholder="Password" class="input" id="password" required />
                 <small class="error" id="p" style="visibility: hidden;"></small>
-                
+
                 <div class="radioButton" id="gender">
-                    <input type="radio" name="sex" value="male" data-icon='' required/>
-                    <input type="radio" name="sex" value="female" data-icon='' required/>
+                    <input type="radio" name="sex" value="male" data-icon='' required />
+                    <input type="radio" name="sex" value="female" data-icon='' required />
                 </div>
                 <small class="error" id="genderErr" style="display: none; color: red;"></small>
 
                 <label>Date of Birth</label>
                 <input type="date" id="birthday" name="birthday" required>
                 <small class="error" id="b" style="display: none; color: red;"></small>
-                
+
                 <select name="nationality" id="nationality" required>
                     <option value="">Select your nationality</option>
-                  </select>
-                
-                  <button class="btn" type="submit">Sign Up</button> 
+                </select>
+
+                <button class="btn" type="submit">Sign Up</button>
             </form>
         </div>
-    
+
 
 
 
@@ -56,19 +59,15 @@
 
         <!-- log In -->
         <div class="container__form container--signin">
-            <form action="/login" method="post" class="form" id="form2" >
+            <form action="/login" method="post" class="form" id="form2">
                 <h2 class="form__title">log In</h2>
                 <input type="text" placeholder="user name" class="input" name="username" />
                 <input type="password" placeholder="Password" class="input" name="password" />
                 <a href="#" class="link"></a>
-                <button class="btn" type="submit">Log In  </button>
-
-
-                <a href="/review/reviews.html"> sign in as a tourist</a>
-                <a href="/admin/admin.html">sign in as an admin </a>
+                <button class="btn" type="submit">Log In </button>
             </form>
         </div>
-    
+
 
 
 
@@ -86,7 +85,8 @@
         </div>
     </div>
 
- <script src="/js/register.js"></script> 
-<script src="/js/navBar.js"></script>
+    <script src="/js/register.js"></script>
+    <script src="/js/navBar.js"></script>
 </body>
+
 </html>
