@@ -1,5 +1,5 @@
 import express from 'express';
-import { createUser, getReviews, loginUser} from '../controllers/userController.js';
+import { createUser, getReviews, loginUser,addReview} from '../controllers/userController.js';
 import { fetchUserFromSession} from '../middleware/auth.js';
 const router = express.Router();
 
@@ -24,11 +24,10 @@ router.get('/profile', fetchUserFromSession,  (req, res) => {
   res.render('pages/profile', { user: req.user });
 });
 
-router.get('/add_a_review', fetchUserFromSession, (req, res) => {
-  res.render('pages/reviews', { user: req.user });
-});
+router.get('/add_a_review', fetchUserFromSession, getReviews);
 
-router.post('pages/reviews', getReviews);
+// Route to handle the submission of a new review
+router.post('/reviews', fetchUserFromSession, addReview);
 
 router.get('/create_A_Plan', fetchUserFromSession, (req, res) => {
   res.render('pages/plan_input', { user: req.user });

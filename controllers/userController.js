@@ -80,17 +80,35 @@ export const loginUser = async (req, res) => {
 //=======================Reviews======================================//
 // userController.js
 
+// Fetch and render reviews
 export const getReviews = async (req, res) => {
   try {
     const reviews = await Review.find().lean();
-    res.render('pages/reviews', { reviews });
+    res.render('pages/reviews', { reviews, user: req.user });
   } catch (error) {
     console.error('Error fetching reviews:', error);
-    if (error instanceof mongoose.Error) {
-      res.status(500).send('Database error: ' + error.message);
-    } else {
-      res.status(500).send('Error fetching reviews');
-    }
+    res.status(500).send('Internal server error');
+  }
+};
+
+// Add a new review
+export const addReview = async (req, res) => {
+  try {
+    const { reviewText, rating } = req.body;
+    
+    // Assuming username and avatar are available in req.user
+    const newReview = new Review({
+      username: req.user.username,
+      avatar: req.user.avatar,
+      comment: reviewText,
+      rate: rating
+    });
+    
+    await newReview.save();
+    res.redirect('/add_a_review');
+  } catch (error) {
+    console.error('Error adding review:', error);
+    res.status(500).send('Internal server error');
   }
 };
 
