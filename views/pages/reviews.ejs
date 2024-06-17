@@ -14,26 +14,30 @@
     <div class="aboveAll">
       <div class="box-container">
         <% if (reviews && reviews.length > 0) { %>
-          <% reviews.forEach(review => { %>
-            <div class="box">
-              <div class="box-top">
-                <div class="profile-info">
-                  <div class="rating">
-                    <!-- Render stars based on rating -->
-                    <% for (let i = 1; i <= review.rate; i++) { %>
-                      <i class="fas fa-star"></i>
-                    <% } %>
-                    <!-- Display rating number -->
-                    <span><%= review.rate %></span>
-                  </div>
-                  <p><strong>Review:</strong> <%= review.comment %></p>
-                  <!-- Add other review details here -->
-                </div>
+        <% reviews.forEach(review => { %>
+        <div class="box">
+          <div class="box-top">
+            <div class="profile-info">
+              <div class="left-part">
+                <img src="<%= review.avatar %>" alt="Avatar" class="avatar">
+                <p class="username"><%= review.username %></p>
+              </div>
+              <div class="rating">
+                <!-- Render stars based on rating -->
+                <% for (let i = 1; i <= review.rate; i++) { %>
+                <i class="fas fa-star"></i>
+                <% } %>
               </div>
             </div>
-          <% }); %>
+          </div>
+          <div class="review-text">
+            <p><%= review.comment %></p>
+            <!-- Add other review details here -->
+          </div>
+        </div>
+        <% }); %>
         <% } else { %>
-          <p>No reviews available.</p>
+        <p>No reviews available.</p>
         <% } %>
       </div>
     </div>
@@ -41,7 +45,6 @@
     <div class="button">
       <button class="btn" id="add-review-button">Add Review</button>
     </div>
-    
     <script src="/js/reviews.js"></script>
   </body>
 </html>

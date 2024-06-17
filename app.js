@@ -51,7 +51,6 @@ mongoose.connect(uri)
     }
     res.render('pages/index', { title: 'My App' });
   });
-  
   //Routes
   app.use('/', userRoutes);
   app.use('/', adminRoutes);
