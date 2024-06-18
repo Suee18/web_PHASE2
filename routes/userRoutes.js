@@ -1,5 +1,5 @@
 import express from 'express';
-import { createUser, getReviews, loginUser,addReview} from '../controllers/userController.js';
+import { createUser, getReviews, loginUser,addReview,updateProfileInfo} from '../controllers/userController.js';
 import { fetchUserFromSession} from '../middleware/auth.js';
 const router = express.Router();
 
@@ -26,9 +26,6 @@ router.get('/profile', fetchUserFromSession,  (req, res) => {
 
 router.get('/add_a_review', fetchUserFromSession, getReviews);
 
-// Route to handle the submission of a new review
-router.post('/reviews', fetchUserFromSession, addReview);
-
 router.get('/create_A_Plan', fetchUserFromSession, (req, res) => {
   res.render('pages/plan_input', { user: req.user });
 });
@@ -36,7 +33,14 @@ router.get('/create_A_Plan', fetchUserFromSession, (req, res) => {
 router.get ('/view_plans_history', fetchUserFromSession ,  (req, res)=> {
   res.render('pages/history', { user: req.user });
 });
+//====================CRUD USER profile info=============================================================================
+//Update Profile info
+router.post('/profile/update', updateProfileInfo); 
 
+
+//===============REVIEWS  ==========================================================================//
+// Route to handle the submission of a new review
+router.post('/reviews', fetchUserFromSession, addReview);
 //================LOG OUT ==========================================================================//
 
 router.get('/logout', (req, res) => {
