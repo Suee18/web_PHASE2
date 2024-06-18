@@ -1,5 +1,7 @@
 import express from 'express';
-import { createUser, getReviews, loginUser,updateProfileInfo,emailExists,usernameExists,deleteAccount, addReview,} from '../controllers/userController.js';
+import { createUser, loginUser,
+updateProfileInfo,emailExists,usernameExists,changePassword, deleteAccount, 
+getReviews,  addReview,} from '../controllers/userController.js';
 import { fetchUserFromSession} from '../middleware/auth.js';
 const router = express.Router();
 
@@ -46,8 +48,9 @@ router.get ('/view_plans_history', fetchUserFromSession ,  (req, res)=> {
 router.post('/profile/update', updateProfileInfo); 
 router.post('/check-email', emailExists); 
 router.post('/check-username', usernameExists);
+// Route to change password
+router.post('/change-password', changePassword);
 //delete account 
-// Route to delete profile
 router.delete('/delete-profile', deleteAccount);
 //===============REVIEWS  ==========================================================================//
 // Route to handle the submission of a new review

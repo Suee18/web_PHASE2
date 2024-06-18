@@ -119,10 +119,33 @@
                       </div>
                     </div>
                     <div style="height: 1em"></div>
+                    <hr>
+                    <h3 id="password-title" style="display: none;" class="mb-0"><i class="fas fa-key pr-1"></i>Change Password</h3>
+                    <button id="btnShowPasswordForm" onclick="showPasswordForm()" type="button" class="btn btn-warning">Change Password</button>
+                    <div id="password-form" style="display: none;">
+                      <div class="form-group">
+                        <label for="current-password">Current Password</label>
+                        <input type="password" class="form-control" id="current-password" placeholder="Enter current password">
+                        <div id="current-password-error" style="color: red;"></div>
+                      </div>
+                      <div class="form-group">
+                        <label for="new-password">New Password</label>
+                        <input type="password" class="form-control" id="new-password" placeholder="Enter new password">
+                        <div id="new-password-error" style="color: red;"></div>
+                      </div>
+                      <div class="form-group">
+                        <label for="confirm-password">Confirm New Password</label>
+                        <input type="password" class="form-control" id="confirm-password" placeholder="Confirm new password">
+                        <div id="confirm-password-error" style="color: red;"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div style="height: 1em"></div>
                     <div class="buttons">
                       <button onclick="editProfile()" type="button" class="btn">Edit Profile</button>
                       <button id="btnSave" onclick="saveProfile()" type="button" class="btn" disabled>Save Changes</button>
-                      <!-- <button type="button" class="btn">Change Password</button> -->
+                      <button id="btnChangePassword" onclick="changePassword()" type="button" class="btn btn-warning"  style="display: none;">confirm new Password</button>
                       <button id="btnDelete" onclick="deleteProfile()" type="button" class="btn btn-danger">Delete Profile</button>
                     </div>
                   </div>
