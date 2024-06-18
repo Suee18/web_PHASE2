@@ -1,10 +1,17 @@
+// adminRouter.js
+
 import express from 'express';
-import { fetchUserFromSession, requireAdmin } from '../middleware/auth.js';
+import { getAdminHome, updateUser, deleteUser } from '../controllers/adminController.js';
 
 const router = express.Router();
 
-router.get('/adminHome', fetchUserFromSession, requireAdmin, (req, res) => {
-    res.render('pages/admin', { user: req.user });
-});
+// Route to render admin home page
+router.get('/adminHome', getAdminHome);
+
+// Route to update user
+router.put('/users/:userId', updateUser);
+
+// Route to delete user
+router.delete('/users/:userId', deleteUser);
 
 export default router;
