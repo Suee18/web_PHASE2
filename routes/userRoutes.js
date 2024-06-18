@@ -27,7 +27,7 @@ router.get('/profile', fetchUserFromSession,  (req, res) => {
 router.get('/add_a_review', fetchUserFromSession, getReviews);
 
 // Route to handle the submission of a new review
-router.post('/reviews', fetchUserFromSession, addReview);
+router.post('/api/reviews',fetchUserFromSession, addReview);
 
 router.get('/create_A_Plan', fetchUserFromSession, (req, res) => {
   res.render('pages/plan_input', { user: req.user });

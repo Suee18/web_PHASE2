@@ -4,10 +4,15 @@ function AddReviewBox() {
   const username = addReviewButton.getAttribute('data-username');
   const avatar = addReviewButton.getAttribute('data-avatar');
 
+  // Check if a review box already exists
+  if (document.querySelector('.new-review-box')) {
+    return; // Exit the function if a review box already exists
+  }
+
   // Create elements
   const boxContainer = document.querySelector('.box-container');
   const newReviewBox = document.createElement('div');
-  newReviewBox.classList.add('box');
+  newReviewBox.classList.add('box', 'new-review-box'); // Add a class to identify the new review box
 
   // Avatar and username
   const profileInfo = document.createElement('div');
@@ -134,7 +139,54 @@ function AddReviewBox() {
       .then(data => {
         if (data.success) {
           console.log('Review submitted successfully:', data);
-          // Optionally, update the UI to reflect the new review
+
+          // Create a new review box to append to the screen
+          const newReviewElement = document.createElement('div');
+          newReviewElement.classList.add('box');
+
+          const profileInfo = document.createElement('div');
+          profileInfo.classList.add('profile-info');
+          
+          const leftPart = document.createElement('div');
+          leftPart.classList.add('left-part');
+          
+          const avatarImg = document.createElement('img');
+          avatarImg.src = avatar; 
+          avatarImg.alt = 'Avatar';
+          avatarImg.classList.add('avatar');
+          
+          const usernameElem = document.createElement('p');
+          usernameElem.classList.add('username');
+          usernameElem.textContent = username; 
+          
+          leftPart.appendChild(avatarImg);
+          leftPart.appendChild(usernameElem);
+          profileInfo.appendChild(leftPart);
+          
+          const ratingWrapper = document.createElement('div');
+          ratingWrapper.classList.add('rating-wrapper');
+          
+          const rating = document.createElement('div');
+          rating.classList.add('rating');
+          rating.innerHTML = renderStars(currentRating); 
+          
+          ratingWrapper.appendChild(rating);
+          profileInfo.appendChild(ratingWrapper);
+          
+          const reviewText = document.createElement('div');
+          reviewText.classList.add('review-text');
+          
+          const reviewContent = document.createElement('p');
+          reviewContent.textContent = textarea.value;
+          reviewText.appendChild(reviewContent);
+          
+          newReviewElement.appendChild(profileInfo);
+          newReviewElement.appendChild(reviewText);
+          
+          boxContainer.appendChild(newReviewElement);
+
+          // Remove the new review box
+          newReviewBox.remove();
         } else {
           console.error('Error submitting review:', data.message);
         }

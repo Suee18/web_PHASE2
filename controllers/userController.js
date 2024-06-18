@@ -95,24 +95,24 @@ export const getReviews = async (req, res) => {
 // Add a new review
 export const addReview = async (req, res) => {
   try {
-    const { reviewText, rating } = req.body;
+    const { username, avatar, comment, rate } = req.body;
     
-    // Assuming username and avatar are available in req.user
+    // Create a new review object
     const newReview = new Review({
-      username: req.session.username,
-      avatar: req.session.avatar,
-      comment: reviewText,
-      rate: rating
+      username,
+      avatar,
+      comment,
+      rate,
+      created_at: new Date() // Adding the created_at field
     });
     
     await newReview.save();
-    res.redirect('/add_a_review');
+    res.json({ success: true, message: 'Review added successfully' });
   } catch (error) {
     console.error('Error adding review:', error);
-    res.status(500).send('Internal server error');
+    res.status(500).json({ success: false, message: 'Internal server error' });
   }
 };
-
 
 
 
