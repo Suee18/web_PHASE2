@@ -237,3 +237,36 @@ font-size:200%;
   visibility: visible;
   opacity: 1;
 }
+
+.avatar-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 300px; /* Adjust as needed */
+  margin: auto;
+}
+
+.avatar-image {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+}
+
+.arrow {
+  background-color: transparent;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#prev-arrow {
+  left: 0;
+}
+
+#next-arrow {
+  right: 0;
+}
