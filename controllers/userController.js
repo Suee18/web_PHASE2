@@ -103,7 +103,6 @@ export const addReview = async (req, res) => {
   try {
     const { username, avatar, comment, rate } = req.body;
     
-    // Create a new review object
     const newReview = new Review({
       username,
       avatar,
