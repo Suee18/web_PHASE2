@@ -177,3 +177,26 @@ export const usernameExists = async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
+
+//Delete Account 
+export const  deleteAccount = async (req, res) => {
+  try {
+    const userId = req.session.userId;
+    if (!userId) {
+      return res.status(401).send('User not logged in');
+    }
+
+    await User.findByIdAndDelete(userId);
+    req.session.destroy(err => {
+      if (err) {
+        return res.status(500).send('Error destroying session');
+      }
+      res.clearCookie('connect.sid'); // Clear the session cookie
+      res.status(200).send('Profile deleted successfully');
+      console.log('=============********Profile deleted successfully******===========================');
+    });
+  } catch (error) {
+    console.error('Error deleting profile:', error);
+    res.status(500).send('Error deleting profile');
+  }
+};

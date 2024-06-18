@@ -1,5 +1,5 @@
 import express from 'express';
-import { createUser, getReviews, loginUser,updateProfileInfo,emailExists,usernameExists,addReview,} from '../controllers/userController.js';
+import { createUser, getReviews, loginUser,updateProfileInfo,emailExists,usernameExists,deleteAccount, addReview,} from '../controllers/userController.js';
 import { fetchUserFromSession} from '../middleware/auth.js';
 const router = express.Router();
 
@@ -25,6 +25,7 @@ function formatDate(date) {
   const year = d.getFullYear();
   return `${day}/${month}/${year}`;
 }
+
 router.get('/profile', fetchUserFromSession, (req, res) => {
   const user = req.user;
   user.formattedBirthday = formatDate(user.birthday);
@@ -44,9 +45,10 @@ router.get ('/view_plans_history', fetchUserFromSession ,  (req, res)=> {
 //Update Profile info
 router.post('/profile/update', updateProfileInfo); 
 router.post('/check-email', emailExists); 
-// Route to check if username exists
 router.post('/check-username', usernameExists);
-
+//delete account 
+// Route to delete profile
+router.delete('/delete-profile', deleteAccount);
 //===============REVIEWS  ==========================================================================//
 // Route to handle the submission of a new review
 router.post('/reviews', fetchUserFromSession, addReview);

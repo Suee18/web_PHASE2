@@ -201,3 +201,26 @@ document.getElementById('username-value').addEventListener('input', function () 
     });
   }
 });
+
+function deleteProfile() {
+  if (confirm('Are you sure you want to delete your profile? This action cannot be undone.')) {
+    fetch('/delete-profile', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    .then(response => {
+      if (response.ok) {
+        alert('Profile deleted successfully');
+        window.location.href = '/'; // Redirect to the homepage or login page
+      } else {
+        alert('Error deleting profile');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('Error deleting profile');
+    });
+  }
+}
