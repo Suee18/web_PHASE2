@@ -22,6 +22,7 @@ userSchema.pre('save', function(next) {
     age--;
   }
   this.age = age;
+  this.birthday = new Date(this.birthday.setHours(0, 0, 0, 0)); // Set time to 00:00:00:000
   next();
 });
 //default avatar for each account on sign up 

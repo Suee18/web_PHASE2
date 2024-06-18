@@ -3,6 +3,11 @@ import Review from '../models/Review.js';
 import bcrypt from 'bcrypt';
 
 //======================Register=====================================================
+//function to format date
+function formatDate(date) {
+  const d = new Date(date);
+  return new Date(d.setHours(0, 0, 0, 0));
+}
 
 // Function to Sign up / create a new user
 export const createUser = async (req, res) => {
@@ -20,13 +25,14 @@ export const createUser = async (req, res) => {
 
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    
+    const formattedBirthday = formatDate(birthday);
+
     const newUser = new User({
       username,
       email,
       password: hashedPassword,
       sex,
-      birthday,
+      birthday: formattedBirthday,
       nationality
     });
     
@@ -116,10 +122,10 @@ export const addReview = async (req, res) => {
 
 
 
-
+//==================Update Profile info=======================================
 export const updateProfileInfo = async (req, res) => {
   try {
-    const { email, gender, nationality, username, birthday, age } = req.body;
+    const { email, gender, nationality, username, birthday, age, avatar} = req.body;
     const userId = req.session.userId; //r ID  stored in session
 
     const user = await User.findById(userId);
@@ -133,6 +139,7 @@ export const updateProfileInfo = async (req, res) => {
     user.age = age;
     user.sex = gender;
     user.nationality = nationality;
+    user.avatar = avatar;
 
     await user.save();
     console.log('=======UserCOntroller: Profile updated successfully:', user);
@@ -140,5 +147,86 @@ export const updateProfileInfo = async (req, res) => {
   } catch (err) {
     console.log('=======UserCOntroller: Profile update fail:', user);
     res.status(500).send('Internal server error');
+  }
+};
+
+export const emailExists = async (req, res) => {
+  const { email } = req.body;
+  try {
+    const user = await User.findOne({ email });
+    if (user) {
+      res.json({ exists: true });
+    } else {
+      res.json({ exists: false });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+export const usernameExists = async (req, res) => { 
+  const { username } = req.body;
+  try {
+    const user = await User.findOne({ username });
+    if (user) {
+      res.json({ exists: true });
+    } else {
+      res.json({ exists: false });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+//Delete Account 
+export const  deleteAccount = async (req, res) => {
+  try {
+    const userId = req.session.userId;
+    if (!userId) {
+      return res.status(401).send('User not logged in');
+    }
+
+    await User.findByIdAndDelete(userId);
+    req.session.destroy(err => {
+      if (err) {
+        return res.status(500).send('Error destroying session');
+      }
+      res.clearCookie('connect.sid'); // Clear the session cookie
+      res.status(200).send('Profile deleted successfully');
+      console.log('=============********Profile deleted successfully******===========================');
+    });
+  } catch (error) {
+    console.error('Error deleting profile:', error);
+    res.status(500).send('Error deleting profile');
+  }
+};
+
+export const changePassword =async (req, res) => {
+  const { currentPassword, newPassword } = req.body;
+  const userId = req.session.userId;
+
+  if (!userId) {
+    return res.status(401).send('User not logged in');
+  }
+
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).send('User not found');
+    }
+
+    const isMatch = await bcrypt.compare(currentPassword, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ error: 'Incorrect current password' });
+    }
+
+    const hashedNewPassword = await bcrypt.hash(newPassword, 10);
+    user.password = hashedNewPassword;
+    await user.save();
+
+    res.status(200).send('Password changed successfully');
+  } catch (error) {
+    console.error('Error changing password:', error);
+    res.status(500).send('Error changing password');
   }
 };
