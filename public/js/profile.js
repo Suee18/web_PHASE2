@@ -213,7 +213,7 @@ function deleteProfile() {
     .then(response => {
       if (response.ok) {
         alert('Profile deleted successfully');
-        window.location.href = '/'; // Redirect to the homepage or login page
+        window.location.href = '/'; // Redirect
       } else {
         alert('Error deleting profile');
       }
