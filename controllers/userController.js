@@ -4,10 +4,7 @@ import bcrypt from 'bcrypt';
 
 //======================Register=====================================================
 //function to format date
-function formatDate(date) {
-  const d = new Date(date);
-  return new Date(d.setHours(0, 0, 0, 0));
-}
+ 
 
 // Function to Sign up / create a new user
 export const createUser = async (req, res) => {
