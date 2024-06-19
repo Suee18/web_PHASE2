@@ -21,3 +21,7 @@ export const getUsers = async (req, res) => {
       res.status(500).send('Internal server error');
     }
   };
+
+export const getStatistics = (req, res) => {
+  res.render('pages/statistics'); // Ensure this is correct
+};

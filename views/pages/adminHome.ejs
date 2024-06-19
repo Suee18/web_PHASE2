@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
+    <title>User</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="/css/admin.css">
     <script src="/js/admin.js"></script>
@@ -12,72 +12,10 @@
 <body>
     <div class="container">
         <!-- Navigation -->
-        <div class="navigation">
-            <ul>
-                <div class="logo-div">
-                    <img src="/images/Logo.png" class="image-logo" onclick="window.location.href='/'" style="cursor: pointer;">
-                    <p class="logo" onclick="window.location.href='/'" style="cursor: pointer;">Travelo</p>
-                </div>
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="fa-solid fa-users"></i></span>
-                        <span class="title">Users</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="fa-solid fa-chart-simple"></i></span>
-                        <span class="title">Statistics</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="fa-solid fa-question"></i></span>
-                        <span class="title">Pending Questions</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="/logout">
-                        <span class="icon"><i class="fa-solid fa-right-from-bracket"></i></span>
-                        <span class="title">Log Out</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
+        <%- include('../components/navBarAdmin') %>
         
         <!-- Content -->
         <div class="main">
-            <div class="cardBox">
-                <!-- Example Cards -->
-                <div class="card">
-                    <div>
-                        <div class="numbers">1,115</div>
-                        <div class="cardName">Daily Views</div>
-                    </div>
-                    <div class="iconBox"><i class="fa-solid fa-eye"></i></div>
-                </div>
-                <div class="card">
-                    <div>
-                        <div class="numbers">80</div>
-                        <div class="cardName">Plans Generated</div>
-                    </div>
-                    <div class="iconBox"><i class="fa-solid fa-map-location-dot"></i></div>
-                </div>
-                <div class="card">
-                    <div>
-                        <div class="numbers">29</div>
-                        <div class="cardName">Reviews</div>
-                    </div>
-                    <div class="iconBox"><i class="fa-solid fa-comments"></i></div>
-                </div>
-                <div class="card">
-                    <div>
-                        <div class="numbers">$7,416</div>
-                        <div class="cardName">Earning</div>
-                    </div>
-                    <div class="iconBox"><i class="fa-solid fa-money-bills"></i></div>
-                </div>
-            </div>
             <!-- Users Table -->
             <div class="details">
                 <div class="users">
