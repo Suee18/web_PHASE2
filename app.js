@@ -53,8 +53,13 @@ mongoose.connect(uri)
   });
   //Routes
   app.use('/', userRoutes);
-  app.use('/', adminRoutes);
-  
+  app.use('/', adminRoutes); // Use admin routes
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error('Unhandled error:', err);
+  res.status(500).send('Internal server error');
+});
   
 
 
