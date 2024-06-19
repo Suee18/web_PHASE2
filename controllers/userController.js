@@ -208,36 +208,34 @@ export const  deleteAccount = async (req, res) => {
   }
 };
 
-export const changePassword =async (req, res) => {
-  const { currentPassword, newPassword, confirmPassword } = req.body;
 
-  if (newPassword !== confirmPassword) {
-    return res.status(400).send('New passwords do not match');
+//change password
+export const changePassword =async (req, res) => {
+  const { currentPassword, newPassword } = req.body;
+  const userId = req.session.userId;
+
+  if (!userId) {
+    return res.status(401).send('User not logged in');
   }
 
   try {
-    const user = await User.findById(req.user._id);
-    
+    const user = await User.findById(userId);
     if (!user) {
       return res.status(404).send('User not found');
     }
 
     const isMatch = await bcrypt.compare(currentPassword, user.password);
-    
     if (!isMatch) {
-      return res.status(400).send('Current password is incorrect');
+      return res.status(400).json({ error: 'Incorrect current password' });
     }
 
-    // Hash the new password
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(newPassword, salt);
-
-    // Update the user's password
-    user.password = hashedPassword;
+    const hashedNewPassword = await bcrypt.hash(newPassword, 10);
+    user.password = hashedNewPassword;
     await user.save();
 
-    res.send('Password changed successfully');
+    res.status(200).send('Password changed successfully');
   } catch (error) {
-    res.status(500).send('Server error');
+    console.error('Error changing password:', error);
+    res.status(500).send('Error changing password');
   }
 };
