@@ -3,8 +3,6 @@ import Review from '../models/Review.js';
 import bcrypt from 'bcrypt';
 
 //======================Register=====================================================
-//function to format date
- 
 
 // Function to Sign up / create a new user
 export const createUser = async (req, res) => {
@@ -22,14 +20,13 @@ export const createUser = async (req, res) => {
 
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const formattedBirthday = formatDate(birthday);
 
     const newUser = new User({
       username,
       email,
       password: hashedPassword,
       sex,
-      birthday: formattedBirthday,
+      birthday,
       nationality
     });
     

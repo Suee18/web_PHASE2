@@ -46,15 +46,31 @@ router.get('/create_A_Plan', fetchUserFromSession, (req, res) => {
 router.get ('/view_plans_history', fetchUserFromSession ,  (req, res)=> {
   res.render('pages/history', { user: req.user });
 });
+//AJAX for latest avatar
+router.get('/profile/avatar', fetchUserFromSession, (req, res) => {
+  const user = req.user;
+  res.json({
+    avatar: user.avatar
+  });
+});
+
 //====================CRUD USER profile info=============================================================================
 //Update Profile info
 router.post('/profile/update', updateProfileInfo); 
 router.post('/check-email', emailExists); 
 router.post('/check-username', usernameExists);
-// Route to change password
-router.post('/change-password', changePassword);
 //delete account 
 router.delete('/delete-profile', deleteAccount);
+//Ajax 
+router.get('/profile/data', fetchUserFromSession, (req, res) => {
+  res.status(200).json(req.user);
+});
+//change password
+router.get ('/change-password', fetchUserFromSession ,  (req, res)=> {
+  res.render('pages/profile_ChangePassword', { user: req.user });
+});
+router.post('/change_password', changePassword);
+
 //===============REVIEWS  ==========================================================================//
 // Route to handle the submission of a new review
 router.post('/reviews', fetchUserFromSession, addReview);

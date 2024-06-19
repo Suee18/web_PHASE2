@@ -1,12 +1,13 @@
+<!-- adminHome.ejs -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin</title>
+    <title>Admin Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="/css/admin.css">
-    <script src="/js/admin.js" defer></script>
+    <script src="/js/admin.js"></script>
 </head>
 <body>
     <div class="container">
@@ -43,6 +44,7 @@
                 </li>
             </ul>
         </div>
+        
         <!-- Content -->
         <div class="main">
             <div class="cardBox">
@@ -85,74 +87,38 @@
                     <table>
                         <thead>
                             <tr>
-                                <td>Avatar</td>
-                                <td>Name</td>
-                                <td>Nationality</td>
-                                <td>Gender</td>
-                                <td>Subscription</td>
-                                <td>Actions</td>
+                                <th>Avatar</th>
+                                <th>Name</th>
+                                <th>Nationality</th>
+                                <th>Gender</th>
+                                <th>Subscription</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
-                       <!-- admin.ejs -->
-
-<tbody>
-    <% if (users && users.length > 0) { %>
-        <% users.forEach(user => { %>
-            <tr>
-                <td><img class="avatars" src="<%= user.avatar %>" alt="Avatar"></td>
-                <td><%= user.username %></td>
-                <td><%= user.nationality %></td>
-                <td><%= user.sex %></td>
-                <td>
-                    <span class="<%= user.isAdmin ? 'admin' : 'user' %>"><%= user.isAdmin ? 'Admin' : 'User' %></span>
-                </td>
-                <td>
-                    <button class="btn edit-btn" data-id="<%= user._id %>">Edit</button>
-                    <button class="btn delete-btn" data-id="<%= user._id %>">Delete</button>
-                </td>
-            </tr>
-        <% }) %>
-    <% } else { %>
-        <tr>
-            <td colspan="6">No users found.</td>
-        </tr>
-    <% } %>
-</tbody>
-
+                        <tbody>
+                            <% if (users && users.length > 0) { %>
+                                <% users.forEach(user => { %>
+                                    <tr>
+                                        <td><img class="avatars" src="<%= user.avatar %>" alt="Avatar"></td>
+                                        <td><%= user.username %></td>
+                                        <td><%= user.nationality %></td>
+                                        <td><%= user.sex %></td>
+                                        <td><span class="<%= user.isAdmin ? 'admin' : 'user' %>"><%= user.isAdmin ? 'Admin' : 'User' %></span></td>
+                                        <td>
+                                            <button class="btn edit-btn" data-id="<%= user._id %>">Edit</button>
+                                            <button class="btn delete-btn" data-id="<%= user._id %>">Delete</button>
+                                        </td>
+                                    </tr>
+                                <% }); %>
+                            <% } else { %>
+                                <tr>
+                                    <td colspan="6">No users found.</td>
+                                </tr>
+                            <% } %>
+                        </tbody>
                     </table>
                 </div>
-                <!-- Edit User Form -->
-                <div class="details-container2" id="details-container2">
-                    <div class="details-content2">
-                        <h2>Edit User</h2>
-                        <form id="edit-form">
-                            <label for="name">Name:</label>
-                            <input type="text" id="name" name="name" required>
-                            <label for="nationality">Nationality:</label>
-                            <input type="text" id="nationality" name="nationality" required>
-                            <label for="gender">Gender:</label>
-                            <select id="gender" name="gender" required>
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                            </select>
-                            <label for="subscription">Subscription:</label>
-                            <select id="subscription" name="subscription" required>
-                                <option value="Essential">Essential</option>
-                                <option value="Premium">Premium</option>
-                                <option value="Extra">Extra</option>
-                            </select>
-                            <button type="submit" class="save-btn" id="save-btn">Save</button>
-                        </form>
-                    </div>
-                    <button class="close-btn" id="close-btn2">Close</button>
-                </div>
             </div>
-        </div>
-        <!-- Modal for Delete Confirmation -->
-        <div class="details-container" id="details-container">
-            <div class="details-content"></div>
-            <button class="close-btn" id="close-btn">Close</button>
-            <button class="yes-btn" id="yes-btn">Yes</button>
         </div>
     </div>
 </body>

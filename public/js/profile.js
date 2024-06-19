@@ -1,56 +1,28 @@
-function editProfile() {
-  document.getElementById('email-value').contentEditable = true;
-  document.getElementById('age-value').contentEditable = true;
-  // document.getElementById('gender-value').contentEditable = true;
-  // document.getElementById('nationality-value').contentEditable = true;
-  document.getElementById('username-value').contentEditable = true;
-  document.getElementById('birthday-value').disabled = false;
-  document.getElementById('btnSave').disabled = false;
-  document.getElementById('prev-arrow').disabled = false;
-  document.getElementById('next-arrow').disabled = false;
-
-  //gender select
-  document.getElementById('gender-value').style.display = 'none';
-  document.getElementById('gender-select').style.display = 'inline';
-
-  //birthday select
-  document.getElementById('birthday-value').style.display = 'none';
-  document.getElementById('birthday-select').style.display = 'inline';
-
-  //nationality select
-  document.getElementById('nationality-value').style.display = 'none';
-  document.getElementById('nationality-select').style.display = 'inline';
-
-  //to sync age entry with birthday year
-  document.getElementById('age-value').addEventListener('input', updateBirthdayFromAge);
-  document.getElementById('birthday-value').addEventListener('change', updateAgeFromBirthday);
+//Ajax call to update profile info
+function updateProfileDisplay(user) {
+  document.getElementById('username-value').innerText = user.username;
+  document.getElementById('userInfoUN').innerText = user.username;
+  document.getElementById('email-value').innerText = user.email;
+  document.getElementById('birthday-value').innerText = new Date(user.birthday).toLocaleDateString();
+  document.getElementById('age-value').innerText = user.age;
+  document.getElementById('gender-value').innerText = user.sex;
+  document.getElementById('nationality-value').innerText = user.nationality;
+  document.getElementById('finalAvatar').src = user.avatar;
 }
 
-function updateBirthdayFromAge() {
-  const age = parseInt(document.getElementById('age-value').innerText, 10);
-  if (!isNaN(age)) {
-    const today = new Date();
-    const birthYear = today.getFullYear() - age;
-    const birthMonth = today.getMonth();
-    const birthDay = today.getDate();
-
-    const newBirthday = new Date(birthYear, birthMonth, birthDay);
-    document.getElementById('birthday-value').value = newBirthday.toISOString().substring(0, 10);
-  }
+function fetchProfileData() {
+  $.ajax({
+    url: '/profile/data',
+    type: 'GET',
+    success: function(user) {
+      updateProfileDisplay(user);
+    },
+    error: function(error) {
+      console.error('Error fetching profile data:', error);
+    }
+  });
 }
 
-function updateAgeFromBirthday() {
-  const birthday = new Date(document.getElementById('birthday-value').value);
-  const today = new Date();
-  let age = today.getFullYear() - birthday.getFullYear();
-  const m = today.getMonth() - birthday.getMonth();
-  if (m < 0 || (m === 0 && today.getDate() < birthday.getDate())) {
-    age--;
-  }
-  document.getElementById('age-value').innerText = age;
-}
-
-//Avatar scroller
 document.addEventListener('DOMContentLoaded', (event) => {
   const images = [
     '/images/avatars/female_1.png',
@@ -67,7 +39,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     '/images/avatars/male_5.png',
     '/images/avatars/male_6.png',
     '/images/avatars/male_7.png',
-
   ];
 
   let currentIndex = 0;
@@ -82,16 +53,65 @@ document.addEventListener('DOMContentLoaded', (event) => {
     currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0;
     avatarImage.src = images[currentIndex];
   });
+  
+    fetchProfileData();
+  setInterval(fetchProfileData, 1000); // check for updates every 1 second
+
 });
 
+function editProfile() {
+  document.getElementById('email-value').contentEditable = false;
+  document.getElementById('age-value').contentEditable = false;
+  document.getElementById('username-value').contentEditable = false;
+  document.getElementById('birthday-select').disabled = false;
+  document.getElementById('btnSave').disabled = false;
+  document.getElementById('prev-arrow').disabled = false;
+  document.getElementById('next-arrow').disabled = false;
+
+
+  // Show selects for gender , nationality , birthdate ,username, email
+  document.getElementById('gender-value').style.display = 'none';
+  document.getElementById('gender-select').style.display = 'inline';
+
+  document.getElementById('birthday-value').style.display = 'none';
+  document.getElementById('birthday-select').style.display = 'inline';
+
+  document.getElementById('nationality-value').style.display = 'none';
+  document.getElementById('nationality-select').style.display = 'inline';
+
+  document.getElementById('username-value').style.display = 'none';
+document.getElementById('username-edit').style.display = 'inline';
+
+document.getElementById('email-value').style.display = 'none';
+document.getElementById('email-edit').style.display = 'inline';
+
+document.getElementById('finalAvatar').style.display = 'none';
+document.getElementById('avatar-image').style.display = 'block';
+document.getElementById('prev-arrow').style.display = 'inline';
+document.getElementById('next-arrow').style.display = 'inline';
+  // Sync age entry with birthday year
+  document.getElementById('age-value').addEventListener('input', updateBirthdayFromAge);
+  document.getElementById('birthday-select').addEventListener('change', updateAgeFromBirthday);
+}
+
+function updateAgeFromBirthday() {
+  const birthday = new Date(document.getElementById('birthday-select').value);
+  const today = new Date();
+  let age = today.getFullYear() - birthday.getFullYear();
+  const m = today.getMonth() - birthday.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < birthday.getDate())) {
+    age--;
+  }
+  document.getElementById('age-value').innerText = age;
+}
 
 function saveProfile() {
-  const email = document.getElementById('email-value').innerText;
+  // const email = document.getElementById('email-value').innerText;
   const birthday = document.getElementById('birthday-select').value;
   const age = document.getElementById('age-value').innerText;
-  // const gender = document.getElementById('gender-value').innerText;
-  // const nationality = document.getElementById('nationality-value').innerText;
-  const username = document.getElementById('username-value').innerText;
+  // const username = document.getElementById('username-value').innerText;
+   const username = document.getElementById('username-edit').value;
+   const email = document.getElementById('email-edit').value;
   const avatar = document.getElementById('avatar-image').src;
   const gender = document.getElementById('gender-select').value;
   const nationality = document.getElementById('nationality-select').value;
@@ -101,7 +121,9 @@ function saveProfile() {
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4 && xhr.status === 200) {
-      alert('Profile updated successfully');
+      const response = JSON.parse(xhr.responseText);
+      alert(response.message);
+      updateProfileDisplay(response.user);
     }
   };
   xhr.send(JSON.stringify({
@@ -112,94 +134,125 @@ function saveProfile() {
     gender: gender,
     nationality: nationality,
     avatar: avatar
-
   }));
+
   document.getElementById('btnSave').disabled = true;
   document.getElementById('email-value').contentEditable = false;
   document.getElementById('age-value').contentEditable = false;
-  document.getElementById('gender-value').contentEditable = false;
-  document.getElementById('nationality-value').contentEditable = false;
   document.getElementById('username-value').contentEditable = false;
-  document.getElementById('birthday-value').disabled = true;
+  document.getElementById('birthday-select').disabled = true;
+
   document.getElementById('prev-arrow').disabled = true;
   document.getElementById('next-arrow').disabled = true;
+
   document.getElementById('gender-select').style.display = 'none';
   document.getElementById('gender-value').style.display = 'inline';
+
   document.getElementById('nationality-value').style.display = 'inline';
   document.getElementById('nationality-select').style.display = 'none';
+
   document.getElementById('birthday-value').style.display = 'inline';
   document.getElementById('birthday-select').style.display = 'none';
 
+  document.getElementById('username-value').style.display = 'inline';
+  document.getElementById('username-edit').style.display = 'none';
+
+  document.getElementById('email-value').style.display = 'inline';
+  document.getElementById('email-edit').style.display = 'none';
+
+  document.getElementById('finalAvatar').style.display = 'block';
+  document.getElementById('avatar-image').style.display = 'none';
+  document.getElementById('prev-arrow').style.display = 'none';
+  document.getElementById('next-arrow').style.display = 'none';
+
 }
 
-//email validation
+
+//un fomrat
+function validateUsername(username) {
+  const usernameRegex = /^[a-zA-Z0-9_]{3,20}$/; // s
+    return usernameRegex.test(username);
+}
+
+// username exists in the database
+async function checkUsernameExists(username) {
+  const response = await fetch('/check-username', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ username })
+  });
+  const data = await response.json();
+  return data.exists;
+}
+
+
+
+//  email format
 function validateEmail(email) {
-  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return re.test(email);
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
 }
 
-document.getElementById('email-value').addEventListener('input', function () {
-  const email = this.innerText;
-  const emailError = document.getElementById('email-error');
-  if (!validateEmail(email)) {
-    emailError.textContent = 'Invalid email format';
-    document.getElementById('btnSave').disabled = true;
-  } else {
-    // Check if the email already exists in the database
-    fetch('/check-email', {
+// Function to check if email exists in the database
+async function checkEmailExists(email) {
+  const response = await fetch('/check-email', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ email }),
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.exists) {
-        emailError.textContent = 'Email already in use';
-        document.getElementById('btnSave').disabled = true;
+      body: JSON.stringify({ email })
+  });
+  const data = await response.json();
+  return data.exists;
+}
+//USERNAME VALIDTAION OUTPUT 
+document.addEventListener("DOMContentLoaded", function() {
+  const usernameInput = document.getElementById("username-edit");
+  const usernameError = document.getElementById("username-error");
+  const emailInput = document.getElementById("email-edit");
+  const emailError = document.getElementById("email-error");
+
+  usernameInput.addEventListener("input", async function() {
+      if (validateUsername(usernameInput.value)) {
+          const exists = await checkUsernameExists(usernameInput.value);
+          if (exists) {
+              usernameError.textContent = "Username already exists";
+              document.getElementById('btnSave').disabled = true;
+
+          } else {
+              usernameError.textContent = "";
+              document.getElementById('btnSave').disabled = false;
+
+          }
       } else {
-        emailError.textContent = '';
-        document.getElementById('btnSave').disabled = false;
+          usernameError.textContent = "Invalid username format";
+          document.getElementById('btnSave').disabled = true;
+
+
       }
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
-  }
-});
-//username validation 
-document.getElementById('username-value').addEventListener('input', function () {
-  const username = this.innerText;
-  const usernameError = document.getElementById('username-error');
-  if (username.length < 3) {
-    usernameError.textContent = 'Username must be at least 3 characters long';
-    document.getElementById('btnSave').disabled = true;
-  } else {
-    // Check if the username already exists in the database
-    fetch('/check-username', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ username }),
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.exists) {
-        usernameError.textContent = 'Username already in use';
-        document.getElementById('btnSave').disabled = true;
+  });
+//EMAIL VALLIDATION OUT PUT 
+  emailInput.addEventListener("input", async function() {
+      if (validateEmail(emailInput.value)) {
+          const exists = await checkEmailExists(emailInput.value);
+          if (exists) {
+              emailError.textContent = "Email already exists";
+              document.getElementById('btnSave').disabled = true;
+          } else {
+              emailError.textContent = "";
+              document.getElementById('btnSave').disabled = false;
+          }
       } else {
-        usernameError.textContent = '';
-        document.getElementById('btnSave').disabled = false;
+          emailError.textContent = "Invalid email format";
+          document.getElementById('btnSave').disabled = true;
+
       }
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
-  }
+  });
 });
 
+//delete Account 
 function deleteProfile() {
   if (confirm('Are you sure you want to delete your profile? This action cannot be undone.')) {
     fetch('/delete-profile', {
@@ -223,77 +276,7 @@ function deleteProfile() {
   }
 }
 
-
-//change password
-function showPasswordForm() {
-  document.getElementById('password-form').style.display = 'block';
-  document.getElementById('password-title').style.display = 'block';
-  document.getElementById('btnShowPasswordForm').style.display = 'none';
-  document.getElementById('btnChangePassword').style.display = 'inline';
-  
-}
-
-function changePassword() {
-  const currentPassword = document.getElementById('current-password').value;
-  const newPassword = document.getElementById('new-password').value;
-  const confirmPassword = document.getElementById('confirm-password').value;
-
-  const currentPasswordError = document.getElementById('current-password-error');
-  const newPasswordError = document.getElementById('new-password-error');
-  const confirmPasswordError = document.getElementById('confirm-password-error');
-
-  let valid = true;
-
-  if (!currentPassword) {
-    currentPasswordError.textContent = 'Current password is required';
-    valid = false;
-  } else {
-    currentPasswordError.textContent = '';
-  }
-
-  if (newPassword.length < 8) {
-    newPasswordError.textContent = 'New password must be at least 8 characters long';
-    valid = false;
-  } else {
-    newPasswordError.textContent = '';
-  }
-
-  if (newPassword !== confirmPassword) {
-    confirmPasswordError.textContent = 'Passwords do not match';
-    valid = false;
-  } else {
-    confirmPasswordError.textContent = '';
-  }
-
-  if (valid) {
-    fetch('/change-password', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        currentPassword: currentPassword,
-        newPassword: newPassword,
-      }),
-    })
-    .then(response => {
-      if (response.ok) {
-        alert('Password changed successfully');
-        document.getElementById('password-form').style.display = 'none';
-        document.getElementById('btnShowPasswordForm').style.display = 'inline-block';
-      } else {
-        response.json().then(data => {
-          if (data.error === 'Incorrect current password') {
-            currentPasswordError.textContent = 'Incorrect current password';
-          } else {
-            alert('Error changing password');
-          }
-        });
-      }
-    })
-    .catch(error => {
-      console.error('Error:', error);
-      alert('Error changing password');
-    });
-  }
-}
+//password change 
+document.getElementById('btnChangePassword').addEventListener('click', function() {
+  window.location.href = '/change-password';
+});
