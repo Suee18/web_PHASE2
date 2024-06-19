@@ -10,9 +10,10 @@ const userSchema = new Schema({
   nationality: { type: String, required: true },
   isAdmin: { type: Boolean, default: false },
   avatar: { type: String, required: true },
-  age : {type: Number, required: true},
+  age: { type: Number, required: true },
+  subscriptionType: { type: String, default: 'regular' }, // Added subscriptionType field with default value
 });
-//age 
+
 userSchema.pre('save', function(next) {
   const today = new Date();
   const birthDate = new Date(this.birthday);
@@ -22,10 +23,9 @@ userSchema.pre('save', function(next) {
     age--;
   }
   this.age = age;
-  // this.birthday = new Date(this.birthday.setHours(0, 0, 0, 0)); // Set time to 00:00:00:000
   next();
 });
-//default avatar for each account on sign up 
+
 userSchema.pre('validate', function(next) {
   const today = new Date();
   const birthDate = new Date(this.birthday);

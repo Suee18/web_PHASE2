@@ -208,6 +208,8 @@ export const  deleteAccount = async (req, res) => {
   }
 };
 
+
+//change password
 export const changePassword =async (req, res) => {
   const { currentPassword, newPassword } = req.body;
   const userId = req.session.userId;

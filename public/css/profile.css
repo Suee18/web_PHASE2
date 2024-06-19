@@ -44,7 +44,8 @@ body {
   margin-left: -15px;
 }
 
-.main-container {
+.main-container 
+{
   border-radius: 2rem;
   margin: 0 auto;
   width:90%;
