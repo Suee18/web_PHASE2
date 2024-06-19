@@ -209,31 +209,35 @@ export const  deleteAccount = async (req, res) => {
 };
 
 export const changePassword =async (req, res) => {
-  const { currentPassword, newPassword } = req.body;
-  const userId = req.session.userId;
+  const { currentPassword, newPassword, confirmPassword } = req.body;
 
-  if (!userId) {
-    return res.status(401).send('User not logged in');
+  if (newPassword !== confirmPassword) {
+    return res.status(400).send('New passwords do not match');
   }
 
   try {
-    const user = await User.findById(userId);
+    const user = await User.findById(req.user._id);
+    
     if (!user) {
       return res.status(404).send('User not found');
     }
 
     const isMatch = await bcrypt.compare(currentPassword, user.password);
+    
     if (!isMatch) {
-      return res.status(400).json({ error: 'Incorrect current password' });
+      return res.status(400).send('Current password is incorrect');
     }
 
-    const hashedNewPassword = await bcrypt.hash(newPassword, 10);
-    user.password = hashedNewPassword;
+    // Hash the new password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(newPassword, salt);
+
+    // Update the user's password
+    user.password = hashedPassword;
     await user.save();
 
-    res.status(200).send('Password changed successfully');
+    res.send('Password changed successfully');
   } catch (error) {
-    console.error('Error changing password:', error);
-    res.status(500).send('Error changing password');
+    res.status(500).send('Server error');
   }
 };
