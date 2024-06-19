@@ -54,7 +54,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     avatarImage.src = images[currentIndex];
   });
   
-  // Start 
     fetchProfileData();
   setInterval(fetchProfileData, 1000); // check for updates every 1 second
 
@@ -68,6 +67,7 @@ function editProfile() {
   document.getElementById('btnSave').disabled = false;
   document.getElementById('prev-arrow').disabled = false;
   document.getElementById('next-arrow').disabled = false;
+
 
   // Show selects for gender , nationality , birthdate ,username, email
   document.getElementById('gender-value').style.display = 'none';
@@ -168,7 +168,7 @@ function saveProfile() {
 }
 
 
-
+//username and email validati
 function validateUsername(username) {
   const usernameRegex = /^[a-zA-Z0-9_]{3,20}$/; // s
     return usernameRegex.test(username);
