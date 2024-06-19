@@ -99,3 +99,62 @@ document.addEventListener('DOMContentLoaded', function() {
       document.getElementById('details-container2').style.display = 'none';
   });
 });
+document.addEventListener('DOMContentLoaded', function() {
+    const editButtons = document.querySelectorAll('.btn.edit-btn'); // corrected the selector
+  
+    editButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const userId = this.dataset.id;
+            const editForm = document.getElementById('edit-form');
+  
+            // Fetch user data from the table
+            const row = this.closest('tr');
+            const name = row.querySelector('td:nth-child(2)').innerText;
+            const nationality = row.querySelector('td:nth-child(3)').innerText;
+            const gender = row.querySelector('td:nth-child(4)').innerText;
+            const subscription = row.querySelector('td:nth-child(5)').innerText;
+  
+            // Pre-fill the form with user data
+            editForm.name.value = name;
+            editForm.nationality.value = nationality;
+            editForm.gender.value = gender;
+            editForm.subscription.value = subscription;
+  
+            // Open the form
+            document.getElementById('details-container2').style.display = 'block';
+  
+            editForm.onsubmit = async function(e) {
+                e.preventDefault();
+                const formData = new FormData(editForm);
+                const jsonData = Object.fromEntries(formData.entries());
+  
+                console.log('Submitting form data:', jsonData); // Debugging: Log form data
+
+                try {
+                    const response = await fetch(`/users/${userId}`, {
+                        method: 'PUT',
+                        body: JSON.stringify(jsonData),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    });
+  
+                    if (response.ok) {
+                        alert('User updated successfully');
+                        location.reload();
+                    } else {
+                        alert('Failed to update user');
+                        const errorText = await response.text(); // Get the error message
+                        console.error('Failed to update user:', errorText); // Debugging: Log error response
+                    }
+                } catch (error) {
+                    console.error('Error updating user:', error); // Debugging: Log error
+                    alert('Failed to update user');
+                }
+            };
+        });
+    });
+});
+
+
+
