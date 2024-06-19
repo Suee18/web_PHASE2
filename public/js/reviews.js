@@ -128,22 +128,29 @@ function AddReviewBox() {
       };
 
       // Make an AJAX request to submit the review
-      fetch('/api/reviews', {
+      fetch('/reviews', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(reviewData)
       })
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          return response.json().then(data => {
+            throw new Error(data.message || 'Something went wrong');
+          });
+        }
+        return response.json();
+      })
       .then(data => {
         if (data.success) {
           console.log('Review submitted successfully:', data);
-
+      
           // Create a new review box to append to the screen
           const newReviewElement = document.createElement('div');
           newReviewElement.classList.add('box');
-
+      
           const profileInfo = document.createElement('div');
           profileInfo.classList.add('profile-info');
           
@@ -184,7 +191,7 @@ function AddReviewBox() {
           newReviewElement.appendChild(reviewText);
           
           boxContainer.appendChild(newReviewElement);
-
+      
           // Remove the new review box
           newReviewBox.remove();
         } else {

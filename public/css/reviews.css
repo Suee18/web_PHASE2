@@ -7,7 +7,6 @@
   body {
     margin: 0;
     padding: 0;
-    
     background-color: #033f76;
   }
   
@@ -104,7 +103,7 @@
     width: 30%;
   }
   .add-review-btn:hover {
-    background-color: #312693;
+    background-color: #31269396;
     color: #ffffff;
     box-shadow: 0 4px #8c7a61;
   }
@@ -146,7 +145,7 @@
   }
   
   .btn {
-    background-color: #b08e63;
+    background-color: #cba676;
     box-shadow: 0 6px #96a0a3;
     color: #ffffff;
     border-radius: 20px;
@@ -162,9 +161,9 @@
   }
   
   .btn:hover {
-    background-color: #312693;
+    background-color: #997c57;
     color: #ffffff;
-    box-shadow: 0 4px #8c7a61;
+    box-shadow: 0 4px #b7c3c7;
   }
   
   .btn:active {
@@ -173,5 +172,12 @@
   
   .btn:focus {
     outline: none;
+  }
+  .button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px; /* Adjust this to your needs */
   }
   
