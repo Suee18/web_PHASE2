@@ -55,6 +55,11 @@ router.post('/check-username', usernameExists);
 router.post('/change-password', changePassword);
 //delete account 
 router.delete('/delete-profile', deleteAccount);
+//Ajax 
+router.get('/profile/data', fetchUserFromSession, (req, res) => {
+  res.status(200).json(req.user);
+});
+
 //===============REVIEWS  ==========================================================================//
 // Route to handle the submission of a new review
 router.post('/reviews', fetchUserFromSession, addReview);

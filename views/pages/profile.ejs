@@ -11,6 +11,9 @@
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css'>
   <link rel="stylesheet" href="/css/profile.css">
   <script src="/js/profile.js" defer></script>
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 </head>
 <body>
   <header>
@@ -32,12 +35,13 @@
                     <div>
                       <div class="aboveAll">
                         <div id="avatar-display" class="avatar-container">
-                          <button id="prev-arrow" class="arrow" disabled>&lt;</button>
-                          <img id="avatar-image" src="<%= user.avatar %>" alt="Avatar" class="avatar-image">
-                          <button id="next-arrow" class="arrow" disabled>&gt;</button>
+                          <button id="prev-arrow" class="arrow" disabled style="display: none;">&lt;</button>
+                           <img id="finalAvatar" src="<%= user.avatar %>" alt="Avatar" class="avatar-image">
+                           <img id="avatar-image" src="<%= user.avatar %>" alt="Avatar" class="avatar-image" style="display: none;"> 
+                          <button id="next-arrow" class="arrow" disabled style="display: none;">&gt;</button>
                         </div>
 
-                        <p class="userInfoUN">
+                        <p id="userInfoUN"class="userInfoUN">
                           <%= user.username %>
                         </p>
                       </div>
@@ -56,6 +60,7 @@
                             <td><span id="username-value">
                                 <%= user.username %>
                               </span>
+                              <input type="text" id="username-edit" value="<%= user.username %>" style="display:none;">
                               <div id="username-error" style="color: red;"></div>
                             </td>
                           </tr>
@@ -64,6 +69,7 @@
                             <td><span id="email-value">
                                 <%= user.email %>
                               </span>
+                              <input type="email" id="email-edit" value="<%= user.email %>" style="display:none;">
                               <div id="email-error" style="color: red;"></div>
                             </td>
                           </tr>
