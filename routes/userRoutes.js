@@ -46,6 +46,14 @@ router.get('/create_A_Plan', fetchUserFromSession, (req, res) => {
 router.get ('/view_plans_history', fetchUserFromSession ,  (req, res)=> {
   res.render('pages/history', { user: req.user });
 });
+//AJAX for latest avatar
+router.get('/profile/avatar', fetchUserFromSession, (req, res) => {
+  const user = req.user;
+  res.json({
+    avatar: user.avatar
+  });
+});
+
 //====================CRUD USER profile info=============================================================================
 //Update Profile info
 router.post('/profile/update', updateProfileInfo); 

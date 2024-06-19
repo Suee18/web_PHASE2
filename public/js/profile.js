@@ -168,13 +168,13 @@ function saveProfile() {
 }
 
 
-//username and email validati
+//un fomrat
 function validateUsername(username) {
   const usernameRegex = /^[a-zA-Z0-9_]{3,20}$/; // s
     return usernameRegex.test(username);
 }
 
-// Function to check if username exists in the database
+// username exists in the database
 async function checkUsernameExists(username) {
   const response = await fetch('/check-username', {
       method: 'POST',
@@ -187,7 +187,9 @@ async function checkUsernameExists(username) {
   return data.exists;
 }
 
-// Function to validate email format
+
+
+//  email format
 function validateEmail(email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
@@ -205,7 +207,7 @@ async function checkEmailExists(email) {
   const data = await response.json();
   return data.exists;
 }
-
+//USERNAME VALIDTAION OUTPUT 
 document.addEventListener("DOMContentLoaded", function() {
   const usernameInput = document.getElementById("username-edit");
   const usernameError = document.getElementById("username-error");
@@ -218,16 +220,20 @@ document.addEventListener("DOMContentLoaded", function() {
           if (exists) {
               usernameError.textContent = "Username already exists";
               document.getElementById('btnSave').disabled = true;
+
           } else {
               usernameError.textContent = "";
+              document.getElementById('btnSave').disabled = false;
+
           }
       } else {
           usernameError.textContent = "Invalid username format";
           document.getElementById('btnSave').disabled = true;
 
+
       }
   });
-
+//EMAIL VALLIDATION OUT PUT 
   emailInput.addEventListener("input", async function() {
       if (validateEmail(emailInput.value)) {
           const exists = await checkEmailExists(emailInput.value);
@@ -236,6 +242,7 @@ document.addEventListener("DOMContentLoaded", function() {
               document.getElementById('btnSave').disabled = true;
           } else {
               emailError.textContent = "";
+              document.getElementById('btnSave').disabled = false;
           }
       } else {
           emailError.textContent = "Invalid email format";

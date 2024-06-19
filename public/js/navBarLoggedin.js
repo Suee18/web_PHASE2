@@ -22,10 +22,27 @@ document.addEventListener('DOMContentLoaded', function() {
             slidingPanel.classList.remove('panel-open');
         }
     }, true); // Use capture phase for broad coverage
-});
 
+    // Function to fetch the latest avatar
+    function fetchAvatar() {
+        fetch('/profile/avatar')
+            .then(response => response.json())
+            .then(data => {
+                if (data.avatar) {
+                    profileImage.src = data.avatar;
+                    if (panelImage) {
+                        panelImage.src = data.avatar;
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching avatar:', error);
+            });
+    }
 
-document.addEventListener('DOMContentLoaded', function() {
+    // Poll for the latest avatar every 5 seconds
+    setInterval(fetchAvatar, 5000);
+
     // Load the navbar and initialize functionality
     function loadNavbar() {
         const navbarPath = '/js/navBarLoggedin.ejs'; // Path to the navbar HTML
@@ -66,6 +83,5 @@ document.addEventListener('DOMContentLoaded', function() {
         }, true); // Using the capture phase to ensure the event is captured early
     }
 
-    // Load the navbar when the document is ready
     loadNavbar();
 });
