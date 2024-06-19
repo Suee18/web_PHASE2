@@ -22,10 +22,10 @@ export const getUsers = async (req, res) => {
     }
   };
  // Function to update a user
- export const updateUser = async (req, res) => {
+export const updateUser = async (req, res) => {
   try {
-    const { id } = req.params;
-    const { username, gender, nationality, isAdmin } = req.body;
+    const { id } = req.params; // Get user ID from URL parameters
+    const { email, gender, nationality, username, birthday, age, avatar } = req.body;
 
     const user = await User.findById(id);
     if (!user) {
@@ -33,15 +33,18 @@ export const getUsers = async (req, res) => {
     }
 
     user.username = username || user.username;
-    user.gender = gender || user.gender;
+    user.email = email || user.email;
+    user.birthday = birthday ? new Date(birthday) : user.birthday;
+    user.age = age || user.age;
+    user.sex = gender || user.sex;
     user.nationality = nationality || user.nationality;
-    user.isAdmin = typeof isAdmin === 'boolean' ? isAdmin : user.isAdmin;
+    user.avatar = avatar || user.avatar;
 
     await user.save();
-    console.log('User updated successfully:', user);
+    console.log('=======UserController: User updated successfully:', user);
     res.status(200).send('User updated successfully');
   } catch (err) {
-    console.error('User update failed:', err);
+    console.error('=======UserController: User update failed:', err);
     res.status(500).send('Internal server error');
   }
 };
