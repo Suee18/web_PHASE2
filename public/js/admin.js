@@ -107,4 +107,3 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('close-btn2').addEventListener('click', function() {
       document.getElementById('details-container2').style.display = 'none';
   });
-
