@@ -18,6 +18,7 @@ export const fetchUserFromSession = async (req, res, next) => {
   }
 };
 
+
 export const requireAdmin = (req, res, next) => {
   if (req.user && req.user.isAdmin) {
     next();
