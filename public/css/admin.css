@@ -26,7 +26,7 @@
     width: 100%;
     padding: 1.5rem;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     grid-gap: 1rem;
 }
 
@@ -45,18 +45,18 @@
 .cardBox .card .numbers{
     position: relative;
     font-weight: 500;
-    font-size: 2.5rem;
+    font-size: 3rem;
     color: var(--blue);
 }
 
 .cardBox .card .cardName{
     color: var(--black2);
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     margin-top: 5px;
 }
 
 .cardBox .card .iconBox{
-    font-size: 3.5rem;
+    font-size: 2.5rem;
     color: var(--black2);
 }
 
@@ -95,8 +95,10 @@
 }
 
 .cardHeader h2{
-    font-weight: 600;
+    font-weight: 900;
+font-size: 2.2rem;
     color: var(--blue);
+    margin-bottom: 1.5rem;
 }
 
 table .btn{
@@ -400,4 +402,8 @@ justify-content: space-between;
 .card2-header{
     margin-top: -0.9rem;
     margin-bottom: 1.5rem;
+}
+table tbody td {
+    text-align: center;
+    vertical-align: middle; /* Optional: to vertically center the content */
 }

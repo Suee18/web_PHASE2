@@ -29,20 +29,20 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Nationality Chart
-  const nationalityCtx = document.getElementById('nationalityChart').getContext('2d');
-  const nationalityCounts = JSON.parse(document.getElementById('nationalityChart').getAttribute('data-nationality-counts'));
+  // Subscription Type Chart
+  const subscriptionCtx = document.getElementById('subscriptionChart').getContext('2d');
+  const subscriptionCounts = JSON.parse(document.getElementById('subscriptionChart').getAttribute('data-subscription-counts'));
 
-  const nationalityLabels = nationalityCounts.map(item => item._id);
-  const nationalityData = nationalityCounts.map(item => item.count);
+  const subscriptionLabels = subscriptionCounts.map(item => item._id);
+  const subscriptionData = subscriptionCounts.map(item => item.count);
 
-  new Chart(nationalityCtx, {
+  new Chart(subscriptionCtx, {
     type: 'pie',
     data: {
-      labels: nationalityLabels,
+      labels: subscriptionLabels,
       datasets: [{
-        label: 'Nationality Distribution',
-        data: nationalityData,
+        label: 'Subscription Type Distribution',
+        data: subscriptionData,
         backgroundColor: [
           'rgba(255, 99, 132, 0.5)',
           'rgba(54, 162, 235, 0.5)',

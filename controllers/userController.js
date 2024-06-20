@@ -81,7 +81,7 @@ export const loginUser = async (req, res) => {
 
     // Redirect based on isAdmin 
     if (user.isAdmin) {
-      res.redirect('/adminHome');
+      res.redirect('/statistics');
     } else {
       await incrementVisitCounter();
       res.redirect('/profile');

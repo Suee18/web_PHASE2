@@ -52,8 +52,8 @@ export const getStatistics = async (req, res) => {
       const dailyViews = dailyViewEntry ? dailyViewEntry.count : 0;
 
       // Aggregate nationality data
-      const nationalityCounts = await User.aggregate([
-          { $group: { _id: "$nationality", count: { $sum: 1 } } }
+      const subscriptionCounts = await User.aggregate([
+        { $group: { _id: "$subscriptionType", count: { $sum: 1 } } }
       ]);
 
       // Transform visits data for chart
@@ -73,13 +73,14 @@ export const getStatistics = async (req, res) => {
           acc[review._id] = ((review.count / totalReviews) * 100).toFixed(2); // Ensure percentage is a fixed number
           return acc;
       }, {});
-
+      const userCount = await User.countDocuments({ isAdmin: 'false' });
       console.log({
         dailyViews,
         dailyVisits: JSON.stringify(dailyVisits),
         totalReviews,
-        nationalityCounts: JSON.stringify(nationalityCounts),
-        reviewPercentages: JSON.stringify(reviewPercentages)
+        subscriptionCounts: JSON.stringify(subscriptionCounts),
+        reviewPercentages: JSON.stringify(reviewPercentages),
+        userCount
       });
       
       res.render('pages/statistics', {
@@ -87,8 +88,9 @@ export const getStatistics = async (req, res) => {
           dailyViews,
           dailyVisits: JSON.stringify(dailyVisits),
           totalReviews,
-          nationalityCounts: JSON.stringify(nationalityCounts),
-          reviewPercentages: JSON.stringify(reviewPercentages) // Pass as a JSON string
+          subscriptionCounts: JSON.stringify(subscriptionCounts),
+          reviewPercentages: JSON.stringify(reviewPercentages),
+          userCount 
       });
   } catch (err) {
       console.error('Error fetching statistics:', err);
