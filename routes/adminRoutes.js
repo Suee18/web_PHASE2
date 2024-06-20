@@ -7,12 +7,8 @@ const router = express.Router();
 //for admin authority 
 router.get('/adminHome', fetchUserFromSession, requireAdmin, getAdminHome);
 
-router.get('/users', fetchUserFromSession, requireAdmin, (req, res) => {
-    res.render('pages/admin', { user: req.user });
-});
-router.get('/statistics', fetchUserFromSession, requireAdmin, (req, res) => {
-    res.render('pages/admin', { user: req.user });
-});
+router.get('/users', fetchUserFromSession, requireAdmin, getUsers);
+router.get('/statistics', fetchUserFromSession, requireAdmin, getStatistics);
 
 // router.get('/users', getUsers,fetchUserFromSession,requireAdmin);
 // router.get('/statistics', getStatistics,fetchUserFromSession,requireAdmin);

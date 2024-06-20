@@ -28,39 +28,74 @@ export const getAdminHome = async (req, res) => {
   }
 };
 
+
 // Function to fetch users
 export const getUsers = async (req, res) => {
-    try {
-      const users = await User.find(); // Fetch all users from the User model
-      res.render('pages/admin', { title: 'Admin', users }); // Pass users data to admin.ejs
-    } catch (err) {
-      console.error('Error fetching users:', err);
-      res.status(500).send('Internal server error');
-    }
-  };
-  export const getStatistics = async (req, res) => {
-    try {
-      // Fetch daily views and monthly visits as before...
+  try {
+    const users = await User.find(); // Fetch all users from the User model
+    res.render('pages/admin', { title: 'Admin', users }); // Pass users data to admin.ejs
+  } catch (err) {
+    console.error('Error fetching users:', err);
+    res.status(500).send('Internal server error');
+  }
+};
+
+
+export const getStatistics = async (req, res) => {
+  try {
+      // Fetch visit data
       const visits = await VisitCounter.find().sort({ date: 1 });
-      const today = new Date().setHours(0, 0, 0, 0); // Set to the beginning of today
+
+      // Calculate daily views
+      const today = new Date().setHours(0, 0, 0, 0);
       const dailyViewEntry = visits.find(visit => visit.date.getTime() === today);
       const dailyViews = dailyViewEntry ? dailyViewEntry.count : 0;
-  
-      const monthlyVisits = visits.reduce((acc, visit) => {
-        const month = visit.date.toLocaleString('default', { month: 'long', year: 'numeric' });
-        acc[month] = (acc[month] || 0) + visit.count;
-        return acc;
+
+      // Aggregate nationality data
+      const nationalityCounts = await User.aggregate([
+          { $group: { _id: "$nationality", count: { $sum: 1 } } }
+      ]);
+
+      // Transform visits data for chart
+      const dailyVisits = visits.reduce((acc, visit) => {
+          const date = visit.date.toLocaleDateString('default', { year: 'numeric', month: 'numeric', day: 'numeric' });
+          acc[date] = (acc[date] || 0) + visit.count;
+          return acc;
       }, {});
-  
-      // Fetch total number of reviews using the static method from Review model
-      const totalReviews = await Review.countDocuments(); // Ensure to use countDocuments() or count() depending on your Mongoose version
-  
-      res.render('pages/statistics', { title: 'Statistics', dailyViews, monthlyVisits: JSON.stringify(monthlyVisits), totalReviews });
-    } catch (err) {
+
+      // Fetch total reviews count and calculate review percentages
+      const totalReviews = await Review.countDocuments();
+      const reviewCounts = await Review.aggregate([
+          { $group: { _id: "$rate", count: { $sum: 1 } } }
+      ]);
+
+      const reviewPercentages = reviewCounts.reduce((acc, review) => {
+          acc[review._id] = ((review.count / totalReviews) * 100).toFixed(2); // Ensure percentage is a fixed number
+          return acc;
+      }, {});
+
+      console.log({
+        dailyViews,
+        dailyVisits: JSON.stringify(dailyVisits),
+        totalReviews,
+        nationalityCounts: JSON.stringify(nationalityCounts),
+        reviewPercentages: JSON.stringify(reviewPercentages)
+      });
+      
+      res.render('pages/statistics', {
+          title: 'Statistics',
+          dailyViews,
+          dailyVisits: JSON.stringify(dailyVisits),
+          totalReviews,
+          nationalityCounts: JSON.stringify(nationalityCounts),
+          reviewPercentages: JSON.stringify(reviewPercentages) // Pass as a JSON string
+      });
+  } catch (err) {
       console.error('Error fetching statistics:', err);
       res.status(500).send('Internal server error');
-    }
-  };
+  }
+};
+
   // Function to update a user
  export const updateUser = async (req, res) => {
   try {

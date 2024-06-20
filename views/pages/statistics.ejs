@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="/css/admin.css">
-    <link rel="stylesheet" href="/public/js/statistics.js">
     <title>Statistics</title>
 </head>
 <body>
@@ -15,38 +14,97 @@
         
         <!-- Content -->
         <div class="main">
-    <div class="cardBox">
-        <!-- Example Cards -->
-        <div class="card">
-            <div>
-                <div class="numbers"><%= dailyViews %></div>
-                <div class="cardName">Daily Views</div>
+            <div class="cardBox">
+                <!-- Example Cards -->
+                <div class="card">
+                    <div>
+                        <div class="numbers"><%= dailyViews %></div>
+                        <div class="cardName">Daily Views</div>
+                    </div>
+                    <div class="iconBox"><i class="fa-solid fa-eye"></i></div>
+                </div>
+                <div class="card">
+                    <div>
+                        <div class="numbers">80</div>
+                        <div class="cardName">Plans Generated</div>
+                    </div>
+                    <div class="iconBox"><i class="fa-solid fa-map-location-dot"></i></div>
+                </div>
+                <div class="card">
+                    <div>
+                        <div class="numbers"><%= totalReviews %></div>
+                        <div class="cardName">Reviews</div>
+                    </div>
+                    <div class="iconBox"><i class="fa-solid fa-comments"></i></div>
+                </div>
+                <div class="card">
+                    <div>
+                        <div class="numbers">$7,416</div>
+                        <div class="cardName">Earning</div>
+                    </div>
+                    <div class="iconBox"><i class="fa-solid fa-money-bills"></i></div>
+                </div>
             </div>
-            <div class="iconBox"><i class="fa-solid fa-eye"></i></div>
-        </div>
-        <div class="card">
-            <div>
-                <div class="numbers">80</div>
-                <div class="cardName">Plans Generated</div>
+            <div id="chart-container">
+                <h2>Daily Visits Chart</h2>
+                <canvas id="dailyVisitsChart" data-daily-visits='<%= dailyVisits %>'></canvas>
             </div>
-            <div class="iconBox"><i class="fa-solid fa-map-location-dot"></i></div>
-        </div>
-        <div class="card">
-            <div>
-                <div class="numbers"><%= totalReviews %></div>
-                <div class="cardName">Reviews</div>
+
+            <div class="chartrate">
+            <div id="pie-container">
+                <h2>Nationality Distribution</h2>
+                <canvas id="nationalityChart" data-nationality-counts='<%= nationalityCounts %>'></canvas>
             </div>
-            <div class="iconBox"><i class="fa-solid fa-comments"></i></div>
-        </div>
-        <div class="card">
-            <div>
-                <div class="numbers">$7,416</div>
-                <div class="cardName">Earning</div>
+            
+            <div class="cardBox2">
+                <div class="card2-header">
+                    <h2>Rating Percentage</h2>
+                </div>
+                <div class="card2-container">
+                <div class="card2">
+                    <div>
+                        <div class="cardName">1 stars</div>
+                        <div class="Emoji"><i class="fa-regular fa-face-angry"></i></div>
+                        <div class="Number"><%= JSON.parse(reviewPercentages)[1] || 0 %>%</div>
+                    </div>
+                </div>
+                <div class="card2">
+                    <div>
+                        <div class="cardName">2 Stars</div>
+                        <div class="Emoji"><i class="fa-regular fa-face-frown-open"></i></div>
+                        <div class="Number"><%= JSON.parse(reviewPercentages)[2] || 0 %>%</div>
+                    </div>
+                </div>
+                <div class="card2">
+                    <div>
+                        <div class="cardName">3 Stars</div>
+                        <div class="Emoji"><i class="fa-regular fa-face-meh"></i></div>
+                        <div class="Number"><%= JSON.parse(reviewPercentages)[3] || 0 %>%</div>
+                    </div>
+                </div>
+                <div class="card2">
+                    <div>
+                        <div class="cardName">4 Stars</div>
+                        <div class="Emoji"><i class="fa-regular fa-face-smile-beam"></i></div>
+                        <div class="Number"><%= JSON.parse(reviewPercentages)[4] || 0 %>%</div>
+                    </div>
+                </div>
+                <div class="card2">
+                    <div>
+                        <div class="cardName">5 Stars</div>
+                        <div class="Emoji"><i class="fa-regular fa-face-grin-stars"></i></div>
+                        <div class="Number"><%= JSON.parse(reviewPercentages)[5] || 0 %>%</div>
+                    </div>
+                </div>
             </div>
-            <div class="iconBox"><i class="fa-solid fa-money-bills"></i></div>
+            </div>
         </div>
+      </div>
     </div>
-        </div>
-    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/js/statistics.js"></script>
 </body>
 </html>
+
+
+
