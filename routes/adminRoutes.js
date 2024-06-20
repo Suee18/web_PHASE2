@@ -5,9 +5,8 @@ const router = express.Router();
 
 //MUST DO !!!! ADD ,fetchUserFromSession,requireAdmin to ANY ADMIN ROUTE 
 //for admin authority 
-router.get('/adminHome', fetchUserFromSession, requireAdmin, (req, res) => {
-    res.render('pages/admin', { user: req.user });
-});
+router.get('/adminHome', fetchUserFromSession, requireAdmin, getAdminHome);
+
 router.get('/users', fetchUserFromSession, requireAdmin, (req, res) => {
     res.render('pages/admin', { user: req.user });
 });
