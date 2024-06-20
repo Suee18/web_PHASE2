@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/css/hotel.css">
+    <script src="/js/hotel.js"></script>
+    <title>Hotels</title>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <%- include('../components/navBarAdmin') %>
+        <!-- Content -->
+        <div class="main">
+            <!-- Hotels Table -->
+            <div class="details">
+                <div class="users">
+                    <div class="cardHeader">
+                        <h2>Hotels</h2>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Hotel Name</th>
+                                <th>Price Per Night</th>
+                                <th>All Inclusive</th>
+                                <th>Full Board</th>
+                                <th>Half Board</th>
+                                <th>Breakfast Only</th>
+                                <th>Rating</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if (hotelData.length > 0) { %>
+                                <% hotelData.forEach(hotel => { %>
+                                    <tr>
+                                        <td><%= hotel.hotelName %></td>
+                                        <td><%= hotel.pricePerNight %></td>
+                                        <td><%= hotel.allInclusive ? 'Yes' : 'No' %></td>
+                                        <td><%= hotel.fullBoard ? 'Yes' : 'No' %></td>
+                                        <td><%= hotel.halfBoard ? 'Yes' : 'No' %></td>
+                                        <td><%= hotel.breakfastOnly ? 'Yes' : 'No' %></td>
+                                        <td>
+                                            <% for (let i = 1; i <= 5; i++) { %>
+                                                <i class="fa<%= i <= hotel.rating ? 's' : 'r' %> fa-star"></i>
+                                            <% } %>
+                                        </td>
+                                    </tr>
+                                <% }); %>
+                            <% } else { %>
+                                <tr>
+                                    <td colspan="7">No hotels found.</td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    </script>
+</body>
+</html>

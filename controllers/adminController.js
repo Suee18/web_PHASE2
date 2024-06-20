@@ -5,6 +5,7 @@ import Review from '../models/Review.js'; // Import the Review model
 import flights from '../models/flights.js';
 import Place from '../models/Places.js';
 import food from '../models/food.js';
+import Hotel from '../models/Hotel.js';
 // Function to increment visit counter
 export const incrementVisitCounter = async () => {
   try {
@@ -211,5 +212,23 @@ export const deleteFood = async (req, res) => {
   } catch (err) {
     console.error('Error deleting food item:', err);
     res.status(500).json({ error: 'Failed to delete food item' });
+  }
+};
+export const getHotels = async (req, res) => {
+  try {
+    const hotelData = await Hotel.find(); // Fetch all hotels from the Hotel model
+    res.render('pages/hotel', { title: 'Hotels', hotelData }); // Pass hotel data to hotel.ejs
+  } catch (err) {
+    console.error('Error fetching hotels:', err);
+    res.status(500).send('Internal server error');
+  }
+};
+export const getReviews = async (req, res) => {
+  try {
+    const reviewData = await Review.find(); // Fetch all hotels from the Hotel model
+    res.render('pages/admin-reviews', { title: 'Review', reviewData }); // Pass hotel data to hotel.ejs
+  } catch (err) {
+    console.error('Error fetching reviews:', err);
+    res.status(500).send('Internal server error');
   }
 };

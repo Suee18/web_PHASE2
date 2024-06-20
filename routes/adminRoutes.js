@@ -1,5 +1,6 @@
 import express from 'express';
-import { getAdminHome, getUsers, getStatistics,getFlight,getPlaces,addPlace,addFood,getFood,deleteFood} from '../controllers/adminController.js';
+import { getAdminHome, getUsers, getStatistics,getFlight,
+    getPlaces,addPlace,addFood,getFood,deleteFood,getHotels,getReviews} from '../controllers/adminController.js';
 import{fetchUserFromSession, requireAdmin} from '../middleware/auth.js'
 const router = express.Router();
 
@@ -15,8 +16,9 @@ router.post('/admin/add-place',fetchUserFromSession, requireAdmin, addPlace);
 router.get('/food',fetchUserFromSession, requireAdmin, getFood); // Route for fetching all food items
 router.post('/admin/add-food',fetchUserFromSession, requireAdmin, addFood);
 router.delete('/admin/delete-food/:id', fetchUserFromSession, requireAdmin, deleteFood);
-/*router.get('/food', fetchUserFromSession, requireAdmin, getFood);
-router.get('/hotel', fetchUserFromSession, requireAdmin, getHotels);*/
+router.get('/hotel', fetchUserFromSession, requireAdmin, getHotels);
+router.get('/admin-reviews', fetchUserFromSession, requireAdmin, getReviews);
+
 
 
 export default router;

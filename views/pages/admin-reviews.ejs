@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/css/admin-reviews.css">
+    <script src="/js/reviews.js"></script>
+    <title>Reviews</title>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <%- include('../components/navBarAdmin') %>
+        <!-- Content -->
+        <div class="main">
+            <!-- Reviews Section -->
+            <div class="details">
+                <div class="users">
+                    <div class="cardHeader">
+                        <h2>Reviews</h2>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Avatar</th>
+                                <th>Comment</th>
+                                <th>Rating</th>
+                                <th>Created At</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if (reviewData.length > 0) { %>
+                                <% reviewData.forEach(review => { %>
+                                    <tr>
+                                        <td><%= review.username %></td>
+                                        <td><img src="<%= review.avatar %>" alt="Avatar" class="review-avatar"></td>
+                                        <td><%= review.comment %></td>
+                                        <td>
+                                            <% for (let i = 1; i <= 5; i++) { %>
+                                                <i class="fa<%= i <= review.rate ? 's' : 'r' %> fa-star"></i>
+                                            <% } %>
+                                        </td>
+                                        <td><%= new Date(review.created_at).toLocaleDateString() %></td>
+                                    </tr>
+                                <% }); %>
+                            <% } else { %>
+                                <tr>
+                                    <td colspan="5">No reviews found.</td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    </script>
+</body>
+</html>

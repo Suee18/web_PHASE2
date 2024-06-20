@@ -14,7 +14,7 @@
 
 .main{
     position: absolute;
-    width: calc(100% - 200px);
+    width: calc(100% - 300px);
     left: 18rem;
     min-height: 100vh;
     background: var(--white);
@@ -52,11 +52,11 @@
     color: var(--blue);
     margin-bottom: 1.5rem;
 }
+
 .details table{
-    width: 100%;
+    width: 160%;
     border-collapse: collapse;
     margin-top: 10px;
-    margin-left: -2rem;
 }
 
 .details table thead td{
@@ -78,7 +78,7 @@
 }
 
 .details .users table tr td{
-    padding: 28px;
+    padding: 20px;
 }
 
 .details .users table tr td:last-child{
@@ -88,26 +88,7 @@ table tbody td {
     text-align: center;
     vertical-align: middle; /* Optional: to vertically center the content */
 }
-.users .addbtn {
-    margin-left: auto; /* Push the button to the right */
-    width: 10%; /* Set width of the button */
-    padding: 10px; /* Add padding for better spacing */
-    background-color: #a0e9d6; /* Background color */
-    color: white; /* Text color */
-    border-radius: 2rem; /* Remove border */
-    border: none;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Add shadow */
-    font-family: Arial, sans-serif; /* Specify font */
-    font-size: 16px; /* Specify font size */
-    transition: all 0.3s ease; /* Smooth transition for hover effect */
-    margin-bottom: 2rem;
-    margin-right: -2rem;
+
+.fa-star {
+    color: gold;
 }
-
-.users .addbtn:hover {
-    background-color: #6feacb; /* Darken background on hover */
-    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3); /* Increase shadow on hover */
-    color: #f2f2f2; /* Lighten text color on hover */
-}
-
-
