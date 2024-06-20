@@ -214,6 +214,20 @@ export const deleteFood = async (req, res) => {
     res.status(500).json({ error: 'Failed to delete food item' });
   }
 };
+export const deletePlace = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const palce = await Place.findByIdAndDelete(id);
+    if (!palce) {
+      return res.status(404).json({ error: 'palce not found' });
+    }
+    console.log('palce deleted successfully:', palce);
+    res.status(200).json({ message: 'palce deleted successfully' });
+  } catch (err) {
+    console.error('Error deleting palce:', err);
+    res.status(500).json({ error: 'Failed to delete palce' });
+  }
+};
 export const getHotels = async (req, res) => {
   try {
     const hotelData = await Hotel.find(); // Fetch all hotels from the Hotel model
