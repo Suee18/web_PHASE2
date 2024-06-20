@@ -1,7 +1,20 @@
 import User from '../models/User.js';
 import Review from '../models/Review.js'; 
 import bcrypt from 'bcrypt';
+import VisitCounter from '../models/visitCounter.js';
 
+export const incrementVisitCounter = async () => {
+  try {
+    const today = new Date().setHours(0, 0, 0, 0); // Set to the beginning of today
+    const visit = await VisitCounter.findOneAndUpdate(
+      { date: today },
+      { $inc: { count: 1 } },
+      { upsert: true, new: true }
+    );
+  } catch (err) {
+    console.error('Error incrementing visit counter:', err);
+  }
+};
 //======================Register=====================================================
 
 // Function to Sign up / create a new user
@@ -70,6 +83,7 @@ export const loginUser = async (req, res) => {
     if (user.isAdmin) {
       res.redirect('/adminHome');
     } else {
+      await incrementVisitCounter();
       res.redirect('/profile');
     }
   } catch (error) {
@@ -194,6 +208,8 @@ export const  deleteAccount = async (req, res) => {
   }
 };
 
+
+//change password
 export const changePassword =async (req, res) => {
   const { currentPassword, newPassword } = req.body;
   const userId = req.session.userId;

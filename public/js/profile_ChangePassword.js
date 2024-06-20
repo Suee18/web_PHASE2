@@ -1,4 +1,3 @@
-//Change password
 function showPasswordForm() {
   document.getElementById('password-form').style.display = 'block';
   document.getElementById('password-title').style.display = 'block';
@@ -39,7 +38,7 @@ function changePassword() {
   }
 
   if (valid) {
-    fetch('/change-password', {
+    fetch('/change_password', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -70,3 +69,6 @@ function changePassword() {
     });
   }
 }
+
+// Attach event listener to password change button
+document.getElementById('btnChangePassword').addEventListener('click', changePassword);

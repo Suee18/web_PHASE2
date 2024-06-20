@@ -12,6 +12,7 @@
 <body>
     <div class="container">
         <!-- Navigation -->
+        <%- include('../components/navBarAdmin') %>
         <div class="navigation">
             <ul>
                 <div class="logo-div">
@@ -121,5 +122,29 @@
             </div>
         </div>
     </div>
+     <!-- Edit User Modal -->
+<div id="details-container2" class="modal">
+    <div class="modal-content">
+      <span id="close-btn2" class="close">&times;</span>
+      <form id="edit-form">
+        <h2>Edit User</h2>
+        <input type="hidden" name="id" id="edit-id">
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="edit-name" required>
+        <label for="nationality">Nationality:</label>
+        <input type="text" name="nationality" id="edit-nationality" required>
+        <label for="gender">Gender:</label>
+        <input type="text" name="gender" id="edit-gender" required>
+        <label for="subscription">Subscription:</label>
+        <select name="subscription" id="edit-subscription" required>
+          <option value="user">User</option>
+          <option value="admin">Admin</option>
+        </select>
+        <button type="submit">Save</button>
+      </form>
+    </div>
+  </div>
+  
+
 </body>
 </html>

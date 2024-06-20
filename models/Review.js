@@ -9,5 +9,15 @@ const reviewSchema = new Schema({
   created_at: { type: Date, default: Date.now }
 });
 
+reviewSchema.statics.countReviews = async function () {
+  try {
+    const count = await this.countDocuments();
+    return count;
+  } catch (err) {
+    console.error('Error counting reviews:', err);
+    throw err;
+  }
+};
+
 const Review = mongoose.model('Review',reviewSchema);
 export default Review;

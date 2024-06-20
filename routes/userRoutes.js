@@ -65,6 +65,7 @@ router.delete('/delete-profile', deleteAccount);
 router.get('/profile/data', fetchUserFromSession, (req, res) => {
   res.status(200).json(req.user);
 });
+
 //change password
 router.get ('/change-password', fetchUserFromSession ,  (req, res)=> {
   res.render('pages/profile_ChangePassword', { user: req.user });
