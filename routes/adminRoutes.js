@@ -1,6 +1,6 @@
 import express from 'express';
 import { getAdminHome, getUsers, getStatistics,getFlight,
-    getPlaces,addPlace,addFood,getFood,deleteFood,getHotels,getReviews,deletePlace} from '../controllers/adminController.js';
+    getPlaces,addPlace,addFood,getFood,deleteFood,getHotels,getReviews,deletePlace,updateUser,deleteUser} from '../controllers/adminController.js';
 import{fetchUserFromSession, requireAdmin} from '../middleware/auth.js'
 const router = express.Router();
 
@@ -20,6 +20,6 @@ router.delete('/admin/delete-food/:id', fetchUserFromSession, requireAdmin, dele
 router.get('/hotel', fetchUserFromSession, requireAdmin, getHotels);
 router.get('/admin-reviews', fetchUserFromSession, requireAdmin, getReviews);
 
-
-
+router.put('/users/:id', updateUser);
+router.delete('/users/:id', deleteUser);
 export default router;

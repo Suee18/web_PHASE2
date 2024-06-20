@@ -101,7 +101,7 @@ export const getStatistics = async (req, res) => {
   }
 };
 
-  // Function to update a user
+   // Function to update a user
  export const updateUser = async (req, res) => {
   try {
     const { id } = req.params;
@@ -125,6 +125,8 @@ export const getStatistics = async (req, res) => {
     res.status(500).send('Internal server error');
   }
 };
+
+
 export const getFlight = async (req, res) => {
   try {
     const flightData = await flights.find();
@@ -243,6 +245,25 @@ export const getReviews = async (req, res) => {
     res.render('pages/admin-reviews', { title: 'Review', reviewData }); // Pass hotel data to hotel.ejs
   } catch (err) {
     console.error('Error fetching reviews:', err);
+    res.status(500).send('Internal server error');
+  }
+};
+
+// Function to delete a user
+export const deleteUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const user = await User.findById(id);
+    if (!user) {
+      return res.status(404).send('User not found');
+    }
+
+    await User.findByIdAndDelete(id);
+    console.log('User deleted successfully:', user);
+    res.status(200).send('User deleted successfully');
+  } catch (err) {
+    console.error('User deletion failed:', err);
     res.status(500).send('Internal server error');
   }
 };
