@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/css/places.css"> <!-- Example stylesheet path -->
+    <title>Places</title>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <%- include('../components/navBarAdmin') %>
+        <!-- Content -->
+        <div class="main">
+            <!-- Places Table -->
+            <div class="details">
+                <div class="users">
+                    <div class="cardHeader">
+                        <h2>Places</h2>
+                    </div>
+                    <button class="addbtn" onclick="toggleAddPlaceForm()">Add</button>
+                    <div class="add-place-form" style="display: none;">
+                        <h2>Add New Place</h2>
+                        <form action="/admin/add-place" method="POST">
+                            <label for="placeName">Name:</label>
+                            <input type="text" id="placeName" name="placeName" required><br><br>
+                            
+                            <label for="description">Description:</label>
+                            <textarea id="description" name="description" rows="4" required></textarea><br><br>
+                            
+                            <label for="governorate">Governorate:</label>
+                            <input type="text" id="governorate" name="governorate" required><br><br>
+                            
+                            <label for="city">City:</label>
+                            <input type="text" id="city" name="city" required><br><br>
+                            
+                            <label for="typeOfPlace">Type:</label>
+                            <input type="text" id="typeOfPlace" name="typeOfPlace" required><br><br>
+                            
+                            <label for="budget">Budget:</label>
+                            <input type="text" id="budget" name="budget" required><br><br>
+                            
+                            <button type="submit">Save Place</button>
+                        </form>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Governorate</th>
+                                <th>City</th>
+                                <th>Type</th>
+                                <th>Budget</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if (placesData.length > 0) { %>
+                                <% placesData.forEach(place => { %>
+                                    <tr>
+                                        <td><%= place.placeName %></td>
+                                        <td><%= place.description %></td>
+                                        <td><%= place.governorate %></td>
+                                        <td><%= place.city %></td>
+                                        <td><%= place.typeOfPlace %></td>
+                                        <td><%= place.budget %></td>
+                                        <td>
+                                            <button class="btn edit-btn" data-id="<%= place._id %>">Edit</button>
+                                            <button class="btn delete-btn" data-id="<%= place._id %>">Delete</button>
+                                        </td>
+                                    </tr>
+                                <% }); %>
+                            <% } else { %>
+                                <tr>
+                                    <td colspan="6">No places found.</td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Example JavaScript file for functionality -->
+    <script src="/js/places.js"></script>
+</body>
+</html>

@@ -3,6 +3,8 @@ import User from '../models/User.js';
 import VisitCounter from '../models/visitCounter.js';
 import Review from '../models/Review.js'; // Import the Review model
 import flights from '../models/flights.js';
+import Place from '../models/Places.js';
+import food from '../models/food.js';
 // Function to increment visit counter
 export const incrementVisitCounter = async () => {
   try {
@@ -131,41 +133,69 @@ export const getFlight = async (req, res) => {
     res.status(500).send('Internal server error');
   }
 };
-export const addFlight = async (req, res) => {
+export const getPlaces = async (req, res) => {
   try {
-      const {
-          originCountry,
-          destinationCountry,
-          numOfFlight,
-          price,
-          date,
-          time,
-          duration,
-          seats,
-          gate,
-          company,
-          companyLink
-      } = req.body;
+    const placesData = await Place.find(); // Use the Place model to find places
+    res.render('pages/places', { title: 'Places', placesData });
+  } catch (err) {
+    console.error('Error fetching places:', err);
+    res.status(500).send('Internal server error');
+  }
+};
+export const addPlace = async (req, res) => {
+  try {
+    const { placeName, description, governorate, city, typeOfPlace, budget } = req.body;
 
-      const newFlight = new flights({
-          originCountry,
-          destinationCountry,
-          numOfFlight,
-          price,
-          date,
-          time,
-          duration,
-          seats,
-          gate,
-          company,
-          companyLink
+    // Create a new Place instance
+    const newPlace = new Place({
+      placeName,
+      description,
+      governorate,
+      city,
+      typeOfPlace,
+      budget
+    });
+
+    // Save the new place to the database
+    await newPlace.save();
+
+    console.log('New place added successfully:', newPlace);
+    res.redirect('/places');
+  } catch (err) {
+    console.error('Error adding new place:', err);
+    res.status(500).send('Internal server error');
+  }
+};
+export const addFood = async (req, res) => {
+  try {
+      const { restaurantName, governorate, city, mealType, budget } = req.body;
+      console.log('Received data:', req.body);
+      
+      // Create new Food instance
+      const newFood = new Food({
+          restaurantName,
+          governorate,
+          city,
+          mealType,
+          budget
       });
 
-      await newFlight.save();
-      console.log('New flight added successfully:', newFlight);
-      res.redirect('/flight'); // Redirect to flights page or wherever appropriate
+      // Save to database
+      await newFood.save();
+
+      console.log('Food item added successfully:', newFood);
+      res.status(200).json({ message: 'Food item added successfully' });
   } catch (err) {
-      console.error('Error adding new flight:', err);
-      res.status(500).send('Internal server error');
+      console.error('Error adding food item:', err);
+      res.status(500).json({ error: 'Failed to add food item' });
+  }
+};
+export const getFood = async (req, res) => {
+  try {
+    const foodData = await food.find();
+    res.render('pages/food', { title: 'Food', foodData });
+  } catch (err) {
+    console.error('Error fetching food items:', err);
+    res.status(500).send('Internal server error');
   }
 };
