@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/css/flight.css">
+    <script src="/js/flight.js"></script>
+    <title>Flights</title>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <%- include('../components/navBarAdmin') %>
+        <!-- Content -->
+        <div class="main">
+            <!-- Flights Table -->
+            <div class="details">
+                <div class="users">
+                    <div class="cardHeader">
+                        <h2>Flights</h2>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>From</th>
+                                <th>To</th>
+                                <th>Flight Number</th>
+                                <th>Price</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Duration</th>
+                                <th>Seats</th>
+                                <th>Gate</th>
+                                <th>Company</th>
+                                <th>Company Link</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if (flightData.length > 0) { %>
+                                <% flightData.forEach(flight => { %>
+                                    <tr>
+                                        <td><%= flight.originCountry %></td>
+                                        <td><%= flight.destinationCountry %></td>
+                                        <td><%= flight.numOfFlight %></td>
+                                        <td><%= flight.price %></td>
+                                        <td><%= flight.date.toDateString() %></td>
+                                        <td><%= flight.time %></td>
+                                        <td><%= flight.duration %></td>
+                                        <td><%= flight.seats %></td>
+                                        <td><%= flight.gate %></td>
+                                        <td><%= flight.company %></td>
+                                        <td><a href="<%= flight.companyLink %>"><%= flight.companyLink %></a></td>
+                                    </tr>
+                                <% }); %>
+                            <% } else { %>
+                                <tr>
+                                    <td colspan="11">No flights found.</td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ensure formatDate function is defined before usage -->
+    <script>
+    </script>
+</body>
+</html>

@@ -2,7 +2,7 @@
 import User from '../models/User.js';
 import VisitCounter from '../models/visitCounter.js';
 import Review from '../models/Review.js'; // Import the Review model
-
+import flights from '../models/flights.js';
 // Function to increment visit counter
 export const incrementVisitCounter = async () => {
   try {
@@ -122,4 +122,50 @@ export const getStatistics = async (req, res) => {
     res.status(500).send('Internal server error');
   }
 };
+export const getFlight = async (req, res) => {
+  try {
+    const flightData = await flights.find();
+    res.render('pages/flight', { title: 'Flights', flightData });
+  } catch (err) {
+    console.error('Error fetching flights:', err);
+    res.status(500).send('Internal server error');
+  }
+};
+export const addFlight = async (req, res) => {
+  try {
+      const {
+          originCountry,
+          destinationCountry,
+          numOfFlight,
+          price,
+          date,
+          time,
+          duration,
+          seats,
+          gate,
+          company,
+          companyLink
+      } = req.body;
 
+      const newFlight = new flights({
+          originCountry,
+          destinationCountry,
+          numOfFlight,
+          price,
+          date,
+          time,
+          duration,
+          seats,
+          gate,
+          company,
+          companyLink
+      });
+
+      await newFlight.save();
+      console.log('New flight added successfully:', newFlight);
+      res.redirect('/flight'); // Redirect to flights page or wherever appropriate
+  } catch (err) {
+      console.error('Error adding new flight:', err);
+      res.status(500).send('Internal server error');
+  }
+};
