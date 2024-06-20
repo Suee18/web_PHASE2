@@ -172,7 +172,7 @@ export const addFood = async (req, res) => {
       console.log('Received data:', req.body);
       
       // Create new Food instance
-      const newFood = new Food({
+      const newFood = new food({
           restaurantName,
           governorate,
           city,
@@ -184,7 +184,7 @@ export const addFood = async (req, res) => {
       await newFood.save();
 
       console.log('Food item added successfully:', newFood);
-      res.status(200).json({ message: 'Food item added successfully' });
+      res.redirect('/food');
   } catch (err) {
       console.error('Error adding food item:', err);
       res.status(500).json({ error: 'Failed to add food item' });
@@ -197,5 +197,19 @@ export const getFood = async (req, res) => {
   } catch (err) {
     console.error('Error fetching food items:', err);
     res.status(500).send('Internal server error');
+  }
+};
+export const deleteFood = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const foodItem = await food.findByIdAndDelete(id);
+    if (!foodItem) {
+      return res.status(404).json({ error: 'Food item not found' });
+    }
+    console.log('Food item deleted successfully:', foodItem);
+    res.status(200).json({ message: 'Food item deleted successfully' });
+  } catch (err) {
+    console.error('Error deleting food item:', err);
+    res.status(500).json({ error: 'Failed to delete food item' });
   }
 };
