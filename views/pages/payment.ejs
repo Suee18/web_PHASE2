@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/css/plan_input.css">
+    <link rel="stylesheet" href="user.css">
+    <script src="/js/plan_input.js"></script>
+    <title>Payment Information</title>
+</head>
+<body>
+    <header>
+        <%- include('../components/navBarLoggedin') %>
+    </header>
+    <section class="section2">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
+                    <form action="" id="msform">
+                        <ul id="progressbar">
+                            <li id="package"><strong>Packages</strong></li>
+                            <li id="details"><strong>Details</strong></li>
+                            <li id="personal"><strong>Personal</strong></li>
+                            <li class="active" id="payment"><strong>Payment</strong></li>
+                            <li id="confirm"><strong>Finish</strong></li>
+                        </ul>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <br>
+                        <!-- Step 4 -->
+                        <fieldset>
+                            <h2 class="steps">Step 4</h2>
+                            <div class="container2">
+                                <div class="card-container">
+                                    <div class="front">
+                                        <div class="image">
+                                            <img src="chip.png" alt="">
+                                            <img src="visa.png" alt=""> 
+                                        </div> 
+                                        <div class="card-number-box">################</div>
+                                        <div class="flexbox">
+                                            <div class="box">
+                                                <span>expires</span>
+                                                <div class="expiration">
+                                                    <span class="exp-month">mm</span>
+                                                    <span class="exp-year">yy</span> 
+                                                </div> 
+                                            </div> 
+                                        </div>
+                                    </div> 
+                                    <div class="back">
+                                        <div class="stripe"></div>
+                                        <div class="box">
+                                            <span>cvv</span>
+                                            <div class="cvv-box"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="div-one" class="flexbox">
+                                    <div class="inputBox">
+                                        <span>card number</span>
+                                        <input type="text" maxlength="16" class="card-number-input">        
+                                    </div>
+                                    <div class="inputBox">
+                                        <span>card holder</span>
+                                        <input type="text" class="card-holder-input" >  
+                                    </div>
+                                </div>
+                                <div class="inputBox">
+                                    <span id="exp">expiration Date</span>
+                                    <div class="flexbox2">
+                                        <select name="" id="" class="month-input">
+                                            <option value="month" selected disabled>month</option>
+                                            <option value="01">01</option>
+                                            <option value="02">02</option>
+                                            <option value="03">03</option>
+                                            <option value="04">04</option>
+                                            <option value="05">05</option>
+                                            <option value="06">06</option>
+                                            <option value="07">07</option>
+                                            <option value="08">08</option>
+                                            <option value="09">09</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                        </select>
+                                        <select name="" id="" class="year-input">
+                                            <option value="year" selected disabled>year</option>
+                                            <option value="2021">2021</option>
+                                            <option value="2022">2022</option>
+                                            <option value="2023">2023</option>
+                                            <option value="2024">2024</option>
+                                            <option value="2025">2025</option>
+                                            <option value="2026">2026</option>
+                                            <option value="2027">2027</option>
+                                            <option value="2028">2028</option>
+                                            <option value="2029">2029</option>
+                                            <option value="2030">2030</option>
+                                        </select> 
+                                        <div class="inputBox">
+                                            <span id="cvv">cvv</span>
+                                            <input type="text" maxlength="4" class="cvv-input" placeholder='XXXX'> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="button" name="next" class="next action-button" value="Next" id="next-bt"/>
+                            <input type="button" name="prev" class="prev action-button-previous" value="Previous" id="prev-bt"/>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+</body>
+</html>

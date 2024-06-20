@@ -88,4 +88,31 @@ router.get('/logout', (req, res) => {
   });
 });
 
+//================PLAN INPUT ==========================================================================//
+// Route for the packages page
+router.get('/packages', fetchUserFromSession, (req, res) => {
+  res.render('pages/packages', { user: req.user });
+});
+
+// Route for the plan_input page
+router.get('/plan_input', fetchUserFromSession, (req, res) => {
+  res.render('pages/plan_input', { user: req.user });
+});
+
+// Route for the interest_rate page
+router.get('/interest_rate', fetchUserFromSession, (req, res) => {
+  res.render('pages/interest_rate', { user: req.user });
+});
+
+// Route for the payment page
+router.get('/payment', fetchUserFromSession, (req, res) => {
+  res.render('pages/payment', { user: req.user });
+});
+
+// Route for the finish page
+router.get('/finish', fetchUserFromSession, (req, res) => {
+  res.render('pages/finish', { user: req.user });
+});
+
+
 export default router;

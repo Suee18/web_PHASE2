@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/css/plan_input.css">
+    <link rel="stylesheet" href="user.css ">
+    <script src="/js/plan_input.js"></script>
+    <title>Personal Information</title>
+</head>
+<body>
+    <header>
+        <%- include('../components/navBarLoggedin') %>
+    </header>
+    <section class="section2">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
+                    <form action="" id="msform">
+                        <ul id="progressbar">
+                            <li id="package"><strong>Packages</strong></li>
+                            <li id="details"><strong>Details</strong></li>
+                            <li class="active" id="personal"><strong>Personal</strong></li>
+                            <li id="payment"><strong>Payment</strong></li>
+                            <li id="confirm"><strong>Finish</strong></li>
+                        </ul>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <br>
+                        <!-- Step 3 -->
+                        <fieldset>
+                            <h2 class="steps">Step 3</h2>
+                            <div class="col-7">
+                                <h2 class="fs-title">Rate Based On Your interests:</h2>
+                                <p>note: (0) means you don't interest and (100) means extremely interest </p>
+                            </div>
+                            <table>
+                                <tr>
+                                    <td class="no-border"></td>
+                                    <th>0</th>
+                                    <th>10</th>
+                                    <th>25</th>
+                                    <th>50</th>
+                                    <th>75</th>
+                                    <th>100</th>
+                                </tr>
+                                <tr class="colored">
+                                    <th>Entertainment Areas <span><i class="fa-solid fa-gamepad"></i></span></th>
+                                    <td><input type="radio" name="entertainment" value="0"></td>
+                                    <td><input type="radio" name="entertainment" value="10"></td>
+                                    <td><input type="radio" name="entertainment" value="25"></td>
+                                    <td><input type="radio" name="entertainment" value="50"></td>
+                                    <td><input type="radio" name="entertainment" value="75"></td>
+                                    <td><input type="radio" name="entertainment" value="100"></td>
+                                </tr>
+                                <tr>
+                                    <th>Historical Areas<span><i class="fa-solid fa-monument"></i></span></th>
+                                    <td><input type="radio" name="Historical" value="0"></td>
+                                    <td><input type="radio" name="Historical" value="10"></td>
+                                    <td><input type="radio" name="Historical" value="25"></td>
+                                    <td><input type="radio" name="Historical" value="50"></td>
+                                    <td><input type="radio" name="Historical" value="75"></td>
+                                    <td><input type="radio" name="Historical" value="100"></td>
+                                </tr>
+                                <tr class="colored">
+                                    <th>Religious Areas<span><i class="fa-solid fa-hands-praying"></i></span></th>
+                                    <td><input type="radio" name="Religious" value="0"></td>
+                                    <td><input type="radio" name="Religious" value="10"></td>
+                                    <td><input type="radio" name="Religious" value="25"></td>
+                                    <td><input type="radio" name="Religious" value="50"></td>
+                                    <td><input type="radio" name="Religious" value="75"></td>
+                                    <td><input type="radio" name="Religious" value="100"></td>
+                                </tr>
+                                <tr>
+                                    <th>Sea Areas <span><i class="fa-solid fa-person-swimming"></i></span></th>
+                                    <td><input type="radio" name="sea" value="0"></td>
+                                    <td><input type="radio" name="sea" value="10"></td>
+                                    <td><input type="radio" name="sea" value="25"></td>
+                                    <td><input type="radio" name="sea" value="50"></td>
+                                    <td><input type="radio" name="sea" value="75"></td>
+                                    <td><input type="radio" name="sea" value="100"></td>
+                                </tr>
+                                <tr class="colored">
+                                    <th>Natural Areas<span><i class="fa-solid fa-tree"></i></span></th>
+                                    <td><input type="radio" name="Natural" value="0"></td>
+                                    <td><input type="radio" name="Natural" value="10"></td>
+                                    <td><input type="radio" name="Natural" value="25"></td>
+                                    <td><input type="radio" name="Natural" value="50"></td>
+                                    <td><input type="radio" name="Natural" value="75"></td>
+                                    <td><input type="radio" name="Natural" value="100"></td>
+                                </tr>
+                                <tr>
+                                    <th>Day Person <span><i class="fa-solid fa-cloud-sun"></i></span></th>
+                                    <td><input type="radio" name="Day" value="0"></td>
+                                    <td><input type="radio" name="Day" value="10"></td>
+                                    <td><input type="radio" name="Day" value="25"></td>
+                                    <td><input type="radio" name="Day" value="50"></td>
+                                    <td><input type="radio" name="Day" value="75"></td>
+                                    <td><input type="radio" name="Day" value="100"></td>
+                                </tr>
+                                <tr class="colored">
+                                    <th>Night Person <span><i class="fa-solid fa-cloud-moon"></i></span></th>
+                                    <td><input type="radio" name="Night" value="0"></td>
+                                    <td><input type="radio" name="Night" value="10"></td>
+                                    <td><input type="radio" name="Night" value="25"></td>
+                                    <td><input type="radio" name="Night" value="50"></td>
+                                    <td><input type="radio" name="Night" value="75"></td>
+                                    <td><input type="radio" name="Night" value="100"></td>
+                                </tr>
+                            </table>
+                            <input type="button" name="next" class="next action-button" value="Next" id="next-bt"/>
+                            <input type="button" name="prev" class="prev action-button-previous" value="Previous" id="prev-bt"/>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+</body>
+</html>

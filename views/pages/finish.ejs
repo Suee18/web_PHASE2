@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/css/plan_input.css"><link rel="stylesheet" href="user.css">
+    <script src="/js/plan_input.js"></script>
+    <title>Confirmation</title>
+</head>
+<body>
+    <header>
+        <%- include('../components/navBarLoggedin') %>
+    </header>
+    <section class="section2">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
+                    <form action="" id="msform">
+                        <ul id="progressbar">
+                            <li id="package"><strong>Packages</strong></li>
+                            <li id="details"><strong>Details</strong></li>
+                            <li id="personal"><strong>Personal</strong></li>
+                            <li id="payment"><strong>Payment</strong></li>
+                            <li class="active" id="confirm"><strong>Finish</strong></li>
+                        </ul>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <br>
+                        <!-- Step 5 -->
+                        <fieldset>
+                            <div class="form-card">
+                                <div class="row">
+                                    <div class="col-7">
+                                        <h2 class="fs-title">Confirmation:</h2>
+                                    </div>
+                                    <div class="col-5">
+                                        <h2 class="steps">Step 5</h2>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h3>Thank you for your submission!</h3>
+                                        <p>Your details have been received and your payment is being processed.</p>
+                                        <p>We will send a confirmation email shortly.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="button" name="next" class="next action-button" value="Finish" id="next-bt"/>
+                            <input type="button" name="prev" class="prev action-button-previous" value="Previous" />
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/css/plan_input.css">
+    <link rel="stylesheet" href="user.css">
+    <script src="/js/plan_input.js" defer></script>
+    <title>Package Selection</title>
+</head>
+<body>
+    <header>
+        <%- include('../components/navBarLoggedin') %>
+    </header>
+    <section class="section2">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
+                    <form action="" id="msform">
+                        <ul id="progressbar">
+                            <li class="active" id="package"><strong>Packages</strong></li>
+                            <li id="details"><strong>Details</strong></li>
+                            <li id="personal"><strong>Personal</strong></li>
+                            <li id="payment"><strong>Payment</strong></li>
+                            <li id="confirm"><strong>Finish</strong></li>
+                        </ul>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <br>
+                        <!-- Step 1 -->
+                        <fieldset>
+                            <div class="form-card">
+                                <div class="row">
+                                    <div class="col-7">
+                                        <h2 class="fs-title">Choose Your Package:</h2>
+                                    </div>
+                                    <div class="col-5">
+                                        <h2 class="steps">Step 1</h2>
+                                    </div>
+                                    <div class="container">
+                                        <div class="package" id="package1">
+                                            <h2>Free Package</h2>
+                                            <div class="features">
+                                                <ul>
+                                                    <li>One destination</li>
+                                                    <li>No hotel reservation</li>
+                                                    <li>No ticket reservation</li>
+                                                    <li>Limited Number of Plans</li>
+                                                </ul>
+                                            </div>
+                                            <button onclick="selectPackage(1)">Select</button>
+                                        </div>
+                                        <div class="package" id="package2">
+                                            <h2>Standard Package</h2>
+                                            <div class="features">
+                                                <ul>
+                                                    <li>More than one destination</li>
+                                                    <li>No hotel reservation</li>
+                                                    <li>No transportation tickets</li>
+                                                    <li>Unlimited Number of Plans</li>
+                                                </ul>
+                                            </div>
+                                            <button onclick="selectPackage(2)">Select</button>
+                                        </div>
+                                        <div class="package" id="package3">
+                                            <h2>Premium Package</h2>
+                                            <div class="features">
+                                                <ul>
+                                                    <li>More than one destination</li>
+                                                    <li>Includes hotel reservation</li>
+                                                    <li>Includes transportation tickets</li>
+                                                    <li>Unlimited Number of Plans</li>
+                                                </ul>
+                                            </div>
+                                            <button onclick="selectPackage(3)">Select</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="next action-button" id="next-bt" type="button">Next</button>
+                            
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+</body>
+</html>

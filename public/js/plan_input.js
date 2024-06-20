@@ -1,4 +1,5 @@
 // user.js
+console.log('plan_input.js is loaded');
 document.addEventListener("DOMContentLoaded", function () {
     const menuIcon = document.getElementById("menu-icon");
     const sideMenu = document.getElementById("side-menu");
@@ -221,55 +222,55 @@ function enableHotelDetails() {
 }
 
 
-function selectPackage(packageId) {
-    if (packageId == 1) {
-        disableHotelDetails();
-        document.getElementById("package1").style.borderStyle = "solid";
-        document.getElementById("package1").style.borderColor = "#eb7363a6";
-        document.getElementById("package1").style.borderColor = "#eb7363a6";
-        //disable add destination button----------------------------------
-        var addDestination = document.getElementById("add-destination");
-        addDestination.style.pointerEvents = 'none';
-        addDestination.style.opacity = '0.5';
-        addDestination.style.cursor = 'not-allowed';
-        addDestination.style.background = "rgb(145, 145, 145)";
-        addDestination.disabled = true;
-        //removing other packages border-----------------------------------
-        document.getElementById("package2").style.borderStyle = "none";
-        document.getElementById("package3").style.borderStyle = "none";
-    }
-    else if (packageId == 2) {
-        disableHotelDetails();
-        document.getElementById("package2").style.borderStyle = "solid";
-        document.getElementById("package2").style.borderColor = "#eb7363a6";
-        document.getElementById("package2").style.borderColor = "#eb7363a6";
-        //enable adding destintion button--------------------------------------
-        document.getElementById("add-destination").style.pointerEvents = '';
-        document.getElementById("add-destination").style.opacity = '';
-        document.getElementById("add-destination").style.cursor = '';
-        document.getElementById("add-destination").style.backgroundColor = '';
-        document.getElementById("add-destination").style.disabled = false;
-        //removing other packages border---------------------------------------
-        document.getElementById("package1").style.borderStyle = "none";
-        document.getElementById("package3").style.borderStyle = "none";
-    }
-    else if (packageId == 3) {
-        enableHotelDetails();
-        enableHotelElements();
-        document.getElementById("package3").style.borderStyle = "solid";
-        document.getElementById("package3").style.borderColor = "#eb7363a6";
-        document.getElementById("package3").style.borderColor = "#eb7363a6";
-        //enable adding destintion button-------------------------------------
-        document.getElementById("add-destination").style.pointerEvents = '';
-        document.getElementById("add-destination").style.opacity = '';
-        document.getElementById("add-destination").style.cursor = '';
-        document.getElementById("add-destination").style.backgroundColor = '';
-        document.getElementById("add-destination").style.disabled = '';
-        //removing other packages border--------------------------------------
-        document.getElementById("package1").style.borderStyle = "none";
-        document.getElementById("package2").style.borderStyle = "none";
-    }
-}
+// function selectPackage(packageId) {
+//     if (packageId == 1) {
+//         disableHotelDetails();
+//         document.getElementById("package1").style.borderStyle = "solid";
+//         document.getElementById("package1").style.borderColor = "#eb7363a6";
+//         document.getElementById("package1").style.borderColor = "#eb7363a6";
+//         //disable add destination button----------------------------------
+//         var addDestination = document.getElementById("add-destination");
+//         addDestination.style.pointerEvents = 'none';
+//         addDestination.style.opacity = '0.5';
+//         addDestination.style.cursor = 'not-allowed';
+//         addDestination.style.background = "rgb(145, 145, 145)";
+//         addDestination.disabled = true;
+//         //removing other packages border-----------------------------------
+//         document.getElementById("package2").style.borderStyle = "none";
+//         document.getElementById("package3").style.borderStyle = "none";
+//     }
+//     else if (packageId == 2) {
+//         disableHotelDetails();
+//         document.getElementById("package2").style.borderStyle = "solid";
+//         document.getElementById("package2").style.borderColor = "#eb7363a6";
+//         document.getElementById("package2").style.borderColor = "#eb7363a6";
+//         //enable adding destintion button--------------------------------------
+//         document.getElementById("add-destination").style.pointerEvents = '';
+//         document.getElementById("add-destination").style.opacity = '';
+//         document.getElementById("add-destination").style.cursor = '';
+//         document.getElementById("add-destination").style.backgroundColor = '';
+//         document.getElementById("add-destination").style.disabled = false;
+//         //removing other packages border---------------------------------------
+//         document.getElementById("package1").style.borderStyle = "none";
+//         document.getElementById("package3").style.borderStyle = "none";
+//     }
+//     else if (packageId == 3) {
+//         enableHotelDetails();
+//         enableHotelElements();
+//         document.getElementById("package3").style.borderStyle = "solid";
+//         document.getElementById("package3").style.borderColor = "#eb7363a6";
+//         document.getElementById("package3").style.borderColor = "#eb7363a6";
+//         //enable adding destintion button-------------------------------------
+//         document.getElementById("add-destination").style.pointerEvents = '';
+//         document.getElementById("add-destination").style.opacity = '';
+//         document.getElementById("add-destination").style.cursor = '';
+//         document.getElementById("add-destination").style.backgroundColor = '';
+//         document.getElementById("add-destination").style.disabled = '';
+//         //removing other packages border--------------------------------------
+//         document.getElementById("package1").style.borderStyle = "none";
+//         document.getElementById("package2").style.borderStyle = "none";
+//     }
+// }
 
 
 // adding space after every 4 digits in the card number field
@@ -498,3 +499,11 @@ document.querySelector('.cvv-input').onmouseleave = () => {
 document.querySelector('.cvv-input').oninput = () => {
     document.querySelector('.cvv-box').innerText = document.querySelector('.cvv-input').value;
 }
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('next-bt').addEventListener('click', function() {
+        window.location.href = '/plan_input2';
+    });
+});
