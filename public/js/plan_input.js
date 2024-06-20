@@ -501,9 +501,24 @@ document.querySelector('.cvv-input').oninput = () => {
 }
 
 
-
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('next-bt').addEventListener('click', function() {
-        window.location.href = '/plan_input2';
-    });
-});
+//==========================NOT ROUTING=============================
+// document.addEventListener('DOMContentLoaded', function() {
+//     document.getElementById('next-bt2').addEventListener('click', function() {
+//         window.location.href = '/payment';
+//     });
+// });
+function redirectToPayment() {
+    window.location.href = '/payment';
+}
+function redirectToPackages() {
+    window.location.href = '/packages';
+}
+function redirectToPlanInput() {
+    window.location.href = '/plan_input';
+}
+function redirectToRate_intrests() {
+    window.location.href = '/interest_rate';
+}
+function redirectToFinish() {
+    window.location.href = '/finish';
+}

@@ -3,6 +3,7 @@ import { createUser, loginUser,
 updateProfileInfo,emailExists,usernameExists,changePassword, deleteAccount, 
 getReviews,  addReview,} from '../controllers/userController.js';
 import { fetchUserFromSession} from '../middleware/auth.js';
+import userInput from '../models/userInput.js';
 const router = express.Router();
 
 
@@ -102,7 +103,7 @@ router.get('/plan_input', fetchUserFromSession, (req, res) => {
 
 // Route for the interest_rate page
 router.get('/interest_rate', fetchUserFromSession, (req, res) => {
-  res.render('pages/interest_rate', { user: req.user });
+  res.render('pages/rate_intrests', { user: req.user });
 });
 
 // Route for the payment page
@@ -114,6 +115,47 @@ router.get('/payment', fetchUserFromSession, (req, res) => {
 router.get('/finish', fetchUserFromSession, (req, res) => {
   res.render('pages/finish', { user: req.user });
 });
+
+//================SUBMITING DATA ==========================================================================//
+
+router.post('/submitData', fetchUserFromSession, async (req, res) => {
+  const {
+      packageType,
+      destination,
+      checkIn,
+      checkOut,
+      availableBudget,
+      numOfAdults,
+      numOfChildren,
+      numOfRooms,
+      hotelReservation,
+  } = req.body;
+
+  try {
+      const newUserInput = new userInput({
+          package: packageType,
+          destinations: destination,
+          checkIn: new Date(checkIn),
+          checkOut: new Date(checkOut),
+          availableBudget,
+          hotelDetails: {
+              numOfAdults,
+              numOfChildren,
+              numOfRooms,
+              hotelReservation,
+          },
+          packageType,
+      });
+
+      await newUserInput.save();
+      res.json({ message: 'Details saved successfully!' });
+  } catch (error) {
+      console.error('Error saving details:', error);
+      res.status(500).json({ message: 'Error saving details' });
+  }
+});
+
+
 
 
 export default router;

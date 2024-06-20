@@ -22,10 +22,10 @@ const hotelDetailsSchema = new Schema({
 
 
 const userInputSchema= new Schema({
-    package:{type:string,required:true},
-    destinations:{type:string,required:true},
-    checkIn:{type: date,required:true},
-    checkOut:{type: date,required:true},
+    package:{type:String,required:true},
+    destinations:{type:String,required:true},
+    checkIn:{type: Date,required:true},
+    checkOut:{type: Date,required:true},
     availableBudget:{
         type: String,
         required: true,
