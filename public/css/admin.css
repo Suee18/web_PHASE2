@@ -183,17 +183,18 @@ table img{
     width: 100%;
     height: 100%;
     overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
 /* Modal content */
 .modal-content {
-    background-color: #fefefe;
+    background-color: #f7f7f7;
     margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
-    border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 450px; /* Adjust width as needed */
 }
 
 /* Close button */
@@ -210,6 +211,87 @@ table img{
     text-decoration: none;
     cursor: pointer;
 }
+
+/* Modal styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal content */
+.modal-content {
+    background-color: #f7f7f7;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 450px; /* Adjust width as needed */
+}
+
+/* Close button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Edit form styles */
+#edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#edit-form label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+#edit-form input,
+#edit-form select {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+#edit-form input:focus,
+#edit-form select:focus {
+    outline: none;
+    border-color: var(--blue);
+    box-shadow: 0 0 5px rgba(0, 0, 255, 0.2);
+}
+
+#edit-form button {
+    background-color: var(--blue);
+    color: white;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#edit-form button:hover {
+    background-color: darkblue;
+}
+
 #details-container {
     display: none; /* Initially hidden */
    position: fixed; /* Overlays the main content */

@@ -5,21 +5,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const detailsContainer2 = document.getElementById('details-container2');
     const detailsContainer = document.getElementById('details-container');
     let currentUserId = null;
-    
 
-  // Event listener for navigation links
-  const list = document.querySelectorAll('.nav-link');
-  function activeLink() {
-      list.forEach(item => {
-          item.classList.remove("hovered");
-      });
-      this.classList.add("hovered");
-  }
+    // Event listener for navigation links
+    const list = document.querySelectorAll('.nav-link');
+    function activeLink() {
+        list.forEach(item => {
+            item.classList.remove("hovered");
+        });
+        this.classList.add("hovered");
+    }
 
-  list.forEach(item => item.addEventListener("mouseover", activeLink));
+    list.forEach(item => item.addEventListener("mouseover", activeLink));
 
-
-  
     // Event listener for edit buttons
     editButtons.forEach(button => {
         button.addEventListener('click', function() {
@@ -42,83 +39,78 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Event listener for form submission
+    editForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
 
-        // Event listener for form submission
-        editForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-    
-            const formData = {
-                username: editForm.name.value,
-                nationality: editForm.nationality.value,
-                gender: editForm.gender.value,
-                isAdmin: editForm.subscription.value === 'admin'
-            };
-    
-            try {
-                const response = await fetch(`/users/${currentUserId}`, {
-                    method: 'PUT',
-                    body: JSON.stringify(formData),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                });
-    
-                if (response.ok) {
-                    alert('User updated successfully');
-                    location.reload();
-                } else {
-                    alert('Failed to update user');
+        const formData = {
+            username: editForm.name.value,
+            nationality: editForm.nationality.value,
+            gender: editForm.gender.value,
+            isAdmin: editForm.subscription.value === 'admin'
+        };
+
+        try {
+            const response = await fetch(`/users/${currentUserId}`, {
+                method: 'PUT',
+                body: JSON.stringify(formData),
+                headers: {
+                    'Content-Type': 'application/json'
                 }
-            } catch (error) {
-                console.error('Error updating user:', error);
+            });
+
+            if (response.ok) {
+                alert('User updated successfully');
+                location.reload();
+            } else {
                 alert('Failed to update user');
             }
-        });
-    
-    
-  
-
- // Event listener for delete buttons
- deleteButtons.forEach(button => {
-    button.addEventListener('click', function() {
-        const userId = this.dataset.id;
-        currentUserId = userId; // Set current user id for deletion
-        detailsContainer.style.display = 'block';
+        } catch (error) {
+            console.error('Error updating user:', error);
+            alert('Failed to update user');
+        }
     });
-});
 
-// Yes button inside the modal
-document.getElementById('yes-btn').addEventListener('click', async function() {
-    try {
-        const response = await fetch(`/users/${currentUserId}`, {
-            method: 'DELETE'
+    // Event listener for delete buttons
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const userId = this.dataset.id;
+            currentUserId = userId; // Set current user id for deletion
+            detailsContainer.style.display = 'block';
         });
+    });
 
-        if (response.ok) {
-            alert('User deleted successfully');
-            location.reload();
-        } else {
+    // Yes button inside the modal
+    document.getElementById('yes-btn').addEventListener('click', async function() {
+        try {
+            const response = await fetch(`/users/${currentUserId}`, {
+                method: 'DELETE'
+            });
+
+            if (response.ok) {
+                alert('User deleted successfully');
+                location.reload();
+            } else {
+                alert('Failed to delete user');
+            }
+        } catch (error) {
+            console.error('Error deleting user:', error);
             alert('Failed to delete user');
         }
-    } catch (error) {
-        console.error('Error deleting user:', error);
-        alert('Failed to delete user');
-    }
-});
+    });
 
-// No button inside the modal
-document.getElementById('no-btn').addEventListener('click', function() {
-    detailsContainer.style.display = 'none';
-});
+    // No button inside the modal
+    document.getElementById('no-btn').addEventListener('click', function() {
+        detailsContainer.style.display = 'none';
+    });
 
-// Close buttons for modals
-document.getElementById('close-btn').addEventListener('click', function() {
-    detailsContainer.style.display = 'none';
-});
+    // Close button for edit modal
+    document.getElementById('close-btn2').addEventListener('click', function() {
+        detailsContainer2.style.display = 'none';
+    });
 
-document.getElementById('close-btn2').addEventListener('click', function() {
-    detailsContainer2.style.display = 'none';
+    // Close button for delete confirmation modal
+    document.getElementById('close-btn').addEventListener('click', function() {
+        detailsContainer.style.display = 'none';
+    });
 });
-});
-
-
