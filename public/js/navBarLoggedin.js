@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Poll for the latest avatar every 5 seconds
-    setInterval(fetchAvatar, 5000);
+    setInterval(fetchAvatar, 200);
 
     // Load the navbar and initialize functionality
     function loadNavbar() {
