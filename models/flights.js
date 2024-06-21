@@ -7,8 +7,8 @@ const flightSchema= new Schema({
   numOfFlight: { type: String, required: true },
   price: { type: Number, required: true },
   date: { type: Date, required: true },
-  time: { type: String, required: true }, // Assuming time in "HH:MM" format
-  duration: { type: String, required: true }, // Assuming duration in "HH:MM" format
+  time: { type: String, required: true }, 
+  duration: { type: String, required: true }, 
   seats: { type: Number, required: true },
   gate: { type: String, required: true },
   company: { type: String, required: true },

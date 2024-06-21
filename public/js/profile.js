@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   });
   
     fetchProfileData();
-  setInterval(fetchProfileData, 1000); // check for updates every 1 second
+    setInterval(fetchProfileData, 200); // check for updates every 1 second
 
 });
 
