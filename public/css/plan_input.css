@@ -587,7 +587,7 @@ table {
 th, td {
   /* padding: 8px; */
   text-align: center;
-  /* font-size: 1.2rem; */
+   font-size: 1.2rem; 
 }
 td, th {
   border-bottom: 1px solid #32a890aa;

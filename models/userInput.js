@@ -20,13 +20,23 @@ const hotelDetailsSchema = new Schema({
     }
 });
 
+const interestSchema = new Schema({
+    date: { type: Date, required: true },
+    entertainment: { type: Boolean, default: false },
+    historical: { type: Boolean, default: false },
+    religious: { type: Boolean, default: false },
+    sea: { type: Boolean, default: false },
+    natural: { type: Boolean, default: false },
+    day: { type: Boolean, default: false },
+    night: { type: Boolean, default: false }
+});
 
 const userInputSchema= new Schema({
-    package:{type:String,required:true},
-    destinations:{type:String,required:true},
-    checkIn:{type: Date,required:true},
-    checkOut:{type: Date,required:true},
-    availableBudget:{
+    package: { type: String, required: true },
+    destinations: { type: String, required: true },
+    checkIn: { type: Date, required: true },
+    checkOut: { type: Date, required: true },
+    availableBudget: {
         type: String,
         required: true,
         // enum: ['Budget-Friendly (Up to $1000)', 'Moderate ($1000 - $2000)', 'Comfortable ($2000-$3000)','Luxury ($3000+)']
@@ -36,9 +46,9 @@ const userInputSchema= new Schema({
         type: String,
         required: true,
         enum: ['Free', 'Standard', 'Premium']
-    }
+    },
+    interests: [interestSchema]
 });
 
-
-const userInput = mongoose.model('User-Input', userInputSchema);
+const userInput = mongoose.model('UserInput', userInputSchema);
 export default userInput;
