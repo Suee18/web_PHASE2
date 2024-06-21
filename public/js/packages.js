@@ -9,7 +9,7 @@ function selectPackage(packageId) {
     scrollToNextStep();
 }
 $(document).ready(function () {
-    // Your jQuery-dependent code here
+    var current = 1;
     $(".next").click(function (event) {
         event.preventDefault();
         var current_fs = $(this).parent();
@@ -31,12 +31,19 @@ $(document).ready(function () {
             },
             duration: 600
         });
-        setProgressBar($("fieldset").index(next_fs) + 1);
-        var selectedPackageNumber = getSelectedPackageNumber();
-        if (selectedPackageNumber !== null) {
-            redirectToNextPage(selectedPackageNumber);
-        }
+        setProgressBar(++current);
+        
     });
+    function setProgressBar(curStep) {
+        var percent = parseFloat(100 / steps) * curStep;
+        percent = percent.toFixed();
+        $(".progress-bar")
+            .css("width", percent + "%")
+    }
+
+    $(".submit").click(function () {
+        return false;
+    })
     // Function to validate if a package is selected
     function validatePackageSelection() {
         var packageSelected = false;
