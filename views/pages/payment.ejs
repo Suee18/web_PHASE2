@@ -6,8 +6,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="/css/plan_input.css">
-    <link rel="stylesheet" href="user.css">
-    <script src="/js/plan_input.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
     <title>Payment Information</title>
 </head>
 <body>
@@ -37,8 +36,8 @@
                                 <div class="card-container">
                                     <div class="front">
                                         <div class="image">
-                                            <img src="chip.png" alt="">
-                                            <img src="visa.png" alt=""> 
+                                            <img src="/images/plan/chip.png" alt="">
+                                            <img src="/images/plan/visa.png" alt=""> 
                                         </div> 
                                         <div class="card-number-box">################</div>
                                         <div class="flexbox">
@@ -115,6 +114,48 @@
             </div>
         </div>
     </section>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+<script>
+    (function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const packageNumber = urlParams.get('$package');
+        const destination = urlParams.get('destination');
+        const numPeople = urlParams.get('numPeople');
+        const checkIn = urlParams.get('checkIn');
+        const checkOut = urlParams.get('checkOut');
+        const budget = urlParams.get('budget');
+        const numAdults = urlParams.get('numAdults');
+        const numChildren = urlParams.get('numChildren');
+        const numRooms = urlParams.get('numRooms');
+        const hotelPackage = urlParams.get('hotelPackage');
+        const selectedValues = urlParams.get('selectedValues');
+
+        console.log("Package Number:", packageNumber);
+        console.log("Destination:", destination);
+        console.log("Number of People:", numPeople);
+        console.log("Check-In Date:", checkIn);
+        console.log("Check-Out Date:", checkOut);
+        console.log("Budget:", budget);
+        console.log("Number of Adults:", numAdults);
+        console.log("Number of Children:", numChildren);
+        console.log("Number of Rooms:", numRooms);
+        console.log("Hotel Package:", hotelPackage);
+        console.log("Selected Values:", selectedValues);
+    })();
+
+    // Redirection functions
+    function redirectToFinish() {
+        // Include all necessary parameters in the redirection URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const nextUrl = `finish?${urlParams.toString()}`;
+        window.location.href = nextUrl;
+    }
+
+    function redirectToRate_intrests() {
+        // Include all necessary parameters in the redirection URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const prevUrl = `intrests_rate?${urlParams.toString()}`;
+        window.location.href = prevUrl;
+    }
+</script>
 </body>
 </html>
