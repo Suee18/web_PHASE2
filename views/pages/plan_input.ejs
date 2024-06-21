@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="/css/plan_input.css">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
     <script src="/js/plan_input.js"></script>
     <title>Details</title>
 </head>
@@ -19,17 +21,16 @@
                 <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
                     <form action="" id="msform">
                         <ul id="progressbar">
-                            <li id="package"><strong>Packages</strong></li>
-                            <li class="active" id="details"><strong>Details</strong></li>
+                            <li class="active" id="package"><strong>Packages</strong></li>
+                            <li id="details"><strong>Details</strong></li>
                             <li id="personal"><strong>Personal</strong></li>
                             <li id="payment"><strong>Payment</strong></li>
                             <li id="confirm"><strong>Finish</strong></li>
                         </ul>
                         <div class="progress">
-                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div> 
                         </div>
                         <br>
-                        <!-- Step 2 -->
                         <fieldset>
                             <div class="form-card">
                                 <div class="row">
@@ -44,14 +45,14 @@
                                     <div class="col-lg-6">
                                         <div class="destination">
                                             <h2>Destination</h2>
-                                            <select id="governorates-list"></select>
+                                            <select id="governorates-list" required></select>
                                             <button type="button" id="add-destination">+</button>
                                         </div>
                                         <div class="details">
                                             <h2 class="travel-details">Travel Details</h2>
                                             <div class="detail">
                                                 <label for="num-people">Number of People:</label>
-                                                <input type="number" id="num-people" min="1" value="1" required>
+                                                <input type="number" id="num-people" min="1" value="0" required>
                                             </div>
                                             <div class="detail">
                                                 <label for="check-in">Check-In Date:</label>
@@ -63,11 +64,11 @@
                                             </div>
                                             <div class="detail">
                                                 <label for="budget">Available Budget:</label>
-                                                <select id="budget">
-                                                    <option value="1000">Budget-Friendly (Up to $1000)</option>
-                                                    <option value="2000">Moderate ($1000 - $2000)</option>
-                                                    <option value="3000">Comfortable ($2000 - $3000)</option>
-                                                    <option value="999999">Luxury ($3000+)</option>
+                                                <select id="budget" required>
+                                                <option value="1000">Budget-Friendly (Up to $1000)</option>
+                                                <option value="2000">Moderate ($1000 - $2000)</option>
+                                                <option value="3000">Comfortable ($2000 - $3000)</option>
+                                                <option value="999999">Luxury ($3000+)</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -78,41 +79,42 @@
                                             <div class="hotel flex-container">
                                                 <div class="h-detail">
                                                     <label for="num-adults">Number of Adults:</label>
-                                                    <input type="number" id="num-adults" min="1" value="1" required>
+                                                    <input type="number" id="num-adults" min="1" value="0" required>
                                                 </div>
                                                 <div class="h-detail">
                                                     <label for="num-children">Number of Children:</label>
-                                                    <input type="number" id="num-children" min="1" value="1" required>
+                                                    <input type="number" id="num-children" min="0" value="0" required>
                                                 </div>
                                                 <div class="h-detail">
                                                     <label for="num-room">Number of Rooms:</label>
-                                                    <input type="number" id="num-room" min="1" value="1" required>
+                                                    <input type="number" id="num-room" min="1" value="0" required>
                                                 </div>
                                                 <div class="detail">
                                                     <div class="budget">
                                                         <label for="h-package">Hotel Reservation:</label>
-                                                        <select id="h-package">
-                                                            <option value="all">All Inclusive</option>
-                                                            <option value="half">All inclusive soft</option>
-                                                            <option value="full">Full Board</option>
-                                                            <option value="half">Half Board</option>
-                                                            <option value="breakfast">Breakfast only</option>
+                                                        <select id="h-package" required>
+                                                        <option value="all">All Inclusive</option>
+                                                        <option value="half">All inclusive soft</option>
+                                                        <option value="full">Full Board</option>
+                                                        <option value="half">Half Board</option>
+                                                        <option value="breakfast">Breakfast only</option>
                                                         </select>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> 
                                     </div>
                                 </div>
                             </div>
-                            <input type="button" name="next" class="next action-button" value="Next" id="next-bt" onclick="redirectToRate_intrests()"/>
-                            <input type="button" name="prev" class="prev action-button-previous" value="Previous" onclick="redirectToPackages()" id="prev-bt"/>
+                            <input type="button" name="next" class="next action-button" value="Next" id="next-bt"/>
+                            <input type="button" name="prev" class="prev action-button-previous" value="Previous" id="prev-bt"/>
                         </fieldset>
                     </form>
-                </div>
+                </div> 
             </div>
-        </div>
-    </section>
+        </div>                                              
+        </section>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    
 </body>
 </html>
