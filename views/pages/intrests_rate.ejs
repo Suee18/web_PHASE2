@@ -68,6 +68,7 @@
         const numChildren = urlParams.get('numChildren');
         const numRooms = urlParams.get('numRooms');
         const hotelPackage = urlParams.get('hotelPackage');
+        const from = urlParams.get('from');
 
         console.log("Package Number:", packageNumber);
         console.log("Destination:", destination);
@@ -79,6 +80,7 @@
         console.log("Number of Children:", numChildren);
         console.log("Number of Rooms:", numRooms);
         console.log("Hotel Package:", hotelPackage);
+        console.log("From:", from);
 
         // Convert dates to Date objects
         const checkInDate = new Date(checkIn);
@@ -157,21 +159,18 @@
             console.log('Selected Values:', selectedValues);
 
             // Build URL for redirection
-            const url = new URL('/payment', window.location.origin); // Change '/payment' to the actual payment page path
-            url.searchParams.set('$package', packageNumber);
-            url.searchParams.set('destination', destination);
-            url.searchParams.set('numPeople', numPeople);
-            url.searchParams.set('checkIn', checkIn);
-            url.searchParams.set('checkOut', checkOut);
-            url.searchParams.set('budget', budget);
-            url.searchParams.set('numAdults', numAdults);
-            url.searchParams.set('numChildren', numChildren);
-            url.searchParams.set('numRooms', numRooms);
-            url.searchParams.set('hotelPackage', hotelPackage);
-            url.searchParams.set('selectedValues', JSON.stringify(selectedValues));
 
             // Redirect to the payment page with all parameters
-            window.location.href = url.toString();
+            window.location.href = `payment?$package=${packageNumber}&from=${from}&destination=${destination}
+            &numPeople=${numPeople}&checkIn=${checkIn}&checkOut=${checkOut}&budget=${budget}&numAdults=${numAdults}
+            &numChildren=${numChildren}&numRooms=${numRooms}&hotelPackage=${hotelPackage}
+            &selectedValues=${JSON.stringify(selectedValues)}`;
+        });
+        document.getElementById('prev-bt').addEventListener('click', function (e) {
+            
+            window.location.href = `plan_input?$package=${packageNumber}&from=${from}&destination=${destination}
+            &numPeople=${numPeople}&checkIn=${checkIn}&checkOut=${checkOut}&budget=${budget}&numAdults=${numAdults}
+            &numChildren=${numChildren}&numRooms=${numRooms}&hotelPackage=${hotelPackage}`;
         });
 
         // Log retrieved parameters to console

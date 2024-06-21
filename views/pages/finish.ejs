@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="/css/plan_input.css"><link rel="stylesheet" href="user.css">
     <script src="/js/plan_input.js"></script>
+    <script src="/js/finish.js"></script>
+
     <title>Confirmation</title>
 </head>
 <body>
@@ -44,12 +46,13 @@
                                     <div class="col-md-12">
                                         <h3>Thank you for your submission!</h3>
                                         <p>Your details have been received and your payment is being processed.</p>
-                                        <p>We will send a confirmation email shortly.</p>
                                     </div>
                                 </div>
                             </div>
-                            <input type="button" name="next" class="next action-button" value="Finish" id="next-bt"/>
                             <input type="button" name="prev" class="prev action-button-previous" value="Previous" />
+                          
+                                <input type="button" name="next" class="next action-button" value="Finish" id="next-bt" onclick="planInput()">
+                                
                         </fieldset>
                     </form>
                 </div>

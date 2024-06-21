@@ -11,7 +11,7 @@ const userSchema = new Schema({
   isAdmin: { type: Boolean, default: false },
   avatar: { type: String, required: true },
   age: { type: Number, required: true },
-  subscriptionType: { type: String, default: 'Free' }, // Added subscriptionType field with default value
+  subscriptionType: { type: String, default: 'Free' },
 });
 
 userSchema.pre('save', function(next) {
@@ -44,4 +44,5 @@ userSchema.pre('validate', function(next) {
 });
 
 const User = mongoose.model('User', userSchema);
-export default User;
+
+module.exports = User;

@@ -1,9 +1,18 @@
 const urlParams = new URLSearchParams(window.location.search);
-const packageNumber = urlParams.get('package');
+const packageNumber = urlParams.get('$package');
 
 // Display the package number wherever you need it on details.html
 console.log("Selected Package Number:", packageNumber);
-
+const from = [
+"Select An Origin",
+"United States",
+"China","India","Brazil",
+"Indonesia","Pakistan","Nigeria",
+"Bangladesh","Russia","Mexico",
+"Japan","Ethiopia","Philippines",
+"Vietnam","Germany","Iran","Turkey",
+"Thailand","Saudi-Arabia"
+];
 const governorates = [
     "Select A Destination",
     "Ad Daqahliyah (Dakahlia)",
@@ -44,13 +53,15 @@ $(document).ready(function () {
             text: governorate
         }));
     });
+    var fromList = $('#from-list');
+    from.forEach(function(from) {
+        fromList.append($('<option>', {
+            value: from,
+            text: from
+        }));
+    });
 
-    if (packageNumber === '1') {
-        // Disable "Add Destination" button and style its background
-        $('#add-destination').prop('disabled', true).css({
-            'background-color': 'lightgray',
-            'color': 'gray' // Example: Change text color to white
-        });
+    if (packageNumber === '1' ||packageNumber === '2') {
 
         // Disable .hotel section and style its background
         $('.hotel').css({
@@ -65,21 +76,6 @@ $(document).ready(function () {
             'color': 'gray' // Example: Change text color to white
         });
     }
-
-    if (packageNumber === '2') {
-        $('.hotel').css({
-            'pointer-events': 'none',
-            'background-color': 'lightgray',
-            'color': 'gray' // Example: Change text color to white
-        });
-
-        // Disable input fields inside .hotel section
-        $('.hotel input, .hotel select').prop('disabled', true).css({
-            'background-color': 'lightgray',
-            'color': 'gray' // Example: Change text color to white
-        });
-    }
-
     $(".next").click(function (event) {
         event.preventDefault();
         if (!validateFields()) {
@@ -112,7 +108,7 @@ function validateFields() {
     var isValid = true;
     $("fieldset:visible").find("input[required], select[required]").each(function() {
         var isDisabled = $(this).is(':disabled') || $(this).css('pointer-events') === 'none';
-        if (!isDisabled && ($(this).val() === "" || $(this).val() === "Select A Destination" || $(this).val() === "0")) {
+        if (!isDisabled && ($(this).val() === "" || $(this).val() === "Select A Destination" || $(this).val() === "0" ||$(this).val() === "Select An Origin")) {
             if (!window.packageAlertShown) {
                 alert("Please fill out all required fields.");
                 window.packageAlertShown = true;
@@ -163,6 +159,7 @@ function isDateAfter(dateString1, dateString2) {
 
 function redirectToNextPage(packageNumber) {
     var destination = $('#governorates-list').val();
+    var from = $('#from-list').val();
         var numPeople = $('#num-people').val();
         var checkIn = $('#check-in').val();
         var checkOut = $('#check-out').val();
@@ -172,15 +169,10 @@ function redirectToNextPage(packageNumber) {
         var numRooms = $('#num-room').val();
         var hotelPackage = $('#h-package').val();
 
-        if ($('#governorates-list').is(':disabled')) destination = null;
-        if ($('#num-people').is(':disabled')) numPeople = null;
-        if ($('#check-in').is(':disabled')) checkIn = null;
-        if ($('#check-out').is(':disabled')) checkOut = null;
-        if ($('#budget').is(':disabled')) budget = null;
         if ($('#num-adults').is(':disabled')) numAdults = null;
         if ($('#num-children').is(':disabled')) numChildren = null;
         if ($('#num-room').is(':disabled')) numRooms = null;
         if ($('#h-package').is(':disabled')) hotelPackage = null;
 
-        window.location.href = `intrests_rate?$package=${packageNumber}&destination=${destination}&numPeople=${numPeople}&checkIn=${checkIn}&checkOut=${checkOut}&budget=${budget}&numAdults=${numAdults}&numChildren=${numChildren}&numRooms=${numRooms}&hotelPackage=${hotelPackage}`;
+        window.location.href = `intrests_rate?$package=${packageNumber}&from=${from}&destination=${destination}&numPeople=${numPeople}&checkIn=${checkIn}&checkOut=${checkOut}&budget=${budget}&numAdults=${numAdults}&numChildren=${numChildren}&numRooms=${numRooms}&hotelPackage=${hotelPackage}`;
 }

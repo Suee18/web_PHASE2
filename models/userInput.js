@@ -39,7 +39,6 @@ const userInputSchema= new Schema({
     availableBudget: {
         type: String,
         required: true,
-        // enum: ['Budget-Friendly (Up to $1000)', 'Moderate ($1000 - $2000)', 'Comfortable ($2000-$3000)','Luxury ($3000+)']
     },
     hotelDetails: hotelDetailsSchema,
     packageType: {

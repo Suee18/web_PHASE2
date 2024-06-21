@@ -620,7 +620,15 @@ tr span {
   text-align: left;
   /* margin-left: 0.8rem; */
 }
-
+.destination div{
+            margin-bottom: 15px; /* Adjust as needed */
+        }
+        #governorates-list{
+          margin-left: 1.2rem;
+        }
+        #from-list{
+          margin-left: 0.3rem;
+        }
 /* Media Queries for Responsiveness */
 @media (max-width: 1200px) {
   .right-img {

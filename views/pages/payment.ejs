@@ -8,10 +8,14 @@
     <link rel="stylesheet" href="/css/plan_input.css">
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
     <title>Payment Information</title>
+    <style>
+        /* Additional CSS if needed */
+    </style>
 </head>
 <body>
     <header>
-        <%- include('../components/navBarLoggedin') %>
+        <!-- Replace with your navbar include -->
+        <nav>Navbar Content</nav>
     </header>
     <section class="section2">
         <div class="container-fluid">
@@ -106,8 +110,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <input type="button" name="next" class="next action-button" value="Next" onclick="redirectToFinish()" id="next-bt"/>
-                            <input type="button" name="prev" class="prev action-button-previous" value="Previous" id="prev-bt" onclick="redirectToRate_intrests()"/>
+                            <input type="button" name="next" class="next action-button" value="Next" id="next-bt"/>
+                            <input type="button" name="prev" class="prev action-button-previous" value="Previous" id="prev-bt"/>
                         </fieldset>
                     </form>
                 </div>
@@ -115,47 +119,136 @@
         </div>
     </section>
 <script>
-    (function() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const packageNumber = urlParams.get('$package');
-        const destination = urlParams.get('destination');
-        const numPeople = urlParams.get('numPeople');
-        const checkIn = urlParams.get('checkIn');
-        const checkOut = urlParams.get('checkOut');
-        const budget = urlParams.get('budget');
-        const numAdults = urlParams.get('numAdults');
-        const numChildren = urlParams.get('numChildren');
-        const numRooms = urlParams.get('numRooms');
-        const hotelPackage = urlParams.get('hotelPackage');
-        const selectedValues = urlParams.get('selectedValues');
+(function() {
+    // Capture URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const packageNumber = urlParams.get('$package');
+    const from = urlParams.get('from');
+    const destination = urlParams.get('destination');
+    const numPeople = urlParams.get('numPeople');
+    const checkIn = urlParams.get('checkIn');
+    const checkOut = urlParams.get('checkOut');
+    const budget = urlParams.get('budget');
+    const numAdults = urlParams.get('numAdults');
+    const numChildren = urlParams.get('numChildren');
+    const numRooms = urlParams.get('numRooms');
+    const hotelPackage = urlParams.get('hotelPackage');
+    const selectedValues = urlParams.get('selectedValues');
 
-        console.log("Package Number:", packageNumber);
-        console.log("Destination:", destination);
-        console.log("Number of People:", numPeople);
-        console.log("Check-In Date:", checkIn);
-        console.log("Check-Out Date:", checkOut);
-        console.log("Budget:", budget);
-        console.log("Number of Adults:", numAdults);
-        console.log("Number of Children:", numChildren);
-        console.log("Number of Rooms:", numRooms);
-        console.log("Hotel Package:", hotelPackage);
-        console.log("Selected Values:", selectedValues);
-    })();
+    console.log("URL Parameters:", urlParams); // Log entire URL parameters object
 
-    // Redirection functions
-    function redirectToFinish() {
-        // Include all necessary parameters in the redirection URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const nextUrl = `finish?${urlParams.toString()}`;
-        window.location.href = nextUrl;
+    console.log("Package Number:", packageNumber);
+    console.log("From:", from);
+    console.log("Destination:", destination);
+    console.log("Number of People:", numPeople);
+    console.log("Check-In Date:", checkIn);
+    console.log("Check-Out Date:", checkOut);
+    console.log("Budget:", budget);
+    console.log("Number of Adults:", numAdults);
+    console.log("Number of Children:", numChildren);
+    console.log("Number of Rooms:", numRooms);
+    console.log("Hotel Package:", hotelPackage);
+    console.log("Selected Values:", selectedValues);
+
+    // Function to validate payment information
+    // Function to validate payment information
+function validatePayment() {
+    const cardNumber = document.querySelector('.card-number-input').value.trim();
+    const cardHolder = document.querySelector('.card-holder-input').value.trim();
+    const expMonth = document.querySelector('.month-input').value;
+    const expYear = document.querySelector('.year-input').value;
+    const cvv = document.querySelector('.cvv-input').value.trim();
+
+    // Check if any field is empty
+    if (cardNumber === '' || cardHolder === '' || expMonth === 'month' || expYear === 'year' || cvv === '') {
+        alert('Please fill out all fields.');
+        return false;
     }
 
-    function redirectToRate_intrests() {
-        // Include all necessary parameters in the redirection URL
-        const urlParams = new URLSearchParams(window.location.search);
+    // Validate card number (must be 16 digits)
+    if (cardNumber.length !== 16 || isNaN(cardNumber)) {
+        alert('Please enter a valid 16-digit card number.');
+        return false;
+    }
+
+    // Validate card holder (cannot be empty)
+    if (cardHolder === '') {
+        alert('Please enter the card holder name.');
+        return false;
+    }
+
+    // Validate expiration date
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    const currentMonth = currentDate.getMonth() + 1; // getMonth() returns zero-based month
+    if (expYear < currentYear || (expYear == currentYear && expMonth < currentMonth)) {
+        alert('Please select a valid expiration date.');
+        return false;
+    }
+
+    // Validate CVV (must be 3 or 4 digits)
+    if (cvv.length !== 3 && cvv.length !== 4 || isNaN(cvv)) {
+        alert('Please enter a valid CVV.');
+        return false;
+    }
+
+    // If all validations pass, proceed to the next step
+    return true;
+}
+
+
+    // Function to handle next button click
+    document.getElementById('next-bt').addEventListener('click', function(event) {
+        // Validate payment information
+        if (validatePayment()) {
+            // Proceed to the finish page
+            const nextUrl = `finish?${urlParams.toString()}`;
+            window.location.href = nextUrl;
+        } else {
+            // Validation failed, do not proceed
+            console.log('Payment validation failed.');
+        }
+    });
+
+    // Redirection function for previous button
+    document.getElementById('prev-bt').addEventListener('click', function(event) {
+        // Redirect to previous page
         const prevUrl = `intrests_rate?${urlParams.toString()}`;
         window.location.href = prevUrl;
-    }
+    });
+
+    // Input field interactions for card display
+    document.querySelector('.card-number-input').addEventListener('input', function() {
+        document.querySelector('.card-number-box').innerText = this.value;
+    });
+
+    document.querySelector('.card-holder-input').addEventListener('input', function() {
+        document.querySelector('.card-holder-name').innerText = this.value;
+    });
+
+    document.querySelector('.month-input').addEventListener('change', function() {
+        document.querySelector('.exp-month').innerText = this.value;
+    });
+
+    document.querySelector('.year-input').addEventListener('change', function() {
+        document.querySelector('.exp-year').innerText = this.value;
+    });
+
+    document.querySelector('.cvv-input').addEventListener('mouseenter', function() {
+        document.querySelector('.front').style.transform = 'perspective(1000px) rotateY(-180deg)';
+        document.querySelector('.back').style.transform = 'perspective(1000px) rotateY(0deg)';
+    });
+
+    document.querySelector('.cvv-input').addEventListener('mouseleave', function() {
+        document.querySelector('.front').style.transform = 'perspective(1000px) rotateY(0deg)';
+        document.querySelector('.back').style.transform = 'perspective(1000px) rotateY(180deg)';
+    });
+
+    document.querySelector('.cvv-input').addEventListener('input', function() {
+        document.querySelector('.cvv-box').innerText = this.value;
+    });
+
+})();
 </script>
 </body>
 </html>
