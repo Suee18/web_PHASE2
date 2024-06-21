@@ -120,7 +120,7 @@ router.get('/finish', fetchUserFromSession, (req, res) => {
 
 //================SUBMITING DATA ==========================================================================//
 
-router.post('/submitData', fetchUserFromSession, async (req, res) => {
+router.post('/submit', fetchUserFromSession, async (req, res) => {
   const {
     packageType,
     destination,
