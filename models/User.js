@@ -11,7 +11,7 @@ const userSchema = new Schema({
   isAdmin: { type: Boolean, default: false },
   avatar: { type: String, required: true },
   age: { type: Number, required: true },
-  subscriptionType: { type: String, default: 'regular' }, // Added subscriptionType field with default value
+  subscriptionType: { type: String, default: 'Free' }, // Added subscriptionType field with default value
 });
 
 userSchema.pre('save', function(next) {
