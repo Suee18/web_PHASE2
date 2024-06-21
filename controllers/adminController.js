@@ -216,6 +216,33 @@ export const deleteFood = async (req, res) => {
     res.status(500).json({ error: 'Failed to delete food item' });
   }
 };
+
+export const editFood = async (req, res) => {
+  try {
+      const { id, restaurantName, governorate, city, mealType, budget } = req.body;
+      console.log('Received data for update:', req.body);
+
+      const updatedFood = await food.findByIdAndUpdate(id, {
+          restaurantName,
+          governorate,
+          city,
+          mealType,
+          budget
+      }, { new: true });
+
+      if (!updatedFood) {
+          return res.status(404).json({ error: 'Food item not found' });
+      }
+
+      console.log('Food item updated successfully:', updatedFood);
+      res.redirect('/food');
+  } catch (err) {
+      console.error('Error updating food item:', err);
+      res.status(500).json({ error: 'Failed to update food item' });
+  }
+};
+
+
 export const deletePlace = async (req, res) => {
   try {
     const { id } = req.params;

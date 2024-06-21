@@ -4,16 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="/css/food.css"> <!-- Example stylesheet path -->
+    <link rel="stylesheet" href="/css/food.css">
     <title>Food</title>
 </head>
 <body>
     <div class="container">
-        <!-- Navigation -->
         <%- include('../components/navBarAdmin') %>
-        <!-- Content -->
         <div class="main">
-            <!-- Food Table -->
             <div class="details">
                 <div class="users">
                     <div class="cardHeader">
@@ -25,30 +22,53 @@
                         <form action="/admin/add-food" method="POST">
                             <label for="restaurantName">Restaurant Name:</label>
                             <input type="text" id="restaurantName" name="restaurantName" required><br><br>
-                            
                             <label for="governorate">Governorate:</label>
                             <input type="text" id="governorate" name="governorate" required><br><br>
-                            
                             <label for="city">City:</label>
                             <input type="text" id="city" name="city" required><br><br>
-                            
                             <label for="mealType">Meal Type:</label>
                             <select id="mealType" name="mealType" required>
                                 <option value="Breakfast">Breakfast</option>
                                 <option value="Lunch">Lunch</option>
                                 <option value="Dinner">Dinner</option>
                             </select><br><br>
-                            
                             <label for="budget">Budget:</label>
                             <select id="budget" name="budget" required>
                                 <option value="Up to $100">Up to $100</option>
                                 <option value="$100 - $200">$100 - $200</option>
                                 <option value="$200+">$200+</option>
                             </select><br><br>
-                            
                             <button type="submit">Save Food Item</button>
                         </form>
                     </div>
+                   <!-- Edit Food Form -->
+<div class="edit-food-form" style="display: none;">
+    <h2>Edit Food Item</h2>
+    <form id="editFoodForm" action="/admin/edit-food" method="POST">
+        <input type="hidden" id="editFoodId" name="id">
+        <input type="hidden" name="_method" value="PUT">
+        <label for="editRestaurantName">Restaurant Name:</label>
+        <input type="text" id="editRestaurantName" name="restaurantName" required><br><br>
+        <label for="editGovernorate">Governorate:</label>
+        <input type="text" id="editGovernorate" name="governorate" required><br><br>
+        <label for="editCity">City:</label>
+        <input type="text" id="editCity" name="city" required><br><br>
+        <label for="editMealType">Meal Type:</label>
+        <select id="editMealType" name="mealType" required>
+            <option value="Breakfast">Breakfast</option>
+            <option value="Lunch">Lunch</option>
+            <option value="Dinner">Dinner</option>
+        </select><br><br>
+        <label for="editBudget">Budget:</label>
+        <select id="editBudget" name="budget" required>
+            <option value="Up to $100">Up to $100</option>
+            <option value="$100 - $200">$100 - $200</option>
+            <option value="$200+">$200+</option>
+        </select><br><br>
+        <button type="submit">Update Food Item</button>
+    </form>
+</div>
+
                     <table>
                         <thead>
                             <tr>
@@ -86,8 +106,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Example JavaScript file for functionality -->
     <script src="/js/foods.js"></script>
 </body>
 </html>
