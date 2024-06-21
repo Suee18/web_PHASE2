@@ -6,10 +6,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="/css/plan_input.css">
-    <!-- <link rel="stylesheet" href="user.css "> -->
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
     <script src="/js/interests_rate.js"></script>
-
     <title>Personal Information</title>
 </head>
 
@@ -112,7 +110,7 @@
 
         let tableRows = '';
         categories.forEach(category => {
-            let row = `<tr class="${category.key}"><th>${category.name} <span><i class="fa-solid ${category.icon}"></i></span></th>`;
+            let row = `<tr class="${category.key}"><th>${category.name} <span><i class="fa-solid ${category.icon}"></i></th>`;
             for (let i = 0; i <= daysBetween; i++) {
                 row += `<td><input type="checkbox" name="${category.key}_day${i + 1}" value="${category.key}"></td>`;
             }
@@ -137,18 +135,26 @@
         }
 
         function getSelectedValues() {
-            let selectedValues = {};
-            for (let i = 0; i <= daysBetween; i++) {
-                selectedValues[`day${i + 1}`] = [];
-                const checkboxes = document.querySelectorAll(`td:nth-child(${i + 2}) input[type="checkbox"]`);
-                checkboxes.forEach(checkbox => {
-                    if (checkbox.checked) {
-                        selectedValues[`day${i + 1}`].push(checkbox.value);
-                    }
-                });
-            }
-            return selectedValues;
-        }
+  let selectedValues = [];
+  for (let i = 0; i <= daysBetween; i++) {
+    const currentDate = new Date(checkInDate);
+    currentDate.setDate(currentDate.getDate() + i);
+    const dayKey = `day${i + 1}`;
+    const dayValues = {
+      date: currentDate.toISOString().split('T')[0]
+    };
+    const checkboxes = document.querySelectorAll(`td:nth-child(${i + 2}) input[type="checkbox"]`);
+    checkboxes.forEach(checkbox => {
+      if (checkbox.checked) {
+        dayValues[checkbox.value] = true;
+      } else {
+        dayValues[checkbox.value] = false;
+      }
+    });
+    selectedValues.push(dayValues);
+  }
+  return selectedValues;
+}
 
         document.getElementById('next-bt').addEventListener('click', function (e) {
             if (!validateSelections()) {
@@ -159,21 +165,42 @@
             console.log('Selected Values:', selectedValues);
 
             // Build URL for redirection
+            const queryString = new URLSearchParams({
+                $package: packageNumber,
+                from: from,
+                destination: destination,
+                numPeople: numPeople,
+                checkIn: checkIn,
+                checkOut: checkOut,
+                budget: budget,
+                numAdults: numAdults,
+                numChildren: numChildren,
+                numRooms: numRooms,
+                hotelPackage: hotelPackage,
+                selectedValues: JSON.stringify(selectedValues)
+            }).toString();
 
             // Redirect to the payment page with all parameters
-            window.location.href = `payment?$package=${packageNumber}&from=${from}&destination=${destination}
-            &numPeople=${numPeople}&checkIn=${checkIn}&checkOut=${checkOut}&budget=${budget}&numAdults=${numAdults}
-            &numChildren=${numChildren}&numRooms=${numRooms}&hotelPackage=${hotelPackage}
-            &selectedValues=${JSON.stringify(selectedValues)}`;
-        });
-        document.getElementById('prev-bt').addEventListener('click', function (e) {
-            
-            window.location.href = `plan_input?$package=${packageNumber}&from=${from}&destination=${destination}
-            &numPeople=${numPeople}&checkIn=${checkIn}&checkOut=${checkOut}&budget=${budget}&numAdults=${numAdults}
-            &numChildren=${numChildren}&numRooms=${numRooms}&hotelPackage=${hotelPackage}`;
+            window.location.href = `payment?${queryString}`;
         });
 
-        // Log retrieved parameters to console
+        document.getElementById('prev-bt').addEventListener('click', function (e) {
+            const queryString = new URLSearchParams({
+                $package: packageNumber,
+                from: from,
+                destination: destination,
+                numPeople: numPeople,
+                checkIn: checkIn,
+                checkOut: checkOut,
+                budget: budget,
+                numAdults: numAdults,
+                numChildren: numChildren,
+                numRooms: numRooms,
+                hotelPackage: hotelPackage
+            }).toString();
+
+            window.location.href = `plan_input?${queryString}`;
+        });
     </script>
 </body>
 </html>

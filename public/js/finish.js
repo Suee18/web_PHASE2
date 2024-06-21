@@ -1,30 +1,74 @@
 function planInput() {
-    // Extract parameters from the URL
     const urlParams = new URLSearchParams(window.location.search);
-    const packageType = urlParams.get('$package');
+    const packageTypeValue = urlParams.get('$package');
     const destination = urlParams.get('destination');
     const checkIn = urlParams.get('checkIn');
     const checkOut = urlParams.get('checkOut');
     const availableBudget = urlParams.get('budget');
-    const numOfAdults = urlParams.get('numAdults');
-    const numOfChildren = urlParams.get('numChildren');
-    const numOfRooms = urlParams.get('numRooms');
+    const numOfAdults = parseInt(urlParams.get('numAdults')) || 0;
+    const numOfChildren = parseInt(urlParams.get('numChildren')) || 0;
+    const numOfRooms = parseInt(urlParams.get('numRooms')) || 0;
     const hotelReservation = urlParams.get('hotelPackage');
-    
-    // Create an object with the extracted data
+    const selectedValues = urlParams.get('selectedValues');
+
+    const packageTypeMapping = {
+        '1': 'Free',
+        '2': 'Standard',
+        '3': 'Premium'
+    };
+
+    const packageType = packageTypeMapping[packageTypeValue];
+
+    if (!packageType || !destination || !checkIn || !checkOut || !availableBudget) {
+        alert('Please fill all required fields.');
+        console.error('Missing required fields:', { packageType, destination, checkIn, checkOut, availableBudget });
+        return;
+    }
+
     const formData = {
         packageType,
         destination,
-        checkIn,
-        checkOut,
+        checkIn: new Date(checkIn),
+        checkOut: new Date(checkOut),
         availableBudget,
-        numOfAdults,
-        numOfChildren,
-        numOfRooms,
-        hotelReservation
+        hotelDetails: {
+            numOfAdults,
+            numOfChildren,
+            numOfRooms,
+            hotelReservation
+        },
+        interests: []
     };
 
-    // Send the data to the server using fetch
+    if (selectedValues) {
+        try {
+            const interests = JSON.parse(selectedValues);
+            for (const day in interests) {
+                const dateStr = interests[day].date;
+                const date = new Date(dateStr);
+                if (isNaN(date)) {
+                    console.error(`Invalid date for day: ${day}, date: ${dateStr}`);
+                    alert('Invalid date found in interests.');
+                    return;
+                }
+                formData.interests.push({
+                    date: date,
+                    entertainment: interests[day].activities.includes('entertainment'),
+                    historical: interests[day].activities.includes('historical'),
+                    religious: interests[day].activities.includes('religious'),
+                    sea: interests[day].activities.includes('sea'),
+                    natural: interests[day].activities.includes('natural'),
+                    day: interests[day].activities.includes('day'),
+                    night: interests[day].activities.includes('night')
+                });
+            }
+        } catch (e) {
+            console.error('Error parsing selectedValues:', e);
+            alert('An error occurred while processing your interests.');
+            return;
+        }
+    }
+
     fetch('/submitPlanInput', {
         method: 'POST',
         headers: {
@@ -36,7 +80,6 @@ function planInput() {
     .then(data => {
         alert(data.message);
         console.log(data);
-        // Redirect to another page or show a success message
     })
     .catch(error => {
         console.error('Error:', error);

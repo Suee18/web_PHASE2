@@ -284,21 +284,10 @@ export const postPlan = async (req, res) => {
     checkIn,
     checkOut,
     availableBudget,
-    numOfAdults,
-    numOfChildren,
-    numOfRooms,
-    hotelReservation,
+    hotelDetails,
+    interests
   } = req.body;
-  const {
-    date,
-    entertainment,
-    historical,
-    religious,
-    sea,
-    natural,
-    day,
-    night,
-  } = req.body;
+
   try {
     const newUserInput = new userInput({
       package: packageType,
@@ -306,23 +295,17 @@ export const postPlan = async (req, res) => {
       checkIn: new Date(checkIn),
       checkOut: new Date(checkOut),
       availableBudget,
-      hotelDetails: {
-        numOfAdults,
-        numOfChildren,
-        numOfRooms,
-        hotelReservation,
-      }, //SALMA PREFRENCES PER DAY
-      packageType,
-      interests: {
-        date: new Date(date),
-        entertainment,
-        historical,
-        religious,
-        sea,
-        natural,
-        day,
-        night,
-      },
+      hotelDetails,
+      interests: interests.map(interest => ({
+        date: new Date(interest.date), // Ensure date is converted to Date object
+        entertainment: interest.entertainment,
+        historical: interest.historical,
+        religious: interest.religious,
+        sea: interest.sea,
+        natural: interest.natural,
+        day: interest.day,
+        night: interest.night
+      }))
     });
 
     await newUserInput.save();
@@ -332,4 +315,3 @@ export const postPlan = async (req, res) => {
     res.status(500).json({ message: 'Error saving details' });
   }
 };
-
