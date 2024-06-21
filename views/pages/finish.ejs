@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="/css/plan_input.css"><link rel="stylesheet" href="user.css">
     <script src="/js/plan_input.js"></script>
+    <script src="/js/finish.js"></script>
+
     <title>Confirmation</title>
 </head>
 <body>
@@ -48,11 +50,9 @@
                                 </div>
                             </div>
                             <input type="button" name="prev" class="prev action-button-previous" value="Previous" />
-                            <form action="/submit" method="POST" id="msform">
-                            
-                                <input type="button" name="next" class="next action-button" value="Finish" id="next-bt"/>
+                          
+                                <input type="button" name="next" class="next action-button" value="Finish" id="next-bt" onclick="planInput()">
                                 
-                            </form>
                         </fieldset>
                     </form>
                 </div>

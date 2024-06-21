@@ -1,5 +1,6 @@
 import User from '../models/User.js';
 import Review from '../models/Review.js'; 
+import userInput from '../models/userInput.js';
 import bcrypt from 'bcrypt';
 import VisitCounter from '../models/visitCounter.js';
 
@@ -15,6 +16,7 @@ export const incrementVisitCounter = async () => {
     console.error('Error incrementing visit counter:', err);
   }
 };
+
 //======================Register=====================================================
 
 // Function to Sign up / create a new user
@@ -272,3 +274,62 @@ export const changePassword =async (req, res) => {
     res.status(500).send('Error changing password');
   }
 };
+
+
+//========================================PLAN===========================================================
+export const postPlan = async (req, res) => {
+  const {
+    packageType,
+    destination,
+    checkIn,
+    checkOut,
+    availableBudget,
+    numOfAdults,
+    numOfChildren,
+    numOfRooms,
+    hotelReservation,
+  } = req.body;
+  const {
+    date,
+    entertainment,
+    historical,
+    religious,
+    sea,
+    natural,
+    day,
+    night,
+  } = req.body;
+  try {
+    const newUserInput = new userInput({
+      package: packageType,
+      destinations: destination,
+      checkIn: new Date(checkIn),
+      checkOut: new Date(checkOut),
+      availableBudget,
+      hotelDetails: {
+        numOfAdults,
+        numOfChildren,
+        numOfRooms,
+        hotelReservation,
+      }, //SALMA PREFRENCES PER DAY
+      packageType,
+      interests: {
+        date: new Date(date),
+        entertainment,
+        historical,
+        religious,
+        sea,
+        natural,
+        day,
+        night,
+      },
+    });
+
+    await newUserInput.save();
+    res.json({ message: 'Details saved successfully!' });
+  } catch (error) {
+    console.error('Error saving details:', error);
+    res.status(500).json({ message: 'Error saving details' });
+  }
+};
+

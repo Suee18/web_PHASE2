@@ -2,7 +2,7 @@ import express from 'express';
 import {
   createUser, loginUser,
   updateProfileInfo, emailExists, usernameExists, changePassword, deleteAccount,
-  getReviews, addReview,
+  getReviews, addReview, postPlan
 } from '../controllers/userController.js';
 import { fetchUserFromSession } from '../middleware/auth.js';
 import userInput from '../models/userInput.js';
@@ -120,63 +120,7 @@ router.get('/finish', fetchUserFromSession, (req, res) => {
 
 //================SUBMITING DATA ==========================================================================//
 
-router.post('/submit', fetchUserFromSession, async (req, res) => {
-  const {
-    packageType,
-    destination,
-    checkIn,
-    checkOut,
-    availableBudget,
-    numOfAdults,
-    numOfChildren,
-    numOfRooms,
-    hotelReservation,
-  } = req.body;
-  const {
-    date,
-    entertainment,
-    historical,
-    religious,
-    sea,
-    natural,
-    day,
-    night,
-  } = req.body;
-  try {
-    const newUserInput = new userInput({
-      package: packageType,
-      destinations: destination,
-      checkIn: new Date(checkIn),
-      checkOut: new Date(checkOut),
-      availableBudget,
-      hotelDetails: {
-        numOfAdults,
-        numOfChildren,
-        numOfRooms,
-        hotelReservation,
-      }, //SALMA PREFRENCES PER DAY
-      packageType,
-      interests: {
-        date: new Date(date),
-        entertainment,
-        historical,
-        religious,
-        sea,
-        natural,
-        day,
-        night,
-      },
-    });
-
-    await newUserInput.save();
-    res.json({ message: 'Details saved successfully!' });
-  } catch (error) {
-    console.error('Error saving details:', error);
-    res.status(500).json({ message: 'Error saving details' });
-  }
-});
-
-
+router.post('/submitPLanInput', fetchUserFromSession, postPlan); 
 
 
 export default router;

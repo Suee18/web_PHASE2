@@ -40,10 +40,8 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
 
-    // Poll for the latest avatar every 5 seconds
     setInterval(fetchAvatar, 200);
 
-    // Load the navbar and initialize functionality
     function loadNavbar() {
         const navbarPath = '/js/navBarLoggedin.ejs'; // Path to the navbar HTML
         fetch(navbarPath)
