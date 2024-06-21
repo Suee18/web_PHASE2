@@ -579,44 +579,101 @@ margin-right: 10px;
 margin-right: 0; 
 }
 /*********************************************/
-table {
-width: 100%;
-border-collapse: collapse;
 
+table {
+  /* width: 100%; */
+  border-collapse: collapse;
 }
 th, td {
-padding: 8px;
-text-align: center;
-font-size: 1.2rem;
+  /* padding: 8px; */
+  text-align: center;
+   font-size: 1.2rem; 
 }
-td,th{
-border-bottom: 1px solid #32a890aa;
+td, th {
+  border-bottom: 1px solid #32a890aa;
 }
-.colored{
-background-color: #32a89041;
+.colored {
+  background-color: #32a89041;
 }
-tr span{
-margin: 0.3rem;
-opacity: 0.2;
+tr span {
+  /* margin: 0.3rem; */
+  opacity: 0.2;
 }
-.right-img{
-width: 25.5rem;
-height: 19rem;
-margin-left: 10rem;
+.right-img {
+  width: 25.5rem;
+  height: 19rem;
+  margin-left: 10rem;
 }
-.succ{
-color: #32a890aa;
+.succ {
+  color: #32a890aa;
 }
-#succ-a{
-text-decoration: none;
-color: green;
+#succ-a {
+  text-decoration: none;
+  color: green;
 }
-#succ-a:hover{
-text-decoration: underline;
-transition: text-decoration 1s ease;
+#succ-a:hover {
+  text-decoration: underline;
+  transition: text-decoration 1s ease;
 }
-.col-7 p{
-font-size: 0.8rem;
-text-align: left;
-margin-left: 0.8rem;
+.col-7 p {
+  /* font-size: 0.8rem; */
+  text-align: left;
+  /* margin-left: 0.8rem; */
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 1200px) {
+  .right-img {
+      width: 20rem;
+      height: 15rem;
+      margin-left: 5rem;
+  }
+  th, td {
+      font-size: 1rem;
+      padding: 6px;
+  }
+}
+
+@media (max-width: 992px) {
+  .right-img {
+      width: 18rem;
+      height: 14rem;
+      margin-left: 2rem;
+  }
+  th, td {
+      font-size: 0.9rem;
+      padding: 5px;
+  }
+}
+
+@media (max-width: 768px) {
+  th, td {
+      font-size: 0.8rem;
+      padding: 4px;
+  }
+  .col-7 p {
+      font-size: 0.7rem;
+      margin-left: 0.5rem;
+  }
+  .right-img {
+      width: 100%;
+      height: auto;
+      margin-left: 0;
+  }
+}
+
+@media (max-width: 576px) {
+  th, td {
+      font-size: 0.7rem;
+      padding: 3px;
+  }
+  .col-7 p {
+      font-size: 0.6rem;
+      margin-left: 0.3rem;
+  }
+  .right-img {
+      width: 100%;
+      height: auto;
+      margin-left: 0;
+  }
 }

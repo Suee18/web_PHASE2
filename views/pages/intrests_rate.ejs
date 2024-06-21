@@ -6,11 +6,13 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="/css/plan_input.css">
-    <link rel="stylesheet" href="user.css ">
+    <!-- <link rel="stylesheet" href="user.css "> -->
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-    
+    <script src="/js/interests_rate.js"></script>
+
     <title>Personal Information</title>
 </head>
+
 <body>
     <header>
         <%- include('../components/navBarLoggedin') %>
@@ -28,7 +30,8 @@
                             <li id="confirm"><strong>Finish</strong></li>
                         </ul>
                         <div class="progress">
-                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                                aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <br>
                         <!-- Step 3 -->
@@ -36,84 +39,14 @@
                             <h2 class="steps">Step 3</h2>
                             <div class="col-7">
                                 <h2 class="fs-title">Rate Based On Your interests:</h2>
-                                <p>note: (0) means you don't interest and (100) means extremely interest </p>
+                                <p>Note: Select desired activites for each day</p>
                             </div>
-                            <table>
-                                <tr>
-                                    <td class="no-border"></td>
-                                    <th>0</th>
-                                    <th>10</th>
-                                    <th>25</th>
-                                    <th>50</th>
-                                    <th>75</th>
-                                    <th>100</th>
-                                </tr>
-                                <tr class="colored">
-                                    <th>Entertainment Areas <span><i class="fa-solid fa-gamepad"></i></span></th>
-                                    <td><input type="radio" name="entertainment" value="0"></td>
-                                    <td><input type="radio" name="entertainment" value="10"></td>
-                                    <td><input type="radio" name="entertainment" value="25"></td>
-                                    <td><input type="radio" name="entertainment" value="50"></td>
-                                    <td><input type="radio" name="entertainment" value="75"></td>
-                                    <td><input type="radio" name="entertainment" value="100"></td>
-                                </tr>
-                                <tr>
-                                    <th>Historical Areas<span><i class="fa-solid fa-monument"></i></span></th>
-                                    <td><input type="radio" name="Historical" value="0"></td>
-                                    <td><input type="radio" name="Historical" value="10"></td>
-                                    <td><input type="radio" name="Historical" value="25"></td>
-                                    <td><input type="radio" name="Historical" value="50"></td>
-                                    <td><input type="radio" name="Historical" value="75"></td>
-                                    <td><input type="radio" name="Historical" value="100"></td>
-                                </tr>
-                                <tr class="colored">
-                                    <th>Religious Areas<span><i class="fa-solid fa-hands-praying"></i></span></th>
-                                    <td><input type="radio" name="Religious" value="0"></td>
-                                    <td><input type="radio" name="Religious" value="10"></td>
-                                    <td><input type="radio" name="Religious" value="25"></td>
-                                    <td><input type="radio" name="Religious" value="50"></td>
-                                    <td><input type="radio" name="Religious" value="75"></td>
-                                    <td><input type="radio" name="Religious" value="100"></td>
-                                </tr>
-                                <tr>
-                                    <th>Sea Areas <span><i class="fa-solid fa-person-swimming"></i></span></th>
-                                    <td><input type="radio" name="sea" value="0"></td>
-                                    <td><input type="radio" name="sea" value="10"></td>
-                                    <td><input type="radio" name="sea" value="25"></td>
-                                    <td><input type="radio" name="sea" value="50"></td>
-                                    <td><input type="radio" name="sea" value="75"></td>
-                                    <td><input type="radio" name="sea" value="100"></td>
-                                </tr>
-                                <tr class="colored">
-                                    <th>Natural Areas<span><i class="fa-solid fa-tree"></i></span></th>
-                                    <td><input type="radio" name="Natural" value="0"></td>
-                                    <td><input type="radio" name="Natural" value="10"></td>
-                                    <td><input type="radio" name="Natural" value="25"></td>
-                                    <td><input type="radio" name="Natural" value="50"></td>
-                                    <td><input type="radio" name="Natural" value="75"></td>
-                                    <td><input type="radio" name="Natural" value="100"></td>
-                                </tr>
-                                <tr>
-                                    <th>Day Person <span><i class="fa-solid fa-cloud-sun"></i></span></th>
-                                    <td><input type="radio" name="Day" value="0"></td>
-                                    <td><input type="radio" name="Day" value="10"></td>
-                                    <td><input type="radio" name="Day" value="25"></td>
-                                    <td><input type="radio" name="Day" value="50"></td>
-                                    <td><input type="radio" name="Day" value="75"></td>
-                                    <td><input type="radio" name="Day" value="100"></td>
-                                </tr>
-                                <tr class="colored">
-                                    <th>Night Person <span><i class="fa-solid fa-cloud-moon"></i></span></th>
-                                    <td><input type="radio" name="Night" value="0"></td>
-                                    <td><input type="radio" name="Night" value="10"></td>
-                                    <td><input type="radio" name="Night" value="25"></td>
-                                    <td><input type="radio" name="Night" value="50"></td>
-                                    <td><input type="radio" name="Night" value="75"></td>
-                                    <td><input type="radio" name="Night" value="100"></td>
-                                </tr>
+                            <table id="dynamic-table">
+                                <!-- Dynamic content will be inserted here -->
                             </table>
-                            <input type="button" name="next" class="next action-button" value="Next" id="next-bt"/>
-                            <input type="button" name="prev" class="prev action-button-previous" value="Previous" id="prev-bt"/>
+                            <input type="button" name="next" class="next action-button" value="Next" id="next-bt" />
+                            <input type="button" name="prev" class="prev action-button-previous" value="Previous"
+                                id="prev-bt" />
                         </fieldset>
                     </form>
                 </div>
@@ -136,6 +69,47 @@
         const numRooms = urlParams.get('numRooms');
         const hotelPackage = urlParams.get('hotelPackage');
 
+
+        // Convert dates to Date objects
+        const checkInDate = new Date(checkIn);
+        const checkOutDate = new Date(checkOut);
+
+        // Calculate the number of days between check-in and check-out
+        const timeDifference = checkOutDate.getTime() - checkInDate.getTime();
+        const daysBetween = Math.ceil(timeDifference / (1000 * 3600 * 24));
+
+        // Generate table headers dynamically
+        let headerRow = '<tr><td class="no-border"></td>';
+        for (let i = 0; i <= daysBetween; i++) {
+            let currentDate = new Date(checkInDate);
+            currentDate.setDate(currentDate.getDate() + i);
+            headerRow += `<th>Day ${i + 1} (${currentDate.toLocaleDateString()})</th>`;
+        }
+        headerRow += '</tr>';
+
+        // Generate table rows with checkboxes dynamically
+        const categories = [
+            { name: "Entertainment Areas", icon: "fa-gamepad", key: "entertainment" },
+            { name: "Historical Areas", icon: "fa-monument", key: "historical" },
+            { name: "Religious Areas", icon: "fa-hands-praying", key: "religious" },
+            { name: "Sea Areas", icon: "fa-person-swimming", key: "sea" },
+            { name: "Natural Areas", icon: "fa-tree", key: "natural" },
+            { name: "Day Person", icon: "fa-cloud-sun", key: "day" },
+            { name: "Night Person", icon: "fa-cloud-moon", key: "night" }
+        ];
+
+        let tableRows = '';
+        categories.forEach(category => {
+            let row = `<tr class="${category.key}"><th>${category.name} <span><i class="fa-solid ${category.icon}"></i></span></th>`;
+            for (let i = 0; i <= daysBetween; i++) {
+                row += `<td><input type="checkbox" name="${category.key}_day${i + 1}" value="day${i + 1}"></td>`;
+            }
+            row += '</tr>';
+            tableRows += row;
+        });
+
+        // Insert the dynamic content into the table
+        document.getElementById('dynamic-table').innerHTML = headerRow + tableRows;
         // Log retrieved parameters to console
         console.log("Package Number:", packageNumber);
         console.log("Destination:", destination);
@@ -149,4 +123,5 @@
         console.log("Hotel Package:", hotelPackage);
     </script>
 </body>
+
 </html>

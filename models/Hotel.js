@@ -8,6 +8,11 @@ const HotelSchema = new Schema({
         required: true,
         minLength: 1
     },
+    government: {
+        type: String,
+        required: true,
+        minLength: 1
+    },
     pricePerNight: {
         type: Number,
         required: true,

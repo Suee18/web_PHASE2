@@ -1,8 +1,10 @@
 import express from 'express';
-import { createUser, loginUser,
-updateProfileInfo,emailExists,usernameExists,changePassword, deleteAccount, 
-getReviews,  addReview,} from '../controllers/userController.js';
-import { fetchUserFromSession} from '../middleware/auth.js';
+import {
+  createUser, loginUser,
+  updateProfileInfo, emailExists, usernameExists, changePassword, deleteAccount,
+  getReviews, addReview,
+} from '../controllers/userController.js';
+import { fetchUserFromSession } from '../middleware/auth.js';
 import userInput from '../models/userInput.js';
 const router = express.Router();
 
@@ -44,7 +46,7 @@ router.get('/create_A_Plan', fetchUserFromSession, (req, res) => {
   res.render('pages/packages', { user: req.user });
 });
 
-router.get ('/view_plans_history', fetchUserFromSession ,  (req, res)=> {
+router.get('/view_plans_history', fetchUserFromSession, (req, res) => {
   res.render('pages/history', { user: req.user });
 });
 //AJAX for latest avatar
@@ -57,8 +59,8 @@ router.get('/profile/avatar', fetchUserFromSession, (req, res) => {
 
 //====================CRUD USER profile info=============================================================================
 //Update Profile info
-router.post('/profile/update', updateProfileInfo); 
-router.post('/check-email', emailExists); 
+router.post('/profile/update', updateProfileInfo);
+router.post('/check-email', emailExists);
 router.post('/check-username', usernameExists);
 //delete account 
 router.delete('/delete-profile', deleteAccount);
@@ -68,7 +70,7 @@ router.get('/profile/data', fetchUserFromSession, (req, res) => {
 });
 
 //change password
-router.get ('/change-password', fetchUserFromSession ,  (req, res)=> {
+router.get('/change-password', fetchUserFromSession, (req, res) => {
   res.render('pages/profile_ChangePassword', { user: req.user });
 });
 router.post('/change_password', changePassword);
@@ -120,38 +122,57 @@ router.get('/finish', fetchUserFromSession, (req, res) => {
 
 router.post('/submitData', fetchUserFromSession, async (req, res) => {
   const {
-      packageType,
-      destination,
-      checkIn,
-      checkOut,
-      availableBudget,
-      numOfAdults,
-      numOfChildren,
-      numOfRooms,
-      hotelReservation,
+    packageType,
+    destination,
+    checkIn,
+    checkOut,
+    availableBudget,
+    numOfAdults,
+    numOfChildren,
+    numOfRooms,
+    hotelReservation,
   } = req.body;
-
+  const {
+    date,
+    entertainment,
+    historical,
+    religious,
+    sea,
+    natural,
+    day,
+    night,
+  } = req.body;
   try {
-      const newUserInput = new userInput({
-          package: packageType,
-          destinations: destination,
-          checkIn: new Date(checkIn),
-          checkOut: new Date(checkOut),
-          availableBudget,
-          hotelDetails: {
-              numOfAdults,
-              numOfChildren,
-              numOfRooms,
-              hotelReservation,
-          },
-          packageType,
-      });
+    const newUserInput = new userInput({
+      package: packageType,
+      destinations: destination,
+      checkIn: new Date(checkIn),
+      checkOut: new Date(checkOut),
+      availableBudget,
+      hotelDetails: {
+        numOfAdults,
+        numOfChildren,
+        numOfRooms,
+        hotelReservation,
+      }, //SALMA PREFRENCES PER DAY
+      packageType,
+      interests: {
+        date: new Date(date),
+        entertainment,
+        historical,
+        religious,
+        sea,
+        natural,
+        day,
+        night,
+      },
+    });
 
-      await newUserInput.save();
-      res.json({ message: 'Details saved successfully!' });
+    await newUserInput.save();
+    res.json({ message: 'Details saved successfully!' });
   } catch (error) {
-      console.error('Error saving details:', error);
-      res.status(500).json({ message: 'Error saving details' });
+    console.error('Error saving details:', error);
+    res.status(500).json({ message: 'Error saving details' });
   }
 });
 

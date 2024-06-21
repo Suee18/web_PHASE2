@@ -159,6 +159,8 @@ function isDateAfter(dateString1, dateString2) {
     var date2 = new Date(dateString2);
     return date1 > date2;
 }
+
+
 function redirectToNextPage(packageNumber) {
     var destination = $('#governorates-list').val();
         var numPeople = $('#num-people').val();

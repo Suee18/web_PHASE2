@@ -221,9 +221,50 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+//log in
+document.addEventListener('DOMContentLoaded', function() {
+    const loginForm = document.getElementById('form2');
+    const usernameInput = document.querySelector('input[name="username"]');
+    const passwordInput = document.querySelector('input[name="password"]');
+    const errorLog = document.getElementById('errorlogIN');
+  
+    loginForm.addEventListener('submit', async function(event) {
+      event.preventDefault();
+  
+      const formData = new FormData(loginForm);
+      const data = {
+        username: formData.get('username'),
+        password: formData.get('password')
+      };
+  
+      try {
+        const response = await fetch('/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
+  
+        const result = await response.json();
+        if (response.status === 200) {
+          window.location.href = result.redirectUrl;
+        } else {
+          errorLog.textContent = result.error;
+          usernameInput.value = '';
+          passwordInput.value = '';
+        }
+      } catch (error) {
+        errorLog.textContent = 'An error occurred. Please try again.';
+        console.error('Error:', error);
+        usernameInput.value = '';
+        passwordInput.value = '';
+      }
+    });
+  });
+  
 
-
-//srougy front 
+//PHASE 1
 // function validateForm() {
 //     const nameValue = namee.value.trim();
 //     const passValue = password.value.trim();
