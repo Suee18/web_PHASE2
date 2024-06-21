@@ -190,11 +190,11 @@ table img{
 .modal-content {
     background-color: #f7f7f7;
     margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
+    padding: 30px;
     border: 1px solid #ddd;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 450px; /* Adjust width as needed */
+    width: 500px; /* Adjust width as needed */
 }
 
 /* Close button */
@@ -253,22 +253,23 @@ table img{
 
 /* Edit form styles */
 #edit-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Arrange fields in two columns */
+    gap: 20px; /* Add gap between fields */
 }
 
 #edit-form label {
-    font-weight: 600;
-    margin-bottom: 0.5rem;
+    font-size: 1.1rem; /* Increase font size for better readability */
 }
 
 #edit-form input,
 #edit-form select {
-    padding: 0.5rem;
-    border: 1px solid #ddd;
+    width: 100%; /* Expand input fields to full width */
+    padding: 12px; /* Increase padding for better touch targets */
+    font-size: 1.1rem; /* Match font size with label */
+    border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 1rem;
+    transition: border-color 0.3s ease;
 }
 
 #edit-form input:focus,
@@ -279,18 +280,25 @@ table img{
 }
 
 #edit-form button {
-    background-color: var(--blue);
-    color: white;
-    padding: 0.75rem;
-    border: none;
+    width: auto; /* Allow buttons to adjust width */
+    padding: 12px 20px; /* Increase button padding */
+    font-size: 1.1rem; /* Match font size with input fields */
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 #edit-form button:hover {
-    background-color: darkblue;
+    background-color: var(--blue);
 }
+#edit-form input::placeholder {
+    color: #999; /* Adjust placeholder color for readability */
+}
+
+#edit-form input:focus::placeholder {
+    color: transparent; /* Hide placeholder on focus */
+}
+
 
 #details-container {
     display: none; /* Initially hidden */
@@ -308,38 +316,19 @@ table img{
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5); 
   }
   
-  .close-btn {
-    background-color: transparent;
-    color: black;
-    border: 0.2rem solid --blue;
-    padding: 10px 20px;
-    cursor: pointer;
+  .close-btn,
+.yes-btn {
+    padding: 12px 20px; /* Increase button padding */
+    font-size: 1.1rem; /* Match font size with other buttons */
     border-radius: 5px;
-    transition: background-color 0.5s ease;
-    transition: color 0.5s ease;
-    margin-left: 1rem;
-  }
-  
-  .close-btn:hover {
-    background-color: var(--blue);
-    color: white;
-  }
-  .yes-btn{
-    background-color: transparent;
-    color: black;
-    border: 0.2rem solid --blue;
-    padding: 10px 20px;
     cursor: pointer;
-    border-radius: 5px;
-    margin-left: 4rem;
-    margin-top: 3rem;
-    transition: background-color 0.5s ease;
-    transition: color 0.5s ease;
-  }
-  .yes-btn:hover {
+    transition: background-color 0.3s ease, color 0.3s ease; /* Combine transitions */
+}
+
+.close-btn:hover,
+.yes-btn:hover {
     background-color: var(--blue);
-    color: white;
-  }
+    color: white; /* Improve contrast on hover */
   #details-container2 {
     display: none; /* Initially hidden */
    position: fixed; /* Overlays the main content */
@@ -355,7 +344,7 @@ table img{
     width: 450px;
     height: 200px;
   }
-
+}
   #details-content2{
     display: flex;
     flex-direction: column;
