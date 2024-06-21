@@ -99,11 +99,11 @@ box-shadow: 0 0 10px rgba(1, 238, 255, 0.418);
 
 .userInfoUN{
   margin-top: 3rem;
-font-family:paragraphsBoldFont;
+font-family:titlesFont;
 color: #0e044d;
 /* font-weight: 200; */
 /* text-shadow:5px 5px 5px #8c7a61; */
-font-size:200%;
+font-size:300%;
 }
 
 /* .profilee .card p {
@@ -119,10 +119,16 @@ font-size:200%;
 }
 
 .buttons {
-  margin-left: 5rem;
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 3rem;
+
 }
 
 .btn {
+  margin-right: 2rem;
+margin-top: 1rem;
   border-radius: 20px;
   cursor: pointer;
   font-size: 0.8rem;
@@ -201,12 +207,21 @@ font-size:200%;
   /* Smooth transition for the image as well */
 
 }
-
+.mb-0{
+  font-family:paragraphsBoldFont;
+  color: #0e044d;
+  font-size:200%;
+  font-weight: 200;
+}
 
 .dropdown-menu div:hover {
   background-color: #f0f0f0;
 }
-
+#username,#email,#phone,#address,#gender,#dob{
+  font-family:paragraphRegularFont;
+  font-size:200%;
+  font-weight: 100;
+}
 /* Tooltip container */
 .tooltip {
   position: relative;
