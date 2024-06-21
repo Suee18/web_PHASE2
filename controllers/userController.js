@@ -60,36 +60,69 @@ export const createUser = async (req, res) => {
 };
 
 //======================log  in=====================================================
+// export const loginUser = async (req, res) => {
+//   const { username, password } = req.body;
+//   try {
+//     const user = await User.findOne({ username });
+//     if (!user) {
+//       return res.status(400).send('---------!!ERROR!!-------From : UserController/LoginUser()Invalid username or password-------');
+//     }
+//     const isMatch = await bcrypt.compare(password, user.password);
+//     if (!isMatch) {
+//       return res.status(400).send('Invalid username or password');
+//     }
+//     req.session.userId = user._id;
+//     req.session.username = user.username;
+//     req.session.avatar = user.avatar;  // Save the user ID in the session
+//     console.log('\n==============Printed by: UserController/loginUser()===================');
+//     console.log('Session data after login:\n', req.session, '\n-----------------------------');
+//     console.log('User data:', user); // Log user data
+//     console.log('=======================================================================');
+
+//     // Redirect based on isAdmin 
+//     if (user.isAdmin) {
+//       res.redirect('/statistics');
+//     } else {
+//       await incrementVisitCounter();
+//       res.redirect('/profile');
+//     }
+//   } catch (error) {
+//     console.log('!!!!-------------Printed by: UserController/LoginUser()-----------------');
+//     console.log('Error logging in user:', error);
+//     res.status(500).send('Error logging in user');
+//   }
+// };
 export const loginUser = async (req, res) => {
   const { username, password } = req.body;
   try {
     const user = await User.findOne({ username });
     if (!user) {
-      return res.status(400).send('---------!!ERROR!!-------From : UserController/LoginUser()Invalid username or password-------');
+      console.log('User not found:', username);
+      return res.status(400).json({ error: 'Invalid username or password' });
     }
+
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(400).send('Invalid username or password');
+      console.log('Password mismatch for user:', username);
+      return res.status(400).json({ error: 'Invalid username or password' });
     }
+
     req.session.userId = user._id;
     req.session.username = user.username;
-    req.session.avatar = user.avatar;  // Save the user ID in the session
-    console.log('\n==============Printed by: UserController/loginUser()===================');
-    console.log('Session data after login:\n', req.session, '\n-----------------------------');
-    console.log('User data:', user); // Log user data
-    console.log('=======================================================================');
+    req.session.avatar = user.avatar;
 
-    // Redirect based on isAdmin 
+    console.log('User logged in:', username, user.isAdmin ? '(Admin)' : '(User)');
+
+    // Redirect based on isAdmin
     if (user.isAdmin) {
-      res.redirect('/statistics');
+      return res.status(200).json({ redirectUrl: '/statistics' });
     } else {
       await incrementVisitCounter();
-      res.redirect('/profile');
+      return res.status(200).json({ redirectUrl: '/profile' });
     }
   } catch (error) {
-    console.log('!!!!-------------Printed by: UserController/LoginUser()-----------------');
-    console.log('Error logging in user:', error);
-    res.status(500).send('Error logging in user');
+    console.error('Error logging in user:', error);
+    res.status(500).json({ error: 'Error logging in user' });
   }
 };
 //=======================Reviews======================================//
