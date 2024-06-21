@@ -115,33 +115,36 @@
         </div>
     </section>
 <script>
-    (function() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const packageNumber = urlParams.get('$package');
-        const destination = urlParams.get('destination');
-        const numPeople = urlParams.get('numPeople');
-        const checkIn = urlParams.get('checkIn');
-        const checkOut = urlParams.get('checkOut');
-        const budget = urlParams.get('budget');
-        const numAdults = urlParams.get('numAdults');
-        const numChildren = urlParams.get('numChildren');
-        const numRooms = urlParams.get('numRooms');
-        const hotelPackage = urlParams.get('hotelPackage');
-        const selectedValues = urlParams.get('selectedValues');
+(function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const packageNumber = urlParams.get('$package');
+    const from = urlParams.get('from');
+    const destination = urlParams.get('destination');
+    const numPeople = urlParams.get('numPeople');
+    const checkIn = urlParams.get('checkIn');
+    const checkOut = urlParams.get('checkOut');
+    const budget = urlParams.get('budget');
+    const numAdults = urlParams.get('numAdults');
+    const numChildren = urlParams.get('numChildren');
+    const numRooms = urlParams.get('numRooms');
+    const hotelPackage = urlParams.get('hotelPackage');
+    const selectedValues = urlParams.get('selectedValues');
 
-        console.log("Package Number:", packageNumber);
-        console.log("Destination:", destination);
-        console.log("Number of People:", numPeople);
-        console.log("Check-In Date:", checkIn);
-        console.log("Check-Out Date:", checkOut);
-        console.log("Budget:", budget);
-        console.log("Number of Adults:", numAdults);
-        console.log("Number of Children:", numChildren);
-        console.log("Number of Rooms:", numRooms);
-        console.log("Hotel Package:", hotelPackage);
-        console.log("Selected Values:", selectedValues);
-    })();
+    console.log("URL Parameters:", urlParams); // Log entire URL parameters object
 
+    console.log("Package Number:", packageNumber);
+    console.log("From:", from);
+    console.log("Destination:", destination);
+    console.log("Number of People:", numPeople);
+    console.log("Check-In Date:", checkIn);
+    console.log("Check-Out Date:", checkOut);
+    console.log("Budget:", budget);
+    console.log("Number of Adults:", numAdults);
+    console.log("Number of Children:", numChildren);
+    console.log("Number of Rooms:", numRooms);
+    console.log("Hotel Package:", hotelPackage);
+    console.log("Selected Values:", selectedValues);
+})();
     // Redirection functions
     function redirectToFinish() {
         // Include all necessary parameters in the redirection URL
