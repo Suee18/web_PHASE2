@@ -1,18 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
 
-*{
+* {
     font-family: "Ubuntu";
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-.container{
+.container {
     position: relative;
     width: 100%;
 }
 
-.main{
+.main {
     position: absolute;
     width: calc(100% - 300px);
     left: 18rem;
@@ -20,16 +20,15 @@
     background: var(--white);
     transition: 0.5s;
 }
-.details{
+
+.details {
     position: relative;
     width: 100%;
     padding: 20px;
     margin-top: 10px;
-    
 }
 
-.details .users{
-    position: flex;
+.details .users {
     display: grid;
     min-height: 350px;
     width: 100%;
@@ -40,20 +39,20 @@
     justify-content: space-between;
 }
 
-.details .cardHeader{
+.details .cardHeader {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
 }
 
-.cardHeader h2{
+.cardHeader h2 {
     font-weight: 900;
     font-size: 2.2rem;
     color: var(--blue);
     margin-bottom: 1.5rem;
 }
 
-table .btn{
+table .btn {
     position: relative;
     padding: 5px 8px;
     background: var(--black1);
@@ -63,41 +62,44 @@ table .btn{
     margin: 5px 5px;
 }
 
-.details table{
+.details table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
 }
 
-.details table thead td{
+.details table thead td {
     font-weight: 600;
 }
-.details .users table tr{
+
+.details .users table tr {
     color: var(--black1);
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
 }
 
-.details .users table tr:last-child{
+.details .users table tr:last-child {
     border-bottom: none;
 }
 
-.details .users table tbody tr:hover{
+.details .users table tbody tr:hover {
     background: var(--blue);
     color: var(--white);
 }
 
-.details .users table tr td{
+.details .users table tr td {
     padding: 20px;
 }
 
-.details .users table tr td:last-child{
-    text-align:center;
+.details .users table tr td:last-child {
+    text-align: center;
 }
+
 table tbody td {
     text-align: center;
     vertical-align: middle; /* Optional: to vertically center the content */
 }
+
 .users .addbtn {
     margin-left: auto; /* Push the button to the right */
     width: 10%; /* Set width of the button */
@@ -118,6 +120,7 @@ table tbody td {
     box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3); /* Increase shadow on hover */
     color: #f2f2f2; /* Lighten text color on hover */
 }
+
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -127,8 +130,8 @@ table tbody td {
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
 .modal-content {
@@ -154,10 +157,76 @@ table tbody td {
 }
 
 .add-place-form {
-    background-color: #f2f2f2;
+    position: relative;
     padding: 20px;
-    border-radius: 5px;
-    margin: 20px 0;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    width: 300px;
+    margin: 20px auto;
 }
 
+.add-place-form .close-form-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
 
+.add-place-form h2 {
+    margin-bottom: 1rem;
+    color: var(--blue);
+}
+
+.add-place-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.add-place-form input,
+.add-place-form textarea,
+.add-place-form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+}
+
+.add-place-form .form-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.add-place-form button[type="submit"],
+.add-place-form button[type="button"].close-form-btn {
+    background-color: #00509E; /* Darker blue color for save button */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.add-place-form button[type="button"].close-form-btn {
+    background-color: #f44336; /* Red color for close button */
+}
+
+.add-place-form button[type="submit"]:hover,
+.add-place-form button[type="button"].close-form-btn:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.add-place-form button[type="submit"]:hover {
+    background-color: #003366; /* Even darker blue on hover */
+}
+
+.add-place-form button[type="button"].close-form-btn:hover {
+    background-color: #e53935; /* Darker red on hover */
+}

@@ -1,49 +1,58 @@
-function toggleAddPlaceForm() {
-  const addForm = document.querySelector('.add-place-form');
-  if (addForm.style.display === 'none' || addForm.style.display === '') {
-    addForm.style.display = 'block';
-  } else {
-    addForm.style.display = 'none';
-  }
-}
-
 document.addEventListener('DOMContentLoaded', () => {
+  const addForm = document.querySelector('.add-place-form');
+  const closeFormBtns = document.querySelectorAll('.close-form-btn');
+
+  function toggleAddPlaceForm() {
+      if (addForm.style.display === 'none' || addForm.style.display === '') {
+          addForm.style.display = 'block';
+      } else {
+          addForm.style.display = 'none';
+      }
+  }
+
+  document.querySelector('.addbtn').addEventListener('click', toggleAddPlaceForm);
+
+  closeFormBtns.forEach(btn => {
+      btn.addEventListener('click', toggleAddPlaceForm);
+  });
+
   const deleteButtons = document.querySelectorAll('.delete-btn');
   const editPlaceButtons = document.querySelectorAll('.edit-place-btn');
   const editPlaceForm = document.getElementById('edit-place-form');
   const placeDetailsContainer = document.getElementById('place-details-container');
   let currentPlaceId = null;
-
+  
   deleteButtons.forEach(button => {
-    button.addEventListener('click', async (event) => {
-      const placeId = event.target.getAttribute('data-id');
-      const confirmed = confirm('Are you sure you want to delete this place?');
-      if (!confirmed) return;
+      button.addEventListener('click', async (event) => {
+          const placeId = event.target.getAttribute('data-id');
+          const confirmed = confirm('Are you sure you want to delete this place?');
+          if (!confirmed) return;
 
-      try {
-        const response = await fetch(`/admin/delete-place/${placeId}`, {
-          method: 'DELETE',
-          headers: {
-            'Content-Type': 'application/json'
+          try {
+              const response = await fetch(`/admin/delete-place/${placeId}`, {
+                  method: 'DELETE',
+                  headers: {
+                      'Content-Type': 'application/json'
+                  }
+              });
+
+              if (response.ok) {
+                  alert('Place item deleted successfully');
+                  window.location.reload();
+              } else {
+                  const result = await response.json();
+                  alert(`Failed to delete place: ${result.error}`);
+              }
+          } catch (err) {
+              console.error('Error deleting place:', err);
+              alert('Error deleting place');
           }
-        });
-
-        if (response.ok) {
-          alert('Place item deleted successfully');
-          window.location.reload();
-        } else {
-          const result = await response.json();
-          alert(`Failed to delete place: ${result.error}`);
-        }
-      } catch (err) {
-        console.error('Error deleting place:', err);
-        alert('Error deleting place');
-      }
-    });
+      });
   });
 
-  // Event listener for edit place buttons
-  editPlaceButtons.forEach(button => {
+
+   // Event listener for edit place buttons
+   editPlaceButtons.forEach(button => {
     button.addEventListener('click', function () {
       const placeId = this.dataset.id;
       currentPlaceId = placeId;

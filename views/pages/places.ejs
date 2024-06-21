@@ -25,10 +25,10 @@
                         <form action="/admin/add-place" method="POST">
                             <label for="placeName">Name:</label>
                             <input type="text" id="placeName" name="placeName" required><br><br>
-
+                    
                             <label for="description">Description:</label>
                             <textarea id="description" name="description" rows="4" required></textarea><br><br>
-
+                    
                             <label for="governorate">Governorate:</label>
                             <select id="governorate" name="governorate" required>
                                 <option value="Cairo">Cairo</option>
@@ -42,7 +42,7 @@
                                 <option value="Faiyum">Faiyum</option>
                                 <option value="Port Said">Port Said</option>
                             </select><br><br>
-
+                    
                             <label for="city">City:</label>
                             <select id="city" name="city" required>
                                 <option value="Cairo">Cairo</option>
@@ -56,7 +56,7 @@
                                 <option value="Faiyum">Faiyum</option>
                                 <option value="Port Said">Port Said</option>
                             </select><br><br>
-
+                    
                             <label for="typeOfPlace">Type:</label>
                             <select id="typeOfPlace" name="typeOfPlace" required>
                                 <option value="Historical">Historical</option>
@@ -64,20 +64,24 @@
                                 <option value="Nature">Nature</option>
                                 <option value="Sea Areas">Sea Areas</option>
                                 <option value="Religious Areas">Religious Areas</option>
-
-                                <!-- Add more options as needed -->
                             </select><br><br>
-
+                    
                             <label for="budget">Budget:</label>
                             <select id="budget" name="budget" required>
                                 <option value="Low">Low</option>
                                 <option value="Medium">Medium</option>
                                 <option value="High">High</option>
                             </select><br><br>
-
-                            <button type="submit">Save Place</button>
+                    
+                            <div class="form-buttons">
+                                <button type="submit">Save Place</button>
+                                <button type="button" class="close-form-btn">&times;</button>
+                            </div>
                         </form>
                     </div>
+                    
+
+
                     <table>
                         <thead>
                             <tr>
@@ -117,8 +121,7 @@
             </div>
         </div>
     </div>
-
-    <!-- Edit Place Modal -->
+<!-- Edit Place Modal -->
 <div id="place-details-container" class="modal">
     <div class="modal-content">
         <span id="close-btn3" class="close">&times;</span>
@@ -135,6 +138,17 @@
         </form>
     </div>
 </div>
+<!-- Add Place Form -->
+<form class="add-place-form" id="add-place-form" style="display: none;">
+    <button type="button" class="close-form-btn">&times;</button>
+    <h2>Add New Place</h2>
+    <label for="place-name">Place Name:</label>
+    <input type="text" id="place-name" name="place-name" required>
+    <label for="budget">Budget:</label>
+    <input type="number" id="budget" name="budget" required>
+    <button type="submit">Save Place</button>
+</form>
+
 
     <!-- Example JavaScript file for functionality -->
     <script src="/js/places.js"></script>
