@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const detailsContainer2 = document.getElementById('details-container2');
     const detailsContainer = document.getElementById('details-container');
     let currentUserId = null;
+    
 
   // Event listener for navigation links
   const list = document.querySelectorAll('.nav-link');

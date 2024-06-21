@@ -267,3 +267,26 @@ export const deleteUser = async (req, res) => {
     res.status(500).send('Internal server error');
   }
 };
+
+export const editPlace = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { budget } = req.body;
+
+    const updatedPlace = await Place.findByIdAndUpdate(
+      id,
+      { budget },
+      { new: true }
+    );
+
+    if (!updatedPlace) {
+      return res.status(404).json({ error: 'Place not found' });
+    }
+
+    console.log('Place updated successfully:', updatedPlace);
+    res.status(200).json({ message: 'Place updated successfully', updatedPlace });
+  } catch (err) {
+    console.error('Error updating place:', err);
+    res.status(500).json({ error: 'Failed to update place' });
+  }
+};

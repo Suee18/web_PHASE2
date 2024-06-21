@@ -67,20 +67,34 @@
                                         <td><%= place.typeOfPlace %></td>
                                         <td><%= place.budget %></td>
                                         <td>
-                                            <button class="btn edit-btn" data-id="<%= place._id %>">Edit</button>
+                                            <button class="btn edit-place-btn" data-id="<%= place._id %>">Edit</button>
                                             <button class="btn delete-btn" data-id="<%= place._id %>">Delete</button>
                                         </td>
                                     </tr>
                                 <% }); %>
                             <% } else { %>
                                 <tr>
-                                    <td colspan="6">No places found.</td>
+                                    <td colspan="7">No places found.</td>
                                 </tr>
                             <% } %>
                         </tbody>
                     </table>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Edit Place Modal -->
+    <div id="place-details-container" class="modal">
+        <div class="modal-content">
+            <span id="close-btn3" class="close">&times;</span>
+            <form id="edit-place-form">
+                <label for="place-name">Place Name:</label>
+                <input type="text" id="place-name" name="place-name" readonly>
+                <label for="budget">Budget:</label>
+                <input type="text" id="budget" name="budget" required>
+                <button type="submit">Save Changes</button>
+            </form>
         </div>
     </div>
 
