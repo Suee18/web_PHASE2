@@ -41,7 +41,7 @@ router.get('/add_a_review', fetchUserFromSession, getReviews);
 router.post('/reviews', fetchUserFromSession, addReview);
 
 router.get('/create_A_Plan', fetchUserFromSession, (req, res) => {
-  res.render('pages/plan_input', { user: req.user });
+  res.render('pages/packages', { user: req.user });
 });
 
 router.get ('/view_plans_history', fetchUserFromSession ,  (req, res)=> {
@@ -102,8 +102,8 @@ router.get('/plan_input', fetchUserFromSession, (req, res) => {
 });
 
 // Route for the interest_rate page
-router.get('/interest_rate', fetchUserFromSession, (req, res) => {
-  res.render('pages/rate_intrests', { user: req.user });
+router.get('/intrests_rate', fetchUserFromSession, (req, res) => {
+  res.render('pages/intrests_rate', { user: req.user });
 });
 
 // Route for the payment page

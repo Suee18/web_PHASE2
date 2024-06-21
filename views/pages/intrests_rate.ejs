@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="/css/plan_input.css">
     <link rel="stylesheet" href="user.css ">
-    <script src="/js/plan_input.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    
     <title>Personal Information</title>
 </head>
 <body>
@@ -119,6 +120,33 @@
             </div>
         </div>
     </section>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <script>
+        // Retrieve URL query parameters
+        const urlParams = new URLSearchParams(window.location.search);
+
+        // Retrieve individual query parameters
+        const packageNumber = urlParams.get('$package');
+        const destination = urlParams.get('destination');
+        const numPeople = urlParams.get('numPeople');
+        const checkIn = urlParams.get('checkIn');
+        const checkOut = urlParams.get('checkOut');
+        const budget = urlParams.get('budget');
+        const numAdults = urlParams.get('numAdults');
+        const numChildren = urlParams.get('numChildren');
+        const numRooms = urlParams.get('numRooms');
+        const hotelPackage = urlParams.get('hotelPackage');
+
+        // Log retrieved parameters to console
+        console.log("Package Number:", packageNumber);
+        console.log("Destination:", destination);
+        console.log("Number of People:", numPeople);
+        console.log("Check-In Date:", checkIn);
+        console.log("Check-Out Date:", checkOut);
+        console.log("Budget:", budget);
+        console.log("Number of Adults:", numAdults);
+        console.log("Number of Children:", numChildren);
+        console.log("Number of Rooms:", numRooms);
+        console.log("Hotel Package:", hotelPackage);
+    </script>
 </body>
 </html>
