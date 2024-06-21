@@ -66,30 +66,31 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
 
     const formData = {
-      budget: editPlaceForm.querySelector('#budget').value,
+        budget: editPlaceForm.querySelector('#budget').value,
     };
 
     try {
-      const response = await fetch(`/admin/edit-place/${currentPlaceId}`, {
-        method: 'PUT',
-        body: JSON.stringify(formData),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
+        const response = await fetch(`/admin/edit-place/${currentPlaceId}`, {
+            method: 'PUT',
+            body: JSON.stringify(formData),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
 
-      if (response.ok) {
-        alert('Place updated successfully');
-        window.location.reload();
-      } else {
-        const result = await response.json();
-        alert(`Failed to update place: ${result.error}`);
-      }
+        if (response.ok) {
+            alert('Place updated successfully');
+            placeDetailsContainer.style.display = 'none'; // Close modal after success
+            window.location.reload(); // Reload page or update UI as needed
+        } else {
+            const result = await response.json();
+            alert(`Failed to update place: ${result.error}`);
+        }
     } catch (error) {
-      console.error('Error updating place:', error);
-      alert('Failed to update place');
+        console.error('Error updating place:', error);
+        alert('Failed to update place');
     }
-  });
+});
 
   // Close button for modal
   document.getElementById('close-btn3').addEventListener('click', function () {

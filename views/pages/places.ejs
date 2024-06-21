@@ -25,22 +25,56 @@
                         <form action="/admin/add-place" method="POST">
                             <label for="placeName">Name:</label>
                             <input type="text" id="placeName" name="placeName" required><br><br>
-                            
+
                             <label for="description">Description:</label>
                             <textarea id="description" name="description" rows="4" required></textarea><br><br>
-                            
+
                             <label for="governorate">Governorate:</label>
-                            <input type="text" id="governorate" name="governorate" required><br><br>
-                            
+                            <select id="governorate" name="governorate" required>
+                                <option value="Cairo">Cairo</option>
+                                <option value="Alexandria">Alexandria</option>
+                                <option value="Giza">Giza</option>
+                                <option value="Luxor">Luxor</option>
+                                <option value="Aswan">Aswan</option>
+                                <option value="Red Sea">Red Sea</option>
+                                <option value="South Sinai">South Sinai</option>
+                                <option value="Ismailia">Ismailia</option>
+                                <option value="Faiyum">Faiyum</option>
+                                <option value="Port Said">Port Said</option>
+                            </select><br><br>
+
                             <label for="city">City:</label>
-                            <input type="text" id="city" name="city" required><br><br>
-                            
+                            <select id="city" name="city" required>
+                                <option value="Cairo">Cairo</option>
+                                <option value="Alexandria">Alexandria</option>
+                                <option value="Giza">Giza</option>
+                                <option value="Luxor">Luxor</option>
+                                <option value="Aswan">Aswan</option>
+                                <option value="Red Sea">Red Sea</option>
+                                <option value="South Sinai">South Sinai</option>
+                                <option value="Ismailia">Ismailia</option>
+                                <option value="Faiyum">Faiyum</option>
+                                <option value="Port Said">Port Said</option>
+                            </select><br><br>
+
                             <label for="typeOfPlace">Type:</label>
-                            <input type="text" id="typeOfPlace" name="typeOfPlace" required><br><br>
-                            
+                            <select id="typeOfPlace" name="typeOfPlace" required>
+                                <option value="Historical">Historical</option>
+                                <option value="Entertainment">Entertainment</option>
+                                <option value="Nature">Nature</option>
+                                <option value="Sea Areas">Sea Areas</option>
+                                <option value="Religious Areas">Religious Areas</option>
+
+                                <!-- Add more options as needed -->
+                            </select><br><br>
+
                             <label for="budget">Budget:</label>
-                            <input type="text" id="budget" name="budget" required><br><br>
-                            
+                            <select id="budget" name="budget" required>
+                                <option value="Low">Low</option>
+                                <option value="Medium">Medium</option>
+                                <option value="High">High</option>
+                            </select><br><br>
+
                             <button type="submit">Save Place</button>
                         </form>
                     </div>
@@ -85,18 +119,22 @@
     </div>
 
     <!-- Edit Place Modal -->
-    <div id="place-details-container" class="modal">
-        <div class="modal-content">
-            <span id="close-btn3" class="close">&times;</span>
-            <form id="edit-place-form">
-                <label for="place-name">Place Name:</label>
-                <input type="text" id="place-name" name="place-name" readonly>
-                <label for="budget">Budget:</label>
-                <input type="text" id="budget" name="budget" required>
-                <button type="submit">Save Changes</button>
-            </form>
-        </div>
+<div id="place-details-container" class="modal">
+    <div class="modal-content">
+        <span id="close-btn3" class="close">&times;</span>
+        <form id="edit-place-form">
+            <label for="place-name">Place Name:</label>
+            <input type="text" id="place-name" name="place-name" readonly>
+            <label for="budget">Budget:</label>
+            <select id="budget" name="budget" required>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+            </select>
+            <button type="submit">Save Changes</button>
+        </form>
     </div>
+</div>
 
     <!-- Example JavaScript file for functionality -->
     <script src="/js/places.js"></script>

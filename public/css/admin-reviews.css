@@ -32,7 +32,7 @@
     position: flex;
     display: grid;
     min-height: 350px;
-    width: 100%;
+    width: 90%;
     background: var(--white);
     padding: 20px;
     box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
