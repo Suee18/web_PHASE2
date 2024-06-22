@@ -166,6 +166,25 @@ function updateStep2Values() {
     numRooms = document.getElementById("num-room").value;
     hotelPackage = document.getElementById("h-package").value;
 
+    // Validate check-in and check-out dates
+    const today = new Date();
+    const checkInDateObj = new Date(checkInDate);
+    const checkOutDateObj = new Date(checkOutDate);
+
+    // Check if check-in date is today or in the future
+    if (checkInDateObj < today) {
+        alert("Check-in date must be today or in the future.");
+        document.getElementById("check-in").value = ""; // Clear the invalid date
+        return;
+    }
+
+    // Check if check-out date is after check-in date
+    if (checkOutDateObj <= checkInDateObj) {
+        alert("Check-out date must be after the check-in date.");
+        document.getElementById("check-out").value = ""; // Clear the invalid date
+        return;
+    }
+
     console.log("From Location: ", fromLocation);
     console.log("To Location: ", toLocation);
     console.log("Number of People: ", numPeople);
@@ -177,12 +196,14 @@ function updateStep2Values() {
     console.log("Number of Rooms: ", numRooms);
     console.log("Hotel Package: ", hotelPackage);
 
+    // Enable or disable next button based on validation
     if (isStep2Valid()) {
         $('.step2 .next').removeAttr('disabled');
     } else {
         $('.step2 .next').attr('disabled', 'disabled');
     }
 }
+
 
 // Function to update Step 4 values (payment details)
 function updateStep4Values() {
@@ -328,6 +349,7 @@ $(document).ready(function() {
             contentType: 'application/json',
             success: function(response) {
                 alert('Form submitted successfully!');
+                window.location.href = `loading`;
                 console.log(response);
             },
             error: function(error) {

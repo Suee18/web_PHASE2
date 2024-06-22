@@ -1,6 +1,6 @@
 import User from '../models/User.js';
 import Review from '../models/Review.js'; 
-import userInput from '../models/userInput.js';
+import flights from '../models/flights.js';
 import bcrypt from 'bcrypt';
 import VisitCounter from '../models/visitCounter.js';
 import MultiStepForm from '../models/inputALL.js';
@@ -286,9 +286,43 @@ export const submitForm = async (req, res) => {
   try {
     const newFormData = new MultiStepForm(formData);
     await newFormData.save();
-    res.status(201).json({ message: 'Form data saved successfully' });
+    res.redirect('/loading');
   } catch (error) {
     console.error('Error submitting form:', error);
     res.status(500).json({ message: 'Internal Server Error' });
   }
 };
+
+export const findmatchingflight = async (req, res) => {
+  try {
+    console.log('Fetching the last form entry');
+    const lastFormEntry = await MultiStepForm.findOne().sort({ _id: -1 }).exec();
+    if (!lastFormEntry) {
+      console.log('No form entries found');
+      return res.status(404).json({ message: 'No form entries found' });
+    }
+
+    const { from, destination, checkIn } = lastFormEntry;
+    console.log(`Last form entry: From - ${from}, Destination - ${destination}, CheckIn - ${checkIn}`);
+
+    console.log('Finding matching flight');
+    const matchingFlight = await flights.findOne({
+      originCountry: from,
+      destinationCountry: destination,
+      date: checkIn
+    }).exec();
+
+    if (matchingFlight) {
+      console.log('Matching flight found', matchingFlight);
+      return res.status(200).json(matchingFlight);
+    } else {
+      console.log('No matching flight found');
+      return res.status(404).json({ message: 'No matching flight found' });
+    }
+  } catch (error) {
+    console.error('Error finding matching flight:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
+
+
