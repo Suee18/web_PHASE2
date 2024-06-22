@@ -65,7 +65,15 @@ const interests = {
     "natural_area": { "value1": false, "value2": false }
 };
 
-// Function to handle package selection
+function isStep2Valid() {
+    const fromValue = $('#from-list').val();
+    const toValue = $('#governorates-list').val();
+    const monthValue = $('.month-input').val();
+    const yearValue = $('.year-input').val();
+
+    return (fromValue !== "" && toValue !== "" && monthValue !== "" && yearValue !== "");
+}
+
 function selectPackage(packageId) {
     selectedPackage = packageId;
     console.log("Selected Package: ", selectedPackage);
@@ -77,6 +85,33 @@ function selectPackage(packageId) {
     const selectedBtn = document.getElementById("package" + packageId).querySelector("button");
     selectedBtn.dataset.selected = "true";
     selectedBtn.classList.add("selected");
+    if (packageId == 1 ||packageId == 2) {
+
+        // Disable .hotel section and style its background
+        $('.hotel').css({
+            'pointer-events': 'none',
+            'background-color': 'lightgray',
+            'color': 'gray' // Example: Change text color to white
+        });
+
+        // Disable input fields inside .hotel section
+        $('.hotel input, .hotel select').prop('disabled', true).css({
+            'background-color': 'lightgray',
+            'color': 'gray' // Example: Change text color to white
+        });
+    }else{
+        $('.hotel').css({
+            'pointer-events': 'auto',
+            'background-color': 'white',
+            'color': 'black' // Example: Change text color to white
+        });
+
+        // Disable input fields inside .hotel section
+        $('.hotel input, .hotel select').prop('disabled', true).css({
+            'background-color': 'white',
+            'color': 'black' // Example: Change text color to white
+        });
+    }
 }
 
 // Function to update Step 3 values (interests)
@@ -115,6 +150,12 @@ function updateStep2Values() {
     console.log("Number of Children: ", numChildren);
     console.log("Number of Rooms: ", numRooms);
     console.log("Hotel Package: ", hotelPackage);
+
+    if (isStep2Valid()) {
+        $('.step2 .next').removeAttr('disabled');
+    } else {
+        $('.step2 .next').attr('disabled', 'disabled');
+    }
 }
 
 // Function to update Step 4 values (payment details)
@@ -172,10 +213,52 @@ $(document).ready(function() {
     updateStep2Values();
     updateStep4Values();
 
-    // Form submission handling
+    function validatePayment() {
+        const cardNumber = document.querySelector('.card-number-input').value.trim();
+        const cardHolder = document.querySelector('.card-holder-input').value.trim();
+        const expMonth = document.querySelector('.month-input').value;
+        const expYear = document.querySelector('.year-input').value;
+        const cvv = document.querySelector('.cvv-input').value.trim();
+    
+        // Check if any field is empty
+        if (cardNumber === '' || cardHolder === '' || expMonth === 'month' || expYear === 'year' || cvv === '') {
+            alert('Please fill out all fields.');
+            return false;
+        }
+    
+        // Validate card number (must be 16 digits)
+        if (cardNumber.length !== 16 || isNaN(cardNumber)) {
+            alert('Please enter a valid 16-digit card number.');
+            return false;
+        }
+    
+        // Validate card holder (cannot be empty)
+        if (cardHolder === '') {
+            alert('Please enter the card holder name.');
+            return false;
+        }
+    
+        // Validate expiration date
+        const currentDate = new Date();
+        const currentYear = currentDate.getFullYear();
+        const currentMonth = currentDate.getMonth() + 1; // getMonth() returns zero-based month
+        if (expYear < currentYear || (expYear == currentYear && expMonth < currentMonth)) {
+            alert('Please select a valid expiration date.');
+            return false;
+        }
+    
+        // Validate CVV (must be 3 or 4 digits)
+        if (cvv.length !== 3 && cvv.length !== 4 || isNaN(cvv)) {
+            alert('Please enter a valid CVV.');
+            return false;
+        }
+    
+        // If all validations pass, proceed to the next step
+        return true;
+    }
     $('#msform').submit(function(event) {
         event.preventDefault(); // Prevent default form submission
-
+      validatePayment();
         let packageType;
     if (selectedPackage === "1") {
         packageType = "Free";

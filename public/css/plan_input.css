@@ -688,3 +688,8 @@ tr span {
 .step1, .step2, .step3, .step4 {
   margin-bottom: 180px; /* Adjust as per your design */
 }
+.package button.selected{
+  background-color: #32a890aa; /* Example color for selected button */
+    color: #fff; /* Text color for selected button */
+    border-color: #32a890aa;
+}

@@ -75,6 +75,18 @@ $(document).ready(function () {
             'background-color': 'lightgray',
             'color': 'gray' // Example: Change text color to white
         });
+    }else{
+        $('.hotel').css({
+            'pointer-events': 'auto',
+            'background-color': 'white',
+            'color': 'black' // Example: Change text color to white
+        });
+
+        // Disable input fields inside .hotel section
+        $('.hotel input, .hotel select').prop('disabled', true).css({
+            'background-color': 'white',
+            'color': 'black' // Example: Change text color to white
+        });
     }
     $(".next").click(function (event) {
         event.preventDefault();
