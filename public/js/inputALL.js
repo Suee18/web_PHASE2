@@ -1,6 +1,6 @@
 // Arrays for dropdown options
 const from = [
-    "Select An Origin","Paris",
+    "Select An Origin","Rome","Paris",
     "United States",
     "China", "India", "Brazil",
     "Indonesia", "Pakistan", "Nigeria",

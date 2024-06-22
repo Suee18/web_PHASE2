@@ -37,7 +37,7 @@ mongoose.connect(uri)
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
-app.use(express.static(path.join(dirname, 'zgeneratedPlan')));
+app.use(express.static(path.join(dirname, 'zgeneratedPlan copy')));
   app.use(express.static(path.join(dirname, 'public')));
 
   app.use(session({

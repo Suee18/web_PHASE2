@@ -134,6 +134,6 @@ router.get('/loading', fetchUserFromSession, (req, res) => {
 router.get('/user/find-matching-flight',fetchUserFromSession, findMatchingFlight);
 router.get('/user/find-matching-hotel',fetchUserFromSession, findMatchingHotel);
 router.get('/a.html',fetchUserFromSession,(req, res) => {
-  res.render('zgeneratedPlan/a.html', { user: req.user });
+  res.render('zgeneratedPlan copy/a.html', { user: req.user });
 });
 export default router;
