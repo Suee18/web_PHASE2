@@ -38,37 +38,38 @@
                                 <option value="$100 - $200">$100 - $200</option>
                                 <option value="$200+">$200+</option>
                             </select><br><br>
-                            <button type="submit">Save Food Item</button>
+                            <button type="submit" class="submit-btn">Save Food Item</button>
+                            <button type="button" class="close-btn" onclick="toggleAddFoodForm()">Close</button>
                         </form>
                     </div>
                    <!-- Edit Food Form -->
-<div class="edit-food-form" style="display: none;">
-    <h2>Edit Food Item</h2>
-    <form id="editFoodForm" action="/admin/edit-food" method="POST">
-        <input type="hidden" id="editFoodId" name="id">
-        <input type="hidden" name="_method" value="PUT">
-        <label for="editRestaurantName">Restaurant Name:</label>
-        <input type="text" id="editRestaurantName" name="restaurantName" required><br><br>
-        <label for="editGovernorate">Governorate:</label>
-        <input type="text" id="editGovernorate" name="governorate" required><br><br>
-        <label for="editCity">City:</label>
-        <input type="text" id="editCity" name="city" required><br><br>
-        <label for="editMealType">Meal Type:</label>
-        <select id="editMealType" name="mealType" required>
-            <option value="Breakfast">Breakfast</option>
-            <option value="Lunch">Lunch</option>
-            <option value="Dinner">Dinner</option>
-        </select><br><br>
-        <label for="editBudget">Budget:</label>
-        <select id="editBudget" name="budget" required>
-            <option value="Up to $100">Up to $100</option>
-            <option value="$100 - $200">$100 - $200</option>
-            <option value="$200+">$200+</option>
-        </select><br><br>
-        <button type="submit">Update Food Item</button>
-    </form>
-</div>
-
+                    <div class="edit-food-form" style="display: none;">
+                        <h2>Edit Food Item</h2>
+                        <form id="editFoodForm" action="/admin/edit-food" method="POST">
+                            <input type="hidden" id="editFoodId" name="id">
+                            <input type="hidden" name="_method" value="PUT">
+                            <label for="editRestaurantName">Restaurant Name:</label>
+                            <input type="text" id="editRestaurantName" name="restaurantName" required><br><br>
+                            <label for="editGovernorate">Governorate:</label>
+                            <input type="text" id="editGovernorate" name="governorate" required><br><br>
+                            <label for="editCity">City:</label>
+                            <input type="text" id="editCity" name="city" required><br><br>
+                            <label for="editMealType">Meal Type:</label>
+                            <select id="editMealType" name="mealType" required>
+                                <option value="Breakfast">Breakfast</option>
+                                <option value="Lunch">Lunch</option>
+                                <option value="Dinner">Dinner</option>
+                            </select><br><br>
+                            <label for="editBudget">Budget:</label>
+                            <select id="editBudget" name="budget" required>
+                                <option value="Up to $100">Up to $100</option>
+                                <option value="$100 - $200">$100 - $200</option>
+                                <option value="$200+">$200+</option>
+                            </select><br><br>
+                            <button type="submit" class="submit-btn">Update Food Item</button>
+                            <button type="button" class="close-btn" onclick="toggleEditFoodForm()">Close</button>
+                        </form>
+                    </div>
                     <table>
                         <thead>
                             <tr>
@@ -106,6 +107,7 @@
             </div>
         </div>
     </div>
+    
     <script src="/js/foods.js"></script>
 </body>
 </html>
