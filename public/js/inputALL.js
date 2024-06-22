@@ -84,54 +84,60 @@ function selectPackage(packageId) {
     selectedBtn.dataset.selected = "true";
     selectedBtn.classList.add("selected");
 
-    if (packageId == 1) {
-        // Disable Step 4 (Visa Step)
-        $('.step4').css({
-            'pointer-events': 'none',
-            'background-color': 'lightgray',
-            'color': 'gray' // Change text color to gray
-        });
-        $('.step4 input, .step4 select').prop('disabled', true).css({
-            'background-color': 'lightgray',
-            'color': 'gray' // Change text color to gray
-        });
-    } else {
-        // Enable Step 4 (Visa Step)
-        $('.step4').css({
-            'pointer-events': 'auto',
-            'background-color': 'white',
-            'color': 'black' // Change text color to black
-        });
-        $('.step4 input, .step4 select').prop('disabled', false).css({
-            'background-color': 'white',
-            'color': 'black' // Change text color to black
-        });
-    }
+   // Disable Step 2 (Hotel Details) for packageId 1 and 2
+   if (packageId == 1 || packageId == 2) {
+    $('.hotel').css({
+        'pointer-events': 'none',
+        'background-color': 'lightgray',
+        'color': 'gray' // Change text color to gray
+    });
+    $('.hotel input, .hotel select').prop('disabled', true).css({
+        'background-color': 'lightgray',
+        'color': 'gray' // Change text color to gray
+    });
+} else {
+    // Enable Step 2 (Hotel Details) for other packages
+    $('.hotel').css({
+        'pointer-events': 'auto',
+        'background-color': 'white',
+        'color': 'black' // Change text color to black
+    });
+    $('.hotel input, .hotel select').prop('disabled', false).css({
+        'background-color': 'white',
+        'color': 'black' // Change text color to black
+    });
+}
 
-    // Now, handle the styling and disabling/enabling of other sections based on packageId
-    if (packageId == 1) {
-        // Disable .hotel section
-        $('.hotel').css({
-            'pointer-events': 'none',
-            'background-color': 'lightgray',
-            'color': 'gray' // Change text color to gray
-        });
-        $('.hotel input, .hotel select').prop('disabled', true).css({
-            'background-color': 'lightgray',
-            'color': 'gray' // Change text color to gray
-        });
-    } else {
-        // Enable .hotel section
-        $('.hotel').css({
-            'pointer-events': 'auto',
-            'background-color': 'white',
-            'color': 'black' // Change text color to black
-        });
-        $('.hotel input, .hotel select').prop('disabled', false).css({
-            'background-color': 'white',
-            'color': 'black' // Change text color to black
-        });
-    }
+   // Handle Step 4 (Visa Step) based on packageId
+if (packageId == 2 || packageId == 3) {
+    // Enable Step 4 (Visa Step)
+    $('.step4').css({
+        'pointer-events': 'auto',
+        'background-color': 'white',
+        'color': 'black' // Change text color to black
+    });
+    $('.step4 input, .step4 select').prop('disabled', false).css({
+        'background-color': 'white',
+        'color': 'black' // Change text color to black
+    });
+} else {
+    // Disable Step 4 (Visa Step) for other packages
+    $('.step4').css({
+        'pointer-events': 'none',
+        'background-color': 'lightgray',
+        'color': 'gray' // Change text color to gray
+    });
+    $('.step4 input, .step4 select').prop('disabled', true).css({
+        'background-color': 'lightgray',
+        'color': 'gray' // Change text color to gray
+    });
+}
+
+
+    // Additional handling based on packageId, if needed
+
+    // Update Step 2 values after package selection
+    updateStep2Values();
 }
 
 // Function to update Step 3 values (interests)
