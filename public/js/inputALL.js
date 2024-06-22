@@ -297,6 +297,7 @@ $(document).ready(function() {
             contentType: 'application/json',
             success: function(response) {
                 alert('Form submitted successfully!');
+                window.location.href = `loading`;
                 console.log(response);
             },
             error: function(error) {
