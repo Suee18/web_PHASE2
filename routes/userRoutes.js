@@ -2,10 +2,9 @@ import express from 'express';
 import {
   createUser, loginUser,
   updateProfileInfo, emailExists, usernameExists, changePassword, deleteAccount,
-  getReviews, addReview, postPlan
+  getReviews, addReview, submitForm
 } from '../controllers/userController.js';
 import { fetchUserFromSession } from '../middleware/auth.js';
-import userInput from '../models/userInput.js';
 const router = express.Router();
 
 
@@ -49,6 +48,7 @@ router.get('/create_A_Plan', fetchUserFromSession, (req, res) => {
 router.get('/view_plans_history', fetchUserFromSession, (req, res) => {
   res.render('pages/history', { user: req.user });
 });
+
 //AJAX for latest avatar
 router.get('/profile/avatar', fetchUserFromSession, (req, res) => {
   const user = req.user;
@@ -102,6 +102,11 @@ router.get('/packages', fetchUserFromSession, (req, res) => {
 router.get('/plan_input', fetchUserFromSession, (req, res) => {
   res.render('pages/plan_input', { user: req.user });
 });
+//plan input trial 
+// Route for the plan_input page
+router.get('/planINPUT', fetchUserFromSession, (req, res) => {
+  res.render('pages/inputALL', { user: req.user });
+});
 
 // Route for the interest_rate page
 router.get('/intrests_rate', fetchUserFromSession, (req, res) => {
@@ -118,9 +123,11 @@ router.get('/finish', fetchUserFromSession, (req, res) => {
   res.render('pages/finish', { user: req.user });
 });
 
+//router.post('/submitFlightInput', postFlightInput);
+
+
 //================SUBMITING DATA ==========================================================================//
 
-router.post('/submitPLanInput', fetchUserFromSession, postPlan); 
-
+router.post('/submit-form', fetchUserFromSession,submitForm);
 
 export default router;

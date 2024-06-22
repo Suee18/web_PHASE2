@@ -9,7 +9,7 @@ function selectPackage(packageId) {
     scrollToNextStep();
 }
 $(document).ready(function () {
-    var current = 1;
+    // Your jQuery-dependent code here
     $(".next").click(function (event) {
         event.preventDefault();
         var current_fs = $(this).parent();
@@ -31,19 +31,12 @@ $(document).ready(function () {
             },
             duration: 600
         });
-        setProgressBar(++current);
-        
+        setProgressBar($("fieldset").index(next_fs) + 1);
+        var selectedPackageNumber = getSelectedPackageNumber();
+        if (selectedPackageNumber !== null) {
+            redirectToNextPage(selectedPackageNumber);
+        }
     });
-    function setProgressBar(curStep) {
-        var percent = parseFloat(100 / steps) * curStep;
-        percent = percent.toFixed();
-        $(".progress-bar")
-            .css("width", percent + "%")
-    }
-
-    $(".submit").click(function () {
-        return false;
-    })
     // Function to validate if a package is selected
     function validatePackageSelection() {
         var packageSelected = false;
@@ -78,7 +71,7 @@ $(document).ready(function () {
     function redirectToNextPage(packageNumber) {
         // Replace with your actual redirect logic
         // Example: Redirect to 'details.html' with packageNumber as a query parameter
-        window.location.href = `plan_input?$package=${packageNumber}`;
+        window.location.href = `plan_input?package=${packageNumber}`;
     }
     // Event listener for Next button outside the jQuery click event
     document.getElementById('next-bt').addEventListener('click', function (event) {
