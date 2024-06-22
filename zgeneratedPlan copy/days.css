@@ -145,13 +145,11 @@ input:checked + label .description {
     transform: translateY(0) !important;max-height: 300px;
 }
 
-/* NADA */
+/* NADA  */
 .card[for="c1"]{
-    /* background-image: url(daysBG.png); */
-    background-color: #235488;
-
+    background-image: url(daysBG.png);
 } 
- .card[for="c2"]{
+.card[for="c2"]{
     background-image: url(daysBG.png);
 }.card[for="c3"]{
     background-image: url(daysBG.png);
@@ -159,14 +157,11 @@ input:checked + label .description {
     background-image: url(daysBG.png);
 }
 .card[for="c5"]{
-    /* background-image: url(daysBG.png); */
+    background-image: url(daysBG.png);
 }
 .card[for="c6"]{
-    /* background-image: url(daysBG.png); */
-    background-color: #235488;
-
-}  
-
+    background-image: url(daysBG.png);
+} 
 #btn3, #btn1{
     background-color: #007BFF;
     color: white;
