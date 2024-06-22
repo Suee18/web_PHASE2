@@ -115,9 +115,49 @@ table tbody td {
 }
 
 .users .addbtn:hover {
-    background-color: #6feacb; /* Darken background on hover */
-    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3); /* Increase shadow on hover */
-    color: #f2f2f2; /* Lighten text color on hover */
+    background-color: #21918c; /* Darker background on hover */
+    cursor: pointer; /* Pointer cursor on hover */
+    transform: scale(1.05); /* Slightly larger on hover */
 }
 
+.add-food-form {
+    margin-bottom: 20px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.edit-food-form {
+    margin-bottom: 20px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 
+.submit-btn, .close-btn {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.submit-btn {
+    background-color: #a0e9d6;
+    color: white;
+}
+
+.submit-btn:hover {
+    background-color: #21918c;
+}
+
+.close-btn {
+    background-color: red;
+    color: white;
+}
+
+.close-btn:hover {
+    background-color: darkred;
+}
