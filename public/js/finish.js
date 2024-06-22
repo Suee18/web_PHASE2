@@ -87,3 +87,45 @@ function planInput() {
         console.log(formData);
     });
 }
+
+
+
+
+
+function submitFlightInput() {
+    const storedFormData = JSON.parse(localStorage.getItem('formData'));
+    if (!storedFormData) {
+        alert('No form data found. Please complete the form.');
+        return;
+    }
+
+    console.log("Submitting form data:", storedFormData); // Debugging line
+
+    fetch('/submitFlightInput', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(storedFormData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.message) {
+            alert(data.message);
+        } else {
+            alert('Error submitting flight details');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred while submitting the flight details.');
+    });
+}
+
+$(document).ready(function () {
+    // Handle finish button click
+    $("#next-bt").click(function (event) {
+        event.preventDefault();
+        submitFlightInput();
+    });
+});

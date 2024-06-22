@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const hotelDetailsSchema = new Schema({
     numOfAdults: {
         type: Number,
-        min: 1
+        min: 0
     },
     numOfChildren: {
         type: Number,
@@ -12,11 +12,12 @@ const hotelDetailsSchema = new Schema({
     },
     numOfRooms: {
         type: Number,
-        min: 1
+        min: 0
     },
     hotelReservation: {
         type: String,
-        enum: ['All Inclusive', 'All inclusive soft', 'Full Board', 'Half Board', 'Breakfast only']
+        enum: ['null','All Inclusive', 'All inclusive soft', 'Full Board', 'Half Board', 'Breakfast only'],
+        default: null
     }
 });
 

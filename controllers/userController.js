@@ -3,6 +3,8 @@ import Review from '../models/Review.js';
 import userInput from '../models/userInput.js';
 import bcrypt from 'bcrypt';
 import VisitCounter from '../models/visitCounter.js';
+import MultiStepForm from '../models/inputALL.js';
+
 
 export const incrementVisitCounter = async () => {
   try {
@@ -277,41 +279,16 @@ export const changePassword =async (req, res) => {
 
 
 //========================================PLAN===========================================================
-export const postPlan = async (req, res) => {
-  const {
-    packageType,
-    destination,
-    checkIn,
-    checkOut,
-    availableBudget,
-    hotelDetails,
-    interests
-  } = req.body;
+
+export const submitForm = async (req, res) => {
+  const formData = req.body; // Assuming form data is sent as JSON
 
   try {
-    const newUserInput = new userInput({
-      package: packageType,
-      destinations: destination,
-      checkIn: new Date(checkIn),
-      checkOut: new Date(checkOut),
-      availableBudget,
-      hotelDetails,
-      interests: interests.map(interest => ({
-        date: new Date(interest.date), // Ensure date is converted to Date object
-        entertainment: interest.entertainment,
-        historical: interest.historical,
-        religious: interest.religious,
-        sea: interest.sea,
-        natural: interest.natural,
-        day: interest.day,
-        night: interest.night
-      }))
-    });
-
-    await newUserInput.save();
-    res.json({ message: 'Details saved successfully!' });
+    const newFormData = new MultiStepForm(formData);
+    await newFormData.save();
+    res.status(201).json({ message: 'Form data saved successfully' });
   } catch (error) {
-    console.error('Error saving details:', error);
-    res.status(500).json({ message: 'Error saving details' });
+    console.error('Error submitting form:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
   }
 };

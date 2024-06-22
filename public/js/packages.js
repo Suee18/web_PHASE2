@@ -71,7 +71,7 @@ $(document).ready(function () {
     function redirectToNextPage(packageNumber) {
         // Replace with your actual redirect logic
         // Example: Redirect to 'details.html' with packageNumber as a query parameter
-        window.location.href = `plan_input?$package=${packageNumber}`;
+        window.location.href = `plan_input?package=${packageNumber}`;
     }
     // Event listener for Next button outside the jQuery click event
     document.getElementById('next-bt').addEventListener('click', function (event) {

@@ -685,3 +685,6 @@ tr span {
       margin-left: 0;
   }
 }
+.step1, .step2, .step3, .step4 {
+  margin-bottom: 180px; /* Adjust as per your design */
+}
