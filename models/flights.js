@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const Schema =mongoose.Schema;
-const flightSchema= new Schema({
+const flightSchema = new Schema({
   originCountry: { type: String, required: true },
   destinationCountry: { type: String, required: true },
   numOfFlight: { type: String, required: true },

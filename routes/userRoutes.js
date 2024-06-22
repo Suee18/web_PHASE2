@@ -2,8 +2,8 @@ import express from 'express';
 import {
   createUser, loginUser,
   updateProfileInfo, emailExists, usernameExists, changePassword, deleteAccount,
-  getReviews, addReview, submitForm
-} from '../controllers/userController.js';
+  getReviews, addReview, submitForm,
+  findmatchingflight} from '../controllers/userController.js';
 import { fetchUserFromSession } from '../middleware/auth.js';
 const router = express.Router();
 
@@ -129,5 +129,8 @@ router.get('/finish', fetchUserFromSession, (req, res) => {
 //================SUBMITING DATA ==========================================================================//
 
 router.post('/submit-form', fetchUserFromSession,submitForm);
-
+router.get('/loading', fetchUserFromSession, (req, res) => {
+  res.render('pages/loading', { user: req.user });
+});
+router.get('/user/find-matching-flight',fetchUserFromSession,findmatchingflight);
 export default router;

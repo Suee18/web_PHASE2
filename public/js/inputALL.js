@@ -133,6 +133,7 @@ if (packageId == 2 || packageId == 3) {
     });
 }
 
+
     // Additional handling based on packageId, if needed
 
     // Update Step 2 values after package selection
@@ -259,38 +260,31 @@ $(document).ready(function() {
     updateStep2Values();
     updateStep4Values();
 
-    // Form submission handling
     function validatePayment() {
-
-         // Check if selected package is Free (packageId 1)
-    if (selectedPackage === "1") {
-        return true; // Skip validation for Free package
-    }
-
         const cardNumber = document.querySelector('.card-number-input').value.trim();
         const cardHolder = document.querySelector('.card-holder-input').value.trim();
         const expMonth = document.querySelector('.month-input').value;
         const expYear = document.querySelector('.year-input').value;
         const cvv = document.querySelector('.cvv-input').value.trim();
-
+    
         // Check if any field is empty
         if (cardNumber === '' || cardHolder === '' || expMonth === 'month' || expYear === 'year' || cvv === '') {
             alert('Please fill out all fields.');
             return false;
         }
-
+    
         // Validate card number (must be 16 digits)
         if (cardNumber.length !== 16 || isNaN(cardNumber)) {
             alert('Please enter a valid 16-digit card number.');
             return false;
         }
-
+    
         // Validate card holder (cannot be empty)
         if (cardHolder === '') {
             alert('Please enter the card holder name.');
             return false;
         }
-
+    
         // Validate expiration date
         const currentDate = new Date();
         const currentYear = currentDate.getFullYear();
@@ -299,25 +293,23 @@ $(document).ready(function() {
             alert('Please select a valid expiration date.');
             return false;
         }
-
+    
         // Validate CVV (must be 3 or 4 digits)
         if (cvv.length !== 3 && cvv.length !== 4 || isNaN(cvv)) {
             alert('Please enter a valid CVV.');
             return false;
         }
-
+    
         // If all validations pass, proceed to the next step
         return true;
     }
+
     $('#msform').submit(function(event) {
         event.preventDefault(); // Prevent default form submission
-    
-        // Validate payment details
         if (!validatePayment()) {
-            return; // Stop form submission if validation fails
+            return;
         }
-    
-        // Determine package type based on selectedPackage
+
         let packageType;
         if (selectedPackage === "1") {
             packageType = "Free";
@@ -328,7 +320,7 @@ $(document).ready(function() {
         } else {
             packageType = "Unknown"; // Handle unexpected values
         }
-    
+
         // Collect form data including userId, username, and avatar
         const formData = {
             package: packageType,
@@ -348,7 +340,7 @@ $(document).ready(function() {
             sea: $('input[name="sea_area"]:checked').val(),
             natural: $('input[name="natural_area"]:checked').val()
         };
-    
+
         // AJAX POST request to submit form data
         $.ajax({
             type: 'POST',
@@ -357,6 +349,7 @@ $(document).ready(function() {
             contentType: 'application/json',
             success: function(response) {
                 alert('Form submitted successfully!');
+                window.location.href = `loading`;
                 console.log(response);
             },
             error: function(error) {
@@ -365,6 +358,7 @@ $(document).ready(function() {
             }
         });
     });
-    
+
     console.log("Script loaded and initialized.");
 });
+
