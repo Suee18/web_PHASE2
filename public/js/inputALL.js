@@ -1,5 +1,3 @@
-
-
 // Arrays for dropdown options
 const from = [
     "Select An Origin",
@@ -85,31 +83,53 @@ function selectPackage(packageId) {
     const selectedBtn = document.getElementById("package" + packageId).querySelector("button");
     selectedBtn.dataset.selected = "true";
     selectedBtn.classList.add("selected");
-    if (packageId == 1 ||packageId == 2) {
 
-        // Disable .hotel section and style its background
+    if (packageId == 1) {
+        // Disable Step 4 (Visa Step)
+        $('.step4').css({
+            'pointer-events': 'none',
+            'background-color': 'lightgray',
+            'color': 'gray' // Change text color to gray
+        });
+        $('.step4 input, .step4 select').prop('disabled', true).css({
+            'background-color': 'lightgray',
+            'color': 'gray' // Change text color to gray
+        });
+    } else {
+        // Enable Step 4 (Visa Step)
+        $('.step4').css({
+            'pointer-events': 'auto',
+            'background-color': 'white',
+            'color': 'black' // Change text color to black
+        });
+        $('.step4 input, .step4 select').prop('disabled', false).css({
+            'background-color': 'white',
+            'color': 'black' // Change text color to black
+        });
+    }
+
+    // Now, handle the styling and disabling/enabling of other sections based on packageId
+    if (packageId == 1) {
+        // Disable .hotel section
         $('.hotel').css({
             'pointer-events': 'none',
             'background-color': 'lightgray',
-            'color': 'gray' // Example: Change text color to white
+            'color': 'gray' // Change text color to gray
         });
-
-        // Disable input fields inside .hotel section
         $('.hotel input, .hotel select').prop('disabled', true).css({
             'background-color': 'lightgray',
-            'color': 'gray' // Example: Change text color to white
+            'color': 'gray' // Change text color to gray
         });
-    }else{
+    } else {
+        // Enable .hotel section
         $('.hotel').css({
             'pointer-events': 'auto',
             'background-color': 'white',
-            'color': 'black' // Example: Change text color to white
+            'color': 'black' // Change text color to black
         });
-
-        // Disable input fields inside .hotel section
-        $('.hotel input, .hotel select').prop('disabled', true).css({
+        $('.hotel input, .hotel select').prop('disabled', false).css({
             'background-color': 'white',
-            'color': 'black' // Example: Change text color to white
+            'color': 'black' // Change text color to black
         });
     }
 }
@@ -256,19 +276,24 @@ $(document).ready(function() {
         // If all validations pass, proceed to the next step
         return true;
     }
+
     $('#msform').submit(function(event) {
         event.preventDefault(); // Prevent default form submission
-      validatePayment();
+        if (!validatePayment()) {
+            return;
+        }
+
         let packageType;
-    if (selectedPackage === "1") {
-        packageType = "Free";
-    } else if (selectedPackage === "2") {
-        packageType = "Standard";
-    } else if (selectedPackage === "3") {
-        packageType = "Premium";
-    } else {
-        packageType = "Unknown"; // Handle unexpected values
-    }
+        if (selectedPackage === "1") {
+            packageType = "Free";
+        } else if (selectedPackage === "2") {
+            packageType = "Standard";
+        } else if (selectedPackage === "3") {
+            packageType = "Premium";
+        } else {
+            packageType = "Unknown"; // Handle unexpected values
+        }
+
         // Collect form data including userId, username, and avatar
         const formData = {
             package: packageType,
