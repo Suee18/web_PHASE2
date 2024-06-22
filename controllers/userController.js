@@ -4,6 +4,7 @@ import flights from '../models/flights.js';
 import bcrypt from 'bcrypt';
 import VisitCounter from '../models/visitCounter.js';
 import MultiStepForm from '../models/inputALL.js';
+import Hotel from '../models/Hotel.js';
 
 
 export const incrementVisitCounter = async () => {
@@ -293,7 +294,7 @@ export const submitForm = async (req, res) => {
   }
 };
 
-export const findmatchingflight = async (req, res) => {
+export const findMatchingFlight = async (req, res) => {
   try {
     console.log('Fetching the last form entry');
     const lastFormEntry = await MultiStepForm.findOne().sort({ _id: -1 }).exec();
@@ -302,16 +303,14 @@ export const findmatchingflight = async (req, res) => {
       return res.status(404).json({ message: 'No form entries found' });
     }
 
-    const { from, destination, checkIn } = lastFormEntry;
-    console.log(`Last form entry: From - ${from}, Destination - ${destination}, CheckIn - ${checkIn}`);
+    const { from, destination } = lastFormEntry;
+    console.log(`Last form entry: From - ${from}, Destination - ${destination}`);
 
     console.log('Finding matching flight');
     const matchingFlight = await flights.findOne({
       originCountry: from,
-      destinationCountry: destination,
-      date: checkIn
+      destinationCountry: destination
     }).exec();
-
     if (matchingFlight) {
       console.log('Matching flight found', matchingFlight);
       return res.status(200).json(matchingFlight);
@@ -325,4 +324,29 @@ export const findmatchingflight = async (req, res) => {
   }
 };
 
+export const findMatchingHotel = async (req, res) => {
+  try {
+    const lastFormEntry = await MultiStepForm.findOne().sort({ _id: -1 }).exec();
+    if (!lastFormEntry) {
+      return res.status(404).json({ message: 'No form entries found' });
+    }
+
+    const { destination, package: packageType } = lastFormEntry;
+    const matchingHotel = await Hotel.findOne({
+      government: destination
+    }).exec();
+
+    if (matchingHotel) {
+      return res.status(200).json({
+        ...matchingHotel.toObject(),
+        packageType
+      });
+    } else {
+      return res.status(404).json({ message: 'No matching hotel found', packageType });
+    }
+  } catch (error) {
+    console.error('Error finding matching hotel:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
 

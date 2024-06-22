@@ -2,8 +2,7 @@ import express from 'express';
 import {
   createUser, loginUser,
   updateProfileInfo, emailExists, usernameExists, changePassword, deleteAccount,
-  getReviews, addReview, submitForm,
-  findmatchingflight} from '../controllers/userController.js';
+  getReviews, addReview, submitForm,findMatchingFlight,findMatchingHotel} from '../controllers/userController.js';
 import { fetchUserFromSession } from '../middleware/auth.js';
 const router = express.Router();
 
@@ -132,5 +131,9 @@ router.post('/submit-form', fetchUserFromSession,submitForm);
 router.get('/loading', fetchUserFromSession, (req, res) => {
   res.render('pages/loading', { user: req.user });
 });
-router.get('/user/find-matching-flight',fetchUserFromSession,findmatchingflight);
+router.get('/user/find-matching-flight',fetchUserFromSession, findMatchingFlight);
+router.get('/user/find-matching-hotel',fetchUserFromSession, findMatchingHotel);
+router.get('/a.html',fetchUserFromSession,(req, res) => {
+  res.render('zgeneratedPlan/a.html', { user: req.user });
+});
 export default router;

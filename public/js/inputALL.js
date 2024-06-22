@@ -1,13 +1,13 @@
 // Arrays for dropdown options
 const from = [
-    "Select An Origin",
+    "Select An Origin","Paris",
     "United States",
     "China", "India", "Brazil",
     "Indonesia", "Pakistan", "Nigeria",
     "Bangladesh", "Russia", "Mexico",
     "Japan", "Ethiopia", "Philippines",
     "Vietnam", "Germany", "Iran", "Turkey",
-    "Thailand", "Saudi-Arabia","Paris"
+    "Thailand", "Saudi-Arabia"
 ];
 
 const governorates = [

@@ -6,6 +6,7 @@ import session from 'express-session';
 import dotenv from 'dotenv';
 import userRoutes from './routes/userRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
+import { fetchUserFromSession } from './middleware/auth.js';
 
 dotenv.config(); // Load environment variables from .env file
 
@@ -33,7 +34,11 @@ mongoose.connect(uri)
   .catch(err => {
     console.error('****************MongoDB fail to connect:  ->:', err);
   });
-  app.use(express.static(path.join(__dirname, 'public')));
+
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
+app.use(express.static(path.join(dirname, 'zgeneratedPlan')));
+  app.use(express.static(path.join(dirname, 'public')));
 
   app.use(session({
     secret: process.env.SESSION_SECRET, // Use the secret from environment variables
@@ -59,5 +64,8 @@ mongoose.connect(uri)
 app.use((err, req, res, next) => {
   console.error('Unhandled error:', err);
   res.status(500).send('Internal server error');
+});
+app.get('/a.html', fetchUserFromSession, (req, res) => {
+  res.render('zgeneratedPlan/a.html', { user: req.user });
 });
   
