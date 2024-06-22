@@ -339,3 +339,6 @@ $(document).ready(function() {
 
     console.log("Script loaded and initialized.");
 });
+
+document.getElementById("nextBtn").addEventListener("click", function() {
+    window.location.href = "http://127.0.0.1:5500/a.html#screen1"});
