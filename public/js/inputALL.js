@@ -261,6 +261,11 @@ $(document).ready(function() {
     updateStep4Values();
 
     function validatePayment() {
+
+             // Check if selected package is Free (packageId 1)
+    if (selectedPackage === "1") {
+        return true; // Skip validation for Free package
+    }
         const cardNumber = document.querySelector('.card-number-input').value.trim();
         const cardHolder = document.querySelector('.card-holder-input').value.trim();
         const expMonth = document.querySelector('.month-input').value;
@@ -301,7 +306,9 @@ $(document).ready(function() {
         }
     
         // If all validations pass, proceed to the next step
+        if (!validatePayment()) {
         return true;
+        }
     }
 
     $('#msform').submit(function(event) {
